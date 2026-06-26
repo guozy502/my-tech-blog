@@ -3,7 +3,7 @@ title: JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除
 date: 2026-06-26
 description: 深入理解JVM逃逸分析的工作原理，掌握栈上分配、标量替换、锁消除三大优化手段，通过代码实战直观感受逃逸与非逃逸的性能差异。
 tags: ["JAVA","JVM","逃逸分析","性能优化"]
-categories: ["Java"]
+categories: ["Java","JVM"]
 ---
 
 # 一、什么是逃逸分析（Escape Analysis）？
