@@ -6,7 +6,7 @@ tags: ["JAVA","JVM","GC","对象生命周期"]
 categories: ["Java"]
 ---
 
-![对象全生命周期总览](/images/jvm-lifecycle/01-lifecycle-overview.png)
+![对象全生命周期总览](01-lifecycle-overview.png)
 
 ---
 
@@ -51,7 +51,7 @@ categories: ["Java"]
 
 ## 3.1 两种主流方式
 
-![句柄访问 vs 直接指针](/images/jvm-lifecycle/02-handle-vs-direct.png)
+![句柄访问 vs 直接指针](02-handle-vs-direct.png)
 
 - **句柄访问**：栈上 reference → 句柄池（含对象指针 + 类型指针）→ 实例数据 / 类型数据。好处：GC 移动对象时只改句柄池，reference 本身不变
 - **直接指针**：栈上 reference → 对象（含类型指针）→ 类型数据。好处：少一次间接寻址，更快
@@ -121,7 +121,7 @@ categories: ["Java"]
 
 ## 6.1 三大基础算法
 
-![GC三大基础算法对比](/images/jvm-lifecycle/03-gc-algorithms.png)
+![GC三大基础算法对比](03-gc-algorithms.png)
 
 ## 6.2 分代收集理论（Generational Collection）
 - **弱分代假说**：绝大多数对象朝生夕死
@@ -153,7 +153,7 @@ new 分配 → Eden → Minor GC → Survivor 往返 → 晋升 Old → Major GC
 
 # 七、总结：一张图走完一生
 
-![对象完整生命周期流程图](/images/jvm-lifecycle/04-full-lifecycle.png)
+![对象完整生命周期流程图](04-full-lifecycle.png)
 
 ---
 
