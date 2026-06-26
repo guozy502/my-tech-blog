@@ -10,7 +10,7 @@
 	<meta itemprop="description" content="从一行 new 指令出发，追踪 Java 对象从诞生、内存布局、访问定位、分代晋升，到可达性判定、GC 回收的完整一生。">
 	<meta itemprop="datePublished" content="2026-06-26T00:00:00+00:00">
 	<meta itemprop="dateModified" content="2026-06-26T00:00:00+00:00">
-	<meta itemprop="wordCount" content="2566">
+	<meta itemprop="wordCount" content="5446">
 	<meta itemprop="keywords" content="JAVA,JVM,GC,对象生命周期"><meta property="og:url" content="http://localhost:1313/my-tech-blog/posts/jvm/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
 	<meta property="og:site_name" content="My Tech Blog">
 	<meta property="og:title" content="一个对象从创建到回收的全生命周期">
@@ -42,7 +42,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/my-tech-blog\/posts\/jvm\/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F\/"
-    },"genre": "posts","keywords": "JAVA, JVM, GC, 对象生命周期","wordcount":  2566 ,
+    },"genre": "posts","keywords": "JAVA, JVM, GC, 对象生命周期","wordcount":  5446 ,
     "url": "http:\/\/localhost:1313\/my-tech-blog\/posts\/jvm\/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F\/","datePublished": "2026-06-26T00:00:00+00:00","dateModified": "2026-06-26T00:00:00+00:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -124,7 +124,7 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>一个对象从创建到回收的全生命周期</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="post-meta-line"><span title="发布于 2026-06-26 00:00:00"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-06-26">2026-06-26</time></span>&nbsp;<span title="2566 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 2600 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
+      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="post-meta-line"><span title="发布于 2026-06-26 00:00:00"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-06-26">2026-06-26</time></span>&nbsp;<span title="5446 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 5500 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 11 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -168,8 +168,32 @@
     <li><a href="#64-一个对象的临终时间线">6.4 一个对象的&quot;临终&quot;时间线</a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><p><img loading="lazy" src='/my-tech-blog/images/jvm-lifecycle/01-lifecycle-overview.svg' alt="对象全生命周期总览"></p>
-<hr>
+      </div><div class="content" id="content"><div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    A["🏗️ 创建\n类加载+分配+初始化"] --> B["📐 布局\n对象头+数据+填充"]
+    B --> C["📍 访问\n句柄/直接指针"]
+    C --> D["🏠 使用\n引用传递+GC晋升"]
+    D --> E["⚰️ 死亡\n可达性判定"]
+    E --> F["♻️ 回收\nGC算法+收集器"]</pre>
+  <pre class="mermaid-dark">flowchart LR
+    A["🏗️ 创建\n类加载+分配+初始化"] --> B["📐 布局\n对象头+数据+填充"]
+    B --> C["📍 访问\n句柄/直接指针"]
+    C --> D["🏠 使用\n引用传递+GC晋升"]
+    D --> E["⚰️ 死亡\n可达性判定"]
+    E --> F["♻️ 回收\nGC算法+收集器"]</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    A["🏗️ 创建\n类加载+分配+初始化"] --> B["📐 布局\n对象头+数据+填充"]
+    B --> C["📍 访问\n句柄/直接指针"]
+    C --> D["🏠 使用\n引用传递+GC晋升"]
+    D --> E["⚰️ 死亡\n可达性判定"]
+    E --> F["♻️ 回收\nGC算法+收集器"]</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    A["🏗️ 创建\n类加载+分配+初始化"] --> B["📐 布局\n对象头+数据+填充"]
+    B --> C["📍 访问\n句柄/直接指针"]
+    C --> D["🏠 使用\n引用传递+GC晋升"]
+    D --> E["⚰️ 死亡\n可达性判定"]
+    E --> F["♻️ 回收\nGC算法+收集器"]</pre></template>
+</div><hr>
 <h1 class="heading-element" id="一对象的诞生new-一行代码背后发生了什么"><span>一、对象的诞生：<code>new</code> 一行代码背后发生了什么？</span>
   <a href="#%e4%b8%80%e5%af%b9%e8%b1%a1%e7%9a%84%e8%af%9e%e7%94%9fnew-%e4%b8%80%e8%a1%8c%e4%bb%a3%e7%a0%81%e8%83%8c%e5%90%8e%e5%8f%91%e7%94%9f%e4%ba%86%e4%bb%80%e4%b9%88" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
@@ -241,8 +265,48 @@
   <a href="#31-%e4%b8%a4%e7%a7%8d%e4%b8%bb%e6%b5%81%e6%96%b9%e5%bc%8f" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p><img loading="lazy" src='/my-tech-blog/images/jvm-lifecycle/02-handle-vs-direct.svg' alt="句柄访问 vs 直接指针"></p>
-<ul>
+</h2><div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    subgraph handle["句柄访问"]
+        direction TB
+        H1["栈 reference"] --> H2["句柄池\n 对象指针\n 类型指针"] --> H3["实例数据"]
+        H2 --> H4["类型数据"]
+    end
+    subgraph direct["直接指针 HotSpot"]
+        direction TB
+        D1["栈 reference"] --> D2["对象实例\n 对象头 Mark Word + Klass\n 实例数据"] --> D3["类型数据"]
+    end</pre>
+  <pre class="mermaid-dark">flowchart LR
+    subgraph handle["句柄访问"]
+        direction TB
+        H1["栈 reference"] --> H2["句柄池\n 对象指针\n 类型指针"] --> H3["实例数据"]
+        H2 --> H4["类型数据"]
+    end
+    subgraph direct["直接指针 HotSpot"]
+        direction TB
+        D1["栈 reference"] --> D2["对象实例\n 对象头 Mark Word + Klass\n 实例数据"] --> D3["类型数据"]
+    end</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    subgraph handle["句柄访问"]
+        direction TB
+        H1["栈 reference"] --> H2["句柄池\n 对象指针\n 类型指针"] --> H3["实例数据"]
+        H2 --> H4["类型数据"]
+    end
+    subgraph direct["直接指针 HotSpot"]
+        direction TB
+        D1["栈 reference"] --> D2["对象实例\n 对象头 Mark Word + Klass\n 实例数据"] --> D3["类型数据"]
+    end</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    subgraph handle["句柄访问"]
+        direction TB
+        H1["栈 reference"] --> H2["句柄池\n 对象指针\n 类型指针"] --> H3["实例数据"]
+        H2 --> H4["类型数据"]
+    end
+    subgraph direct["直接指针 HotSpot"]
+        direction TB
+        D1["栈 reference"] --> D2["对象实例\n 对象头 Mark Word + Klass\n 实例数据"] --> D3["类型数据"]
+    end</pre></template>
+</div><ul>
 <li><strong>句柄访问</strong>：栈上 reference → 句柄池（含对象指针 + 类型指针）→ 实例数据 / 类型数据。好处：GC 移动对象时只改句柄池，reference 本身不变</li>
 <li><strong>直接指针</strong>：栈上 reference → 对象（含类型指针）→ 类型数据。好处：少一次间接寻址，更快</li>
 </ul>
@@ -374,8 +438,36 @@
   <a href="#61-%e4%b8%89%e5%a4%a7%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p><img loading="lazy" src='/my-tech-blog/images/jvm-lifecycle/03-gc-algorithms.svg' alt="GC三大基础算法对比"></p>
-<h2 class="heading-element" id="62-分代收集理论generational-collection"><span>6.2 分代收集理论（Generational Collection）</span>
+</h2><div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    A["🗑️ 垃圾对象"] --> B["标记-清除\nMark-Sweep"]
+    A --> C["标记-复制\nMark-Copy"]
+    A --> D["标记-整理\nMark-Compact"]
+    B --> B1["❌ 内存碎片"]
+    C --> C1["✅ 无碎片\n⚠️ 浪费一半空间"]
+    D --> D1["✅ 无碎片\n⚠️ 移动对象有STW成本"]</pre>
+  <pre class="mermaid-dark">flowchart LR
+    A["🗑️ 垃圾对象"] --> B["标记-清除\nMark-Sweep"]
+    A --> C["标记-复制\nMark-Copy"]
+    A --> D["标记-整理\nMark-Compact"]
+    B --> B1["❌ 内存碎片"]
+    C --> C1["✅ 无碎片\n⚠️ 浪费一半空间"]
+    D --> D1["✅ 无碎片\n⚠️ 移动对象有STW成本"]</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    A["🗑️ 垃圾对象"] --> B["标记-清除\nMark-Sweep"]
+    A --> C["标记-复制\nMark-Copy"]
+    A --> D["标记-整理\nMark-Compact"]
+    B --> B1["❌ 内存碎片"]
+    C --> C1["✅ 无碎片\n⚠️ 浪费一半空间"]
+    D --> D1["✅ 无碎片\n⚠️ 移动对象有STW成本"]</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    A["🗑️ 垃圾对象"] --> B["标记-清除\nMark-Sweep"]
+    A --> C["标记-复制\nMark-Copy"]
+    A --> D["标记-整理\nMark-Compact"]
+    B --> B1["❌ 内存碎片"]
+    C --> C1["✅ 无碎片\n⚠️ 浪费一半空间"]
+    D --> D1["✅ 无碎片\n⚠️ 移动对象有STW成本"]</pre></template>
+</div><h2 class="heading-element" id="62-分代收集理论generational-collection"><span>6.2 分代收集理论（Generational Collection）</span>
   <a href="#62-%e5%88%86%e4%bb%a3%e6%94%b6%e9%9b%86%e7%90%86%e8%ae%bagenerational-collection" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
@@ -460,8 +552,100 @@
   <a href="#%e4%b8%83%e6%80%bb%e7%bb%93%e4%b8%80%e5%bc%a0%e5%9b%be%e8%b5%b0%e5%ae%8c%e4%b8%80%e7%94%9f" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h1><p><img loading="lazy" src='/my-tech-blog/images/jvm-lifecycle/04-full-lifecycle.svg' alt="对象完整生命周期流程图"></p>
-<hr>
+</h1><div class="diagram-container">
+  <pre class="mermaid">flowchart TD
+    A["📝 new 指令"] --> B["🔍 类加载检查"]
+    B --> C["📦 堆上分配内存\nTLAB / CAS"]
+    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
+    D --> E["📍 引用定位\n直接指针"]
+    E --> F["🏠 Eden 区\n朝生夕死"]
+    F --> G{"Minor GC\n存活?"}
+    G -->|"是"| H["🔄 Survivor\n分代年龄+1"]
+    G -->|"否"| I["♻️ 标记-复制回收"]
+    H --> J{"年龄>=15\n或空间不够?"}
+    J -->|"否"| H
+    J -->|"是"| K["📦 晋升老年代"]
+    K --> L{"Major/Full GC\n可达?"}
+    L -->|"是，继续存活"| K
+    L -->|"否，不可达"| M["⚰️ 标记为垃圾"]
+    M --> N["🗑️ 标记-清除/整理\n内存回收"]
+    I --> O["💾 内存归还给分配器"]
+    N --> O
+    style A fill:#e1f5fe,stroke:#0288d1
+    style F fill:#e8f5e9,stroke:#388e3c
+    style I fill:#ffebee,stroke:#d32f2f
+    style M fill:#ffcdd2,stroke:#c62828
+    style O fill:#f5f5f5,stroke:#999</pre>
+  <pre class="mermaid-dark">flowchart TD
+    A["📝 new 指令"] --> B["🔍 类加载检查"]
+    B --> C["📦 堆上分配内存\nTLAB / CAS"]
+    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
+    D --> E["📍 引用定位\n直接指针"]
+    E --> F["🏠 Eden 区\n朝生夕死"]
+    F --> G{"Minor GC\n存活?"}
+    G -->|"是"| H["🔄 Survivor\n分代年龄+1"]
+    G -->|"否"| I["♻️ 标记-复制回收"]
+    H --> J{"年龄>=15\n或空间不够?"}
+    J -->|"否"| H
+    J -->|"是"| K["📦 晋升老年代"]
+    K --> L{"Major/Full GC\n可达?"}
+    L -->|"是，继续存活"| K
+    L -->|"否，不可达"| M["⚰️ 标记为垃圾"]
+    M --> N["🗑️ 标记-清除/整理\n内存回收"]
+    I --> O["💾 内存归还给分配器"]
+    N --> O
+    style A fill:#e1f5fe,stroke:#0288d1
+    style F fill:#e8f5e9,stroke:#388e3c
+    style I fill:#ffebee,stroke:#d32f2f
+    style M fill:#ffcdd2,stroke:#c62828
+    style O fill:#f5f5f5,stroke:#999</pre>
+  <pre class="mermaid-neutral">flowchart TD
+    A["📝 new 指令"] --> B["🔍 类加载检查"]
+    B --> C["📦 堆上分配内存\nTLAB / CAS"]
+    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
+    D --> E["📍 引用定位\n直接指针"]
+    E --> F["🏠 Eden 区\n朝生夕死"]
+    F --> G{"Minor GC\n存活?"}
+    G -->|"是"| H["🔄 Survivor\n分代年龄+1"]
+    G -->|"否"| I["♻️ 标记-复制回收"]
+    H --> J{"年龄>=15\n或空间不够?"}
+    J -->|"否"| H
+    J -->|"是"| K["📦 晋升老年代"]
+    K --> L{"Major/Full GC\n可达?"}
+    L -->|"是，继续存活"| K
+    L -->|"否，不可达"| M["⚰️ 标记为垃圾"]
+    M --> N["🗑️ 标记-清除/整理\n内存回收"]
+    I --> O["💾 内存归还给分配器"]
+    N --> O
+    style A fill:#e1f5fe,stroke:#0288d1
+    style F fill:#e8f5e9,stroke:#388e3c
+    style I fill:#ffebee,stroke:#d32f2f
+    style M fill:#ffcdd2,stroke:#c62828
+    style O fill:#f5f5f5,stroke:#999</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart TD
+    A["📝 new 指令"] --> B["🔍 类加载检查"]
+    B --> C["📦 堆上分配内存\nTLAB / CAS"]
+    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
+    D --> E["📍 引用定位\n直接指针"]
+    E --> F["🏠 Eden 区\n朝生夕死"]
+    F --> G{"Minor GC\n存活?"}
+    G -->|"是"| H["🔄 Survivor\n分代年龄+1"]
+    G -->|"否"| I["♻️ 标记-复制回收"]
+    H --> J{"年龄>=15\n或空间不够?"}
+    J -->|"否"| H
+    J -->|"是"| K["📦 晋升老年代"]
+    K --> L{"Major/Full GC\n可达?"}
+    L -->|"是，继续存活"| K
+    L -->|"否，不可达"| M["⚰️ 标记为垃圾"]
+    M --> N["🗑️ 标记-清除/整理\n内存回收"]
+    I --> O["💾 内存归还给分配器"]
+    N --> O
+    style A fill:#e1f5fe,stroke:#0288d1
+    style F fill:#e8f5e9,stroke:#388e3c
+    style I fill:#ffebee,stroke:#d32f2f
+    style M fill:#ffcdd2,stroke:#c62828
+    style O fill:#f5f5f5,stroke:#999</pre></template>
+</div><hr>
 <h1 class="heading-element" id="附jvm-参数与诊断工具速查"><span>附：JVM 参数与诊断工具速查</span>
   <a href="#%e9%99%84jvm-%e5%8f%82%e6%95%b0%e4%b8%8e%e8%af%8a%e6%96%ad%e5%b7%a5%e5%85%b7%e9%80%9f%e6%9f%a5" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
@@ -589,5 +773,5 @@
   </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></div><div id="toc-drawer-button" class="fixed-button toc-drawer-button d-none" role="button" aria-label="目录"><i class="fa-solid fa-bars" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="/my-tech-blog/lib/cookieconsent/cookieconsent.min.css"><script src="/my-tech-blog/lib/autocomplete/autocomplete.min.js" defer></script><script src="/my-tech-blog/lib/sharer/sharer.min.js" async defer></script><script src="/my-tech-blog/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="/my-tech-blog/lib/cell-tooltip/cell-tooltip.umd.js" defer></script><script src="/my-tech-blog/js/config/174e85c56d7bbf4a3efb65ecd215b6db.js" defer></script><script src="/my-tech-blog/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/my-tech-blog/lib/cookieconsent/cookieconsent.min.css"><script src="/my-tech-blog/lib/autocomplete/autocomplete.min.js" defer></script><script src="/my-tech-blog/lib/sharer/sharer.min.js" async defer></script><script src="/my-tech-blog/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="/my-tech-blog/lib/cell-tooltip/cell-tooltip.umd.js" defer></script><script src="/my-tech-blog/js/config/174e85c56d7bbf4a3efb65ecd215b6db.js" defer></script><script src="/my-tech-blog/js/lib/mermaid.js" type="module"></script><script src="/my-tech-blog/js/theme.min.js" defer></script></body>
 </html>
