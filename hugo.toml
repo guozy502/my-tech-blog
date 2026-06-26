@@ -1,0 +1,138 @@
+# =====================================================================================
+# Hugo Configuration
+# =====================================================================================
+
+title = "My Tech Blog"
+baseURL = "http://localhost:1313"
+theme = ["FixIt"]
+defaultContentLanguage = "zh-cn"
+locale = "zh-CN"
+languageName = "简体中文"
+hasCJKLanguage = true
+copyright = ""
+enableRobotsTXT = true
+enableGitInfo = true
+enableEmoji = true
+
+# =====================================================================================
+# Author
+# =====================================================================================
+
+[author]
+  name = "zyguo"
+  email = ""
+  link = ""
+
+# =====================================================================================
+# Menu
+# =====================================================================================
+
+[menus]
+
+  [[menus.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 1
+    [menus.main.params]
+      icon = "fa-solid fa-book"
+
+  [[menus.main]]
+    identifier = "categories"
+    name = "分类"
+    url = "/categories/"
+    weight = 2
+    [menus.main.params]
+      icon = "fa-solid fa-folder-tree"
+
+  [[menus.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 3
+    [menus.main.params]
+      icon = "fa-solid fa-tags"
+
+  [[menus.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 4
+    [menus.main.params]
+      icon = "fa-solid fa-user"
+
+# =====================================================================================
+# Theme Params
+# =====================================================================================
+
+[params]
+  # Site header
+  [params.header]
+    [params.header.title]
+      name = "My Tech Blog"
+      pre = ""
+      post = ""
+      type = "text"
+
+  # Home page
+  [params.home]
+    [params.home.profile]
+      enable = true
+      avatarURL = ""
+      title = ""
+      subtitle = "记录技术，分享成长"
+
+  # Footer
+  [params.footer]
+    enable = true
+    since = "2026"
+    # ICP备案号 (optional)
+    # icp = ""
+
+  # SEO
+  [params.seo]
+    images = []
+    [params.seo.webmaster]
+      google = ""
+      bing = ""
+      baidu = ""
+      yandex = ""
+
+  # Appearance
+  [params.appearance]
+    [params.appearance.theme]
+      enable = true
+      default = "auto"
+
+  # Page
+  [params.page]
+    # Page-level table of contents
+    [params.page.toc]
+      enable = true
+    # Code block
+    [params.page.code]
+      copy = true
+      maxShownLines = 15
+    # Math formula (KaTeX)
+    [params.page.math]
+      enable = false
+    # Social share
+    [params.page.share]
+      enable = true
+    # Related posts
+    [params.page.related]
+      enable = true
+
+  # Comments (Giscus)
+  [params.comment]
+    enable = false
+    [params.comment.giscus]
+      repo = ""
+      repoId = ""
+      category = ""
+      categoryId = ""
+
+  # Search
+  [params.search]
+    enable = true
+    type = "pagefind"
