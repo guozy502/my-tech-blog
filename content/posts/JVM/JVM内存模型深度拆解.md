@@ -105,20 +105,20 @@ public class EscapeExample {
 
 ```mermaid
 flowchart TD
-    START[“🔍 逃逸分析判定「不逃逸」”] --> O1
+    START["🔍 逃逸分析判定「不逃逸」"] --> O1
     
-    O1[“🔓 ① 锁消除 Lock Elision”]
-    O1_D[“最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder”]
+    O1["🔓 ① 锁消除 Lock Elision"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
     
     O1 --> O2
     
-    O2[“📊 ② 标量替换 Scalar Replacement”]
-    O2_D[“最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y”]
+    O2["📊 ② 标量替换 Scalar Replacement"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
     
     O2 --> O3
     
-    O3[“⚡ ③ 等价「栈上分配」效果”]
-    O3_D[“终极收益：零 GC 开销\n对象随栈帧销毁自动释放”]
+    O3["⚡ ③ 等价「栈上分配」效果"]
+    O3_D["终极收益：零 GC 开销\n对象随栈帧销毁自动释放"]
     
     O1 --- O1_D
     O2 --- O2_D
@@ -183,16 +183,16 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    subgraph before[“❌ 优化前：聚合量 (Aggregate)”]
-        OBJ[“📦 Point 对象 (≈24 字节堆内存)\n┌──────────────────┐\n│  Object Header   │ 12~16 字节\n│  int x = 3       │  4 字节\n│  int y = 4       │  4 字节\n└──────────────────┘”]
+    subgraph before["❌ 优化前：聚合量 (Aggregate)"]
+        OBJ["📦 Point 对象 (≈24 字节堆内存)\n┌──────────────────┐\n│  Object Header   │ 12~16 字节\n│  int x = 3       │  4 字节\n│  int y = 4       │  4 字节\n└──────────────────┘"]
     end
     
-    subgraph after[“✅ 优化后：标量 (Scalars)”]
-        S1[“int x = 3\n→ 寄存器 r1\n0 字节堆开销”]
-        S2[“int y = 4\n→ 寄存器 r2\n0 字节堆开销”]
+    subgraph after["✅ 优化后：标量 (Scalars)"]
+        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
     end
     
-    before -->|”🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations”| after
+    before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after
     
     style OBJ fill:#ffcdd2,stroke:#c62828
     style S1 fill:#c8e6c9,stroke:#2e7d32
