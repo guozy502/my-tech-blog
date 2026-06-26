@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head><script src="/my-tech-blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=my-tech-blog/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除 - My Tech Blog</title><meta name="author" content="">
+<meta name="description" content="深入理解JVM逃逸分析的工作原理，掌握栈上分配、标量替换、锁消除三大优化手段，通过代码实战直观感受逃逸与非逃逸的性能差异。"><meta name="keywords" content='JAVA, JVM, 逃逸分析, 性能优化'>
+	<meta itemprop="name" content="JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除">
+	<meta itemprop="description" content="深入理解JVM逃逸分析的工作原理，掌握栈上分配、标量替换、锁消除三大优化手段，通过代码实战直观感受逃逸与非逃逸的性能差异。">
+	<meta itemprop="datePublished" content="2026-06-26T00:00:00+00:00">
+	<meta itemprop="dateModified" content="2026-06-26T00:00:00+00:00">
+	<meta itemprop="wordCount" content="10829">
+	<meta itemprop="keywords" content="JAVA,JVM,逃逸分析,性能优化"><meta property="og:url" content="http://localhost:1313/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/">
+	<meta property="og:site_name" content="My Tech Blog">
+	<meta property="og:title" content="JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除">
+	<meta property="og:description" content="深入理解JVM逃逸分析的工作原理，掌握栈上分配、标量替换、锁消除三大优化手段，通过代码实战直观感受逃逸与非逃逸的性能差异。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-26T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-06-26T00:00:00+00:00">
+		<meta property="article:tag" content="JAVA">
+		<meta property="article:tag" content="JVM">
+		<meta property="article:tag" content="逃逸分析">
+		<meta property="article:tag" content="性能优化">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除">
+	<meta name="twitter:description" content="深入理解JVM逃逸分析的工作原理，掌握栈上分配、标量替换、锁消除三大优化手段，通过代码实战直观感受逃逸与非逃逸的性能差异。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/my-tech-blog/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/my-tech-blog/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/my-tech-blog/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/my-tech-blog/apple-touch-icon.png"><link rel="mask-icon" href="/my-tech-blog/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/" title="JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除 - My Tech Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/my-tech-blog/about/" title="关于" /><link rel="stylesheet" href="/my-tech-blog/css/config.min.css"><link rel="stylesheet" href="/my-tech-blog/css/style.min.css"><link rel="preload" href="/my-tech-blog/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/my-tech-blog/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/my-tech-blog/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/my-tech-blog/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/my-tech-blog\/posts\/jvm\/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3\/"
+    },"genre": "posts","keywords": "JAVA, JVM, 逃逸分析, 性能优化","wordcount":  10829 ,
+    "url": "http:\/\/localhost:1313\/my-tech-blog\/posts\/jvm\/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3\/","datePublished": "2026-06-26T00:00:00+00:00","dateModified": "2026-06-26T00:00:00+00:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "作者"
+      },"description": "深入理解JVM逃逸分析的工作原理，掌握栈上分配、标量替换、锁消除三大优化手段，通过代码实战直观感受逃逸与非逃逸的性能差异。"
+  }
+  </script><script src="/my-tech-blog/js/head/color-scheme.min.js"></script></head>
+  <body data-instant-intensity="viewport" data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/my-tech-blog/" title="My Tech Blog"><span class="header-title-text">My Tech Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/my-tech-blog/posts/"><i class="fa-solid fa-book fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a class="menu-link" href="/my-tech-blog/categories/"><i class="fa-solid fa-folder-tree fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a class="menu-link" href="/my-tech-blog/tags/"><i class="fa-solid fa-tags fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
+              <a class="menu-link" href="/my-tech-blog/about/"><i class="fa-solid fa-user fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" role="button" aria-label="切换主题" title="切换主题"><i class="fa-solid fa-adjust" aria-hidden="true"></i></li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/my-tech-blog/" title="My Tech Blog"><span class="header-title-text">My Tech Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="theme-switch" role="button" aria-label="切换主题"><i class="fa-solid fa-adjust" aria-hidden="true"></i></div>
+      <div class="menu-toggle" id="menu-toggle-mobile" role="button" aria-labelledby="menu-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li class="menu-item"><a class="menu-link" href="/my-tech-blog/posts/"><i class="fa-solid fa-book fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item"><a class="menu-link" href="/my-tech-blog/categories/"><i class="fa-solid fa-folder-tree fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item"><a class="menu-link" href="/my-tech-blog/tags/"><i class="fa-solid fa-tags fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item"><a class="menu-link" href="/my-tech-blog/about/"><i class="fa-solid fa-user fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item menu-system"></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="fi-container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"><div class="details related-details open">
+      <div class="details-summary related-summary">
+        <i class="fa-solid fa-fire fa-fade text-danger" aria-hidden="true"></i>
+        <span class="related-title">相关内容</span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></div>
+      <div class="details-content related-content">
+        <ul class="related-list"><li class="related-item">
+              <a href="/my-tech-blog/posts/jvm/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="一个对象从创建到回收的全生命周期">一个对象从创建到回收的全生命周期</a></li></ul>
+      </div>
+    </div></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a>&ensp;<a href="/my-tech-blog/categories/jvm/" class="post-category" title="分类 - JVM"><i class="fa-regular fa-folder" aria-hidden="true"></i> JVM</a></span></div><div class="post-meta-line"><span title="发布于 2026-06-26 00:00:00"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-06-26">2026-06-26</time></span>&nbsp;<span title="10829 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 10900 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 22 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-逃逸定义">1.1 逃逸定义</a></li>
+    <li><a href="#12-逃逸的两种级别">1.2 逃逸的两种级别</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-栈上分配stack-allocation">2.1 栈上分配（Stack Allocation）</a>
+      <ul>
+        <li><a href="#原理">原理</a></li>
+        <li><a href="#收益">收益</a></li>
+        <li><a href="#重要澄清hotspot-的实现方式">重要澄清：HotSpot 的实现方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#22-标量替换scalar-replacement">2.2 标量替换（Scalar Replacement）</a>
+      <ul>
+        <li><a href="#什么是标量scalar">什么是标量（Scalar）？</a></li>
+        <li><a href="#替换过程">替换过程</a></li>
+        <li><a href="#代码示例">代码示例</a></li>
+        <li><a href="#触发条件">触发条件</a></li>
+      </ul>
+    </li>
+    <li><a href="#23-锁消除lock-elision">2.3 锁消除（Lock Elision）</a>
+      <ul>
+        <li><a href="#问题场景">问题场景</a></li>
+        <li><a href="#优化原理">优化原理</a></li>
+        <li><a href="#相关参数">相关参数</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-典型逃逸场景">3.1 典型逃逸场景</a>
+      <ul>
+        <li><a href="#场景一返回新对象--方法逃逸">场景一：返回新对象 → 方法逃逸</a></li>
+        <li><a href="#场景二赋值给成员静态字段--线程逃逸">场景二：赋值给成员/静态字段 → 线程逃逸</a></li>
+        <li><a href="#场景三作为参数传入可能对外存储的方法">场景三：作为参数传入「可能对外存储」的方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#32-典型非逃逸场景">3.2 典型非逃逸场景</a>
+      <ul>
+        <li><a href="#场景一纯计算对象">场景一：纯计算对象</a></li>
+        <li><a href="#场景二局部-stringbuilderstringbuffer">场景二：局部 StringBuilder/StringBuffer</a></li>
+        <li><a href="#场景三lambda-捕获的对象">场景三：Lambda 捕获的对象</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-逃逸分析的性能成本">4.1 逃逸分析的性能成本</a>
+      <ul>
+        <li><a href="#-编译时间开销">① 编译时间开销</a></li>
+        <li><a href="#-并非所有不逃逸都能被识别">② 并非所有“不逃逸”都能被识别</a></li>
+        <li><a href="#-逃逸对象太多时分析收益递减">③ 逃逸对象太多时，分析收益递减</a></li>
+      </ul>
+    </li>
+    <li><a href="#42-为什么没有绝对的栈上分配">4.2 为什么没有绝对的“栈上分配”？</a>
+      <ul>
+        <li><a href="#-jvm-规范的限制">① JVM 规范的限制</a></li>
+        <li><a href="#-标量替换已经覆盖了主要收益">② 标量替换已经覆盖了主要收益</a></li>
+        <li><a href="#-栈空间有限">③ 栈空间有限</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#核心结论">核心结论</a></li>
+    <li><a href="#jvm-参数锦囊">JVM 参数锦囊</a>
+      <ul>
+        <li><a href="#逃逸分析相关">逃逸分析相关</a></li>
+        <li><a href="#观测与诊断">观测与诊断</a></li>
+        <li><a href="#实战建议">实战建议</a></li>
+      </ul>
+    </li>
+    <li><a href="#写在最后">写在最后</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h1 class="heading-element" id="一什么是逃逸分析escape-analysis"><span>一、什么是逃逸分析（Escape Analysis）？</span>
+  <a href="#%e4%b8%80%e4%bb%80%e4%b9%88%e6%98%af%e9%80%83%e9%80%b8%e5%88%86%e6%9e%90escape-analysis" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h1><h2 class="heading-element" id="11-逃逸定义"><span>1.1 逃逸定义</span>
+  <a href="#11-%e9%80%83%e9%80%b8%e5%ae%9a%e4%b9%89" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p><strong>逃逸分析</strong>（Escape Analysis）是 JVM 即时编译器（JIT Compiler）的一项静态代码分析技术：它判断一个对象在<strong>创建它的方法</strong>之外是否会被其他方法或线程访问到。如果对象的引用“逃”出了它的创建作用域，我们就说这个对象发生了<strong>逃逸</strong>。</p>
+<p>用一个生活化的比喻来理解：</p>
+<blockquote>
+<p>你在家里做了一个三明治。如果你只在厨房吃掉它，三明治就「没有逃逸」。如果你把三明治递给客厅的朋友，它就「逃逸到了方法外部」。如果你把三明治放在门口让外卖小哥取走，它就「逃逸到了线程外部」。</p>
+</blockquote>
+<p>在 JVM 的世界里，每个 <code>new</code> 出来的对象都默认分配在堆（Heap）上，堆是线程共享的，分配和回收都需要复杂的同步和 GC 介入。但如果编译器能证明某个对象<strong>不会逃逸</strong>，那它就可以对这个对象施展一系列激进的优化——这正是逃逸分析存在的价值。</p>
+<div class="diagram-container">
+  <pre class="mermaid">flowchart TD
+    A["🆕 new 对象"] --> B{"🔍 逃逸分析\n（JIT C2 编译器）"}
+    B -->|"✅ 不逃逸"| C["🚀 三大优化触发"]
+    B -->|"❌ 对象逃逸"| D["📦 标准堆分配"]
+    
+    C --> C1["🔓 锁消除\n移除无意义的 synchronized"]
+    C1 --> C2["📊 标量替换\n打散对象为基本类型"]
+    C2 --> C3["⚡ 等价栈上分配效果\n对象随栈帧销毁，零 GC 开销"]
+    
+    D --> D1["🗑️ 等待 GC 回收"]
+    
+    style A fill:#e1f5fe,stroke:#0288d1
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#388e3c
+    style D fill:#ffebee,stroke:#d32f2f
+    style C3 fill:#a5d6a7,stroke:#2e7d32
+    style D1 fill:#ef9a9a,stroke:#c62828</pre>
+  <pre class="mermaid-dark">flowchart TD
+    A["🆕 new 对象"] --> B{"🔍 逃逸分析\n（JIT C2 编译器）"}
+    B -->|"✅ 不逃逸"| C["🚀 三大优化触发"]
+    B -->|"❌ 对象逃逸"| D["📦 标准堆分配"]
+    
+    C --> C1["🔓 锁消除\n移除无意义的 synchronized"]
+    C1 --> C2["📊 标量替换\n打散对象为基本类型"]
+    C2 --> C3["⚡ 等价栈上分配效果\n对象随栈帧销毁，零 GC 开销"]
+    
+    D --> D1["🗑️ 等待 GC 回收"]
+    
+    style A fill:#e1f5fe,stroke:#0288d1
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#388e3c
+    style D fill:#ffebee,stroke:#d32f2f
+    style C3 fill:#a5d6a7,stroke:#2e7d32
+    style D1 fill:#ef9a9a,stroke:#c62828</pre>
+  <pre class="mermaid-neutral">flowchart TD
+    A["🆕 new 对象"] --> B{"🔍 逃逸分析\n（JIT C2 编译器）"}
+    B -->|"✅ 不逃逸"| C["🚀 三大优化触发"]
+    B -->|"❌ 对象逃逸"| D["📦 标准堆分配"]
+    
+    C --> C1["🔓 锁消除\n移除无意义的 synchronized"]
+    C1 --> C2["📊 标量替换\n打散对象为基本类型"]
+    C2 --> C3["⚡ 等价栈上分配效果\n对象随栈帧销毁，零 GC 开销"]
+    
+    D --> D1["🗑️ 等待 GC 回收"]
+    
+    style A fill:#e1f5fe,stroke:#0288d1
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#388e3c
+    style D fill:#ffebee,stroke:#d32f2f
+    style C3 fill:#a5d6a7,stroke:#2e7d32
+    style D1 fill:#ef9a9a,stroke:#c62828</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart TD
+    A["🆕 new 对象"] --> B{"🔍 逃逸分析\n（JIT C2 编译器）"}
+    B -->|"✅ 不逃逸"| C["🚀 三大优化触发"]
+    B -->|"❌ 对象逃逸"| D["📦 标准堆分配"]
+    
+    C --> C1["🔓 锁消除\n移除无意义的 synchronized"]
+    C1 --> C2["📊 标量替换\n打散对象为基本类型"]
+    C2 --> C3["⚡ 等价栈上分配效果\n对象随栈帧销毁，零 GC 开销"]
+    
+    D --> D1["🗑️ 等待 GC 回收"]
+    
+    style A fill:#e1f5fe,stroke:#0288d1
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#388e3c
+    style D fill:#ffebee,stroke:#d32f2f
+    style C3 fill:#a5d6a7,stroke:#2e7d32
+    style D1 fill:#ef9a9a,stroke:#c62828</pre></template>
+</div><h2 class="heading-element" id="12-逃逸的两种级别"><span>1.2 逃逸的两种级别</span>
+  <a href="#12-%e9%80%83%e9%80%b8%e7%9a%84%e4%b8%a4%e7%a7%8d%e7%ba%a7%e5%88%ab" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>JVM 将逃逸划分为两个级别：</p>
+<div class="table-wrapper">
+  <table>
+    <thead>
+        <tr>
+            <th>级别</th>
+            <th>英文</th>
+            <th>含义</th>
+            <th>示例</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>方法逃逸</strong></td>
+            <td>Method Escape</td>
+            <td>对象的引用被传递到当前方法之外（如作为返回值、传入其他方法并存储到全局状态）</td>
+            <td>方法返回一个新对象、对象被存入 static 字段</td>
+        </tr>
+        <tr>
+            <td><strong>线程逃逸</strong></td>
+            <td>Thread Escape</td>
+            <td>对象的引用被另一个线程访问到</td>
+            <td>对象被赋给一个共享变量（被其他线程读取）、对象被传入 <code>synchronized</code> 块并被其他线程使用</td>
+        </tr>
+    </tbody>
+  </table>
+</div><div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    subgraph noEsc["✅ 不逃逸 (No Escape)"]
+        direction TB
+        N1["对象仅在栈帧内使用"] --> N2["方法结束即不可达"] --> N3["JIT 可自由优化"]
+    end
+    
+    subgraph methodEsc["⚠️ 方法逃逸 (Method Escape)"]
+        direction TB
+        M1["return 返回对象"] --> M2["存入 static 字段"] --> M3["传入外部方法并存储"]
+    end
+    
+    subgraph threadEsc["🔴 线程逃逸 (Thread Escape)"]
+        direction TB
+        T1["赋给共享变量"] --> T2["其他线程可访问"] --> T3["必须走堆分配 + GC"]
+    end
+    
+    noEsc -->|"引用传出方法"| methodEsc
+    methodEsc -->|"被多线程共享"| threadEsc
+    
+    style noEsc fill:#e8f5e9,stroke:#2e7d32
+    style methodEsc fill:#fff3e0,stroke:#ef6c00
+    style threadEsc fill:#ffebee,stroke:#c62828</pre>
+  <pre class="mermaid-dark">flowchart LR
+    subgraph noEsc["✅ 不逃逸 (No Escape)"]
+        direction TB
+        N1["对象仅在栈帧内使用"] --> N2["方法结束即不可达"] --> N3["JIT 可自由优化"]
+    end
+    
+    subgraph methodEsc["⚠️ 方法逃逸 (Method Escape)"]
+        direction TB
+        M1["return 返回对象"] --> M2["存入 static 字段"] --> M3["传入外部方法并存储"]
+    end
+    
+    subgraph threadEsc["🔴 线程逃逸 (Thread Escape)"]
+        direction TB
+        T1["赋给共享变量"] --> T2["其他线程可访问"] --> T3["必须走堆分配 + GC"]
+    end
+    
+    noEsc -->|"引用传出方法"| methodEsc
+    methodEsc -->|"被多线程共享"| threadEsc
+    
+    style noEsc fill:#e8f5e9,stroke:#2e7d32
+    style methodEsc fill:#fff3e0,stroke:#ef6c00
+    style threadEsc fill:#ffebee,stroke:#c62828</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    subgraph noEsc["✅ 不逃逸 (No Escape)"]
+        direction TB
+        N1["对象仅在栈帧内使用"] --> N2["方法结束即不可达"] --> N3["JIT 可自由优化"]
+    end
+    
+    subgraph methodEsc["⚠️ 方法逃逸 (Method Escape)"]
+        direction TB
+        M1["return 返回对象"] --> M2["存入 static 字段"] --> M3["传入外部方法并存储"]
+    end
+    
+    subgraph threadEsc["🔴 线程逃逸 (Thread Escape)"]
+        direction TB
+        T1["赋给共享变量"] --> T2["其他线程可访问"] --> T3["必须走堆分配 + GC"]
+    end
+    
+    noEsc -->|"引用传出方法"| methodEsc
+    methodEsc -->|"被多线程共享"| threadEsc
+    
+    style noEsc fill:#e8f5e9,stroke:#2e7d32
+    style methodEsc fill:#fff3e0,stroke:#ef6c00
+    style threadEsc fill:#ffebee,stroke:#c62828</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    subgraph noEsc["✅ 不逃逸 (No Escape)"]
+        direction TB
+        N1["对象仅在栈帧内使用"] --> N2["方法结束即不可达"] --> N3["JIT 可自由优化"]
+    end
+    
+    subgraph methodEsc["⚠️ 方法逃逸 (Method Escape)"]
+        direction TB
+        M1["return 返回对象"] --> M2["存入 static 字段"] --> M3["传入外部方法并存储"]
+    end
+    
+    subgraph threadEsc["🔴 线程逃逸 (Thread Escape)"]
+        direction TB
+        T1["赋给共享变量"] --> T2["其他线程可访问"] --> T3["必须走堆分配 + GC"]
+    end
+    
+    noEsc -->|"引用传出方法"| methodEsc
+    methodEsc -->|"被多线程共享"| threadEsc
+    
+    style noEsc fill:#e8f5e9,stroke:#2e7d32
+    style methodEsc fill:#fff3e0,stroke:#ef6c00
+    style threadEsc fill:#ffebee,stroke:#c62828</pre></template>
+</div><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EscapeExample</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1️⃣ 不逃逸 — 对象仅在方法内使用，不对外暴露</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">noEscape</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        Point p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Point(x, y);       <span style="color:#75715e">// p 只在当前栈帧中存活</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> p.<span style="color:#a6e22e">distance</span>();             <span style="color:#75715e">// 方法结束后 p 即不可达</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2️⃣ 方法逃逸 — 对象作为返回值返回给调用者</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Point <span style="color:#a6e22e">methodEscape</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Point(x, y);          <span style="color:#75715e">// 对象逃逸到调用方</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 3️⃣ 线程逃逸 — 对象被赋值给 static 字段，其他线程可见</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Point globalPoint;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">threadEscape</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        globalPoint <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Point(x, y);   <span style="color:#75715e">// 任何线程都能访问到</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p><strong>逃逸分析的核心洞察</strong>：一个对象如果能被证明只存活在某个方法的栈帧中（即既不方法逃逸也不线程逃逸），那它的生命周期就等同于该次方法调用——这意味着编译器可以用<strong>栈分配</strong>替代<strong>堆分配</strong>，省去 GC 的开销。</p>
+<hr>
+<h1 class="heading-element" id="二基于逃逸分析的-jvm-三大优化神器"><span>二、基于逃逸分析的 JVM 三大优化神器</span>
+  <a href="#%e4%ba%8c%e5%9f%ba%e4%ba%8e%e9%80%83%e9%80%b8%e5%88%86%e6%9e%90%e7%9a%84-jvm-%e4%b8%89%e5%a4%a7%e4%bc%98%e5%8c%96%e7%a5%9e%e5%99%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h1><p>当逃逸分析确认一个对象不会逃逸后，JIT 编译器会依次尝试三个层级的优化。它们是递进的——每一种优化都比前一种更”激进”。</p>
+<div class="diagram-container">
+  <pre class="mermaid">flowchart TD
+    START["🔍 逃逸分析判定「不逃逸」"] --> O1
+    
+    O1["🔓 ① 锁消除 Lock Elision"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
+    
+    O1 --> O2
+    
+    O2["📊 ② 标量替换 Scalar Replacement"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
+    
+    O2 --> O3
+    
+    O3["⚡ ③ 等价「栈上分配」效果"]
+    O3_D["终极收益：零 GC 开销\n对象随栈帧销毁自动释放"]
+    
+    O1 --- O1_D
+    O2 --- O2_D
+    O3 --- O3_D
+    
+    style START fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style O1 fill:#fff9c4,stroke:#f9a825
+    style O2 fill:#ffcc80,stroke:#ef6c00
+    style O3 fill:#a5d6a7,stroke:#2e7d32
+    style O1_D fill:#fffde7,stroke:#f9a825,stroke-dasharray: 5 5
+    style O2_D fill:#fff3e0,stroke:#ef6c00,stroke-dasharray: 5 5
+    style O3_D fill:#e8f5e9,stroke:#2e7d32,stroke-dasharray: 5 5</pre>
+  <pre class="mermaid-dark">flowchart TD
+    START["🔍 逃逸分析判定「不逃逸」"] --> O1
+    
+    O1["🔓 ① 锁消除 Lock Elision"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
+    
+    O1 --> O2
+    
+    O2["📊 ② 标量替换 Scalar Replacement"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
+    
+    O2 --> O3
+    
+    O3["⚡ ③ 等价「栈上分配」效果"]
+    O3_D["终极收益：零 GC 开销\n对象随栈帧销毁自动释放"]
+    
+    O1 --- O1_D
+    O2 --- O2_D
+    O3 --- O3_D
+    
+    style START fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style O1 fill:#fff9c4,stroke:#f9a825
+    style O2 fill:#ffcc80,stroke:#ef6c00
+    style O3 fill:#a5d6a7,stroke:#2e7d32
+    style O1_D fill:#fffde7,stroke:#f9a825,stroke-dasharray: 5 5
+    style O2_D fill:#fff3e0,stroke:#ef6c00,stroke-dasharray: 5 5
+    style O3_D fill:#e8f5e9,stroke:#2e7d32,stroke-dasharray: 5 5</pre>
+  <pre class="mermaid-neutral">flowchart TD
+    START["🔍 逃逸分析判定「不逃逸」"] --> O1
+    
+    O1["🔓 ① 锁消除 Lock Elision"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
+    
+    O1 --> O2
+    
+    O2["📊 ② 标量替换 Scalar Replacement"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
+    
+    O2 --> O3
+    
+    O3["⚡ ③ 等价「栈上分配」效果"]
+    O3_D["终极收益：零 GC 开销\n对象随栈帧销毁自动释放"]
+    
+    O1 --- O1_D
+    O2 --- O2_D
+    O3 --- O3_D
+    
+    style START fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style O1 fill:#fff9c4,stroke:#f9a825
+    style O2 fill:#ffcc80,stroke:#ef6c00
+    style O3 fill:#a5d6a7,stroke:#2e7d32
+    style O1_D fill:#fffde7,stroke:#f9a825,stroke-dasharray: 5 5
+    style O2_D fill:#fff3e0,stroke:#ef6c00,stroke-dasharray: 5 5
+    style O3_D fill:#e8f5e9,stroke:#2e7d32,stroke-dasharray: 5 5</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart TD
+    START["🔍 逃逸分析判定「不逃逸」"] --> O1
+    
+    O1["🔓 ① 锁消除 Lock Elision"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
+    
+    O1 --> O2
+    
+    O2["📊 ② 标量替换 Scalar Replacement"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
+    
+    O2 --> O3
+    
+    O3["⚡ ③ 等价「栈上分配」效果"]
+    O3_D["终极收益：零 GC 开销\n对象随栈帧销毁自动释放"]
+    
+    O1 --- O1_D
+    O2 --- O2_D
+    O3 --- O3_D
+    
+    style START fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style O1 fill:#fff9c4,stroke:#f9a825
+    style O2 fill:#ffcc80,stroke:#ef6c00
+    style O3 fill:#a5d6a7,stroke:#2e7d32
+    style O1_D fill:#fffde7,stroke:#f9a825,stroke-dasharray: 5 5
+    style O2_D fill:#fff3e0,stroke:#ef6c00,stroke-dasharray: 5 5
+    style O3_D fill:#e8f5e9,stroke:#2e7d32,stroke-dasharray: 5 5</pre></template>
+</div><h2 class="heading-element" id="21-栈上分配stack-allocation"><span>2.1 栈上分配（Stack Allocation）</span>
+  <a href="#21-%e6%a0%88%e4%b8%8a%e5%88%86%e9%85%8dstack-allocation" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 class="heading-element" id="原理"><span>原理</span>
+  <a href="#%e5%8e%9f%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>正常流程下，Java 对象在堆上分配，由 GC 负责回收。如果逃逸分析确认对象不会逃逸，JIT 可以将其直接分配在<strong>栈帧</strong>上——对象随方法调用诞生，随方法返回自动销毁，完全绕过堆和 GC。</p>
+<div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    subgraph HEAP["📦 传统堆分配"]
+        direction TB
+        H1["1️⃣ new 对象\nTLAB / CAS 分配"] --> H2["2️⃣ 返回引用\n对象在堆上"] --> H3["3️⃣ 方法结束\n对象变垃圾"] --> H4["4️⃣ GC 介入回收\nSTW / 并发标记"]
+    end
+    
+    subgraph STACK["📋 优化后栈分配等效"]
+        direction TB
+        S1["1️⃣ 移动 SP 指针\n单条 CPU 指令"] --> S2["2️⃣ 栈上直接操作\n缓存友好"] --> S3["3️⃣ 方法结束\nSP 复位"] --> S4["🎉 零 GC 参与\n自动释放"]
+    end
+    
+    HEAP -.->|"逃逸分析\n+ 标量替换"| STACK
+    
+    style HEAP fill:#ffebee,stroke:#c62828
+    style STACK fill:#e8f5e9,stroke:#2e7d32
+    style H4 fill:#ffcdd2
+    style S4 fill:#a5d6a7</pre>
+  <pre class="mermaid-dark">flowchart LR
+    subgraph HEAP["📦 传统堆分配"]
+        direction TB
+        H1["1️⃣ new 对象\nTLAB / CAS 分配"] --> H2["2️⃣ 返回引用\n对象在堆上"] --> H3["3️⃣ 方法结束\n对象变垃圾"] --> H4["4️⃣ GC 介入回收\nSTW / 并发标记"]
+    end
+    
+    subgraph STACK["📋 优化后栈分配等效"]
+        direction TB
+        S1["1️⃣ 移动 SP 指针\n单条 CPU 指令"] --> S2["2️⃣ 栈上直接操作\n缓存友好"] --> S3["3️⃣ 方法结束\nSP 复位"] --> S4["🎉 零 GC 参与\n自动释放"]
+    end
+    
+    HEAP -.->|"逃逸分析\n+ 标量替换"| STACK
+    
+    style HEAP fill:#ffebee,stroke:#c62828
+    style STACK fill:#e8f5e9,stroke:#2e7d32
+    style H4 fill:#ffcdd2
+    style S4 fill:#a5d6a7</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    subgraph HEAP["📦 传统堆分配"]
+        direction TB
+        H1["1️⃣ new 对象\nTLAB / CAS 分配"] --> H2["2️⃣ 返回引用\n对象在堆上"] --> H3["3️⃣ 方法结束\n对象变垃圾"] --> H4["4️⃣ GC 介入回收\nSTW / 并发标记"]
+    end
+    
+    subgraph STACK["📋 优化后栈分配等效"]
+        direction TB
+        S1["1️⃣ 移动 SP 指针\n单条 CPU 指令"] --> S2["2️⃣ 栈上直接操作\n缓存友好"] --> S3["3️⃣ 方法结束\nSP 复位"] --> S4["🎉 零 GC 参与\n自动释放"]
+    end
+    
+    HEAP -.->|"逃逸分析\n+ 标量替换"| STACK
+    
+    style HEAP fill:#ffebee,stroke:#c62828
+    style STACK fill:#e8f5e9,stroke:#2e7d32
+    style H4 fill:#ffcdd2
+    style S4 fill:#a5d6a7</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    subgraph HEAP["📦 传统堆分配"]
+        direction TB
+        H1["1️⃣ new 对象\nTLAB / CAS 分配"] --> H2["2️⃣ 返回引用\n对象在堆上"] --> H3["3️⃣ 方法结束\n对象变垃圾"] --> H4["4️⃣ GC 介入回收\nSTW / 并发标记"]
+    end
+    
+    subgraph STACK["📋 优化后栈分配等效"]
+        direction TB
+        S1["1️⃣ 移动 SP 指针\n单条 CPU 指令"] --> S2["2️⃣ 栈上直接操作\n缓存友好"] --> S3["3️⃣ 方法结束\nSP 复位"] --> S4["🎉 零 GC 参与\n自动释放"]
+    end
+    
+    HEAP -.->|"逃逸分析\n+ 标量替换"| STACK
+    
+    style HEAP fill:#ffebee,stroke:#c62828
+    style STACK fill:#e8f5e9,stroke:#2e7d32
+    style H4 fill:#ffcdd2
+    style S4 fill:#a5d6a7</pre></template>
+</div><h3 class="heading-element" id="收益"><span>收益</span>
+  <a href="#%e6%94%b6%e7%9b%8a" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li><strong>零 GC 压力</strong>：栈上的对象随栈帧弹出而自动释放，不参与任何 GC 周期</li>
+<li><strong>分配极快</strong>：栈分配仅仅是移动栈指针（SP），只需一条 CPU 指令。对比之下，堆分配需要在线程本地分配缓冲区（TLAB）中找空闲位置，或走 CAS 竞争</li>
+<li><strong>缓存友好</strong>：栈内存的访问模式天然符合 CPU cache line 的局部性原理</li>
+</ul>
+<h3 class="heading-element" id="重要澄清hotspot-的实现方式"><span>重要澄清：HotSpot 的实现方式</span>
+  <a href="#%e9%87%8d%e8%a6%81%e6%be%84%e6%b8%85hotspot-%e7%9a%84%e5%ae%9e%e7%8e%b0%e6%96%b9%e5%bc%8f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>这里有一个很多文章都写错的细节：<strong>HotSpot JVM 并没有真正实现“把完整对象分配在栈上”</strong>。HotSpot 实际走的是下面要讲的 <strong>标量替换（Scalar Replacement）</strong> 路径——它把对象打散成成员变量，直接在栈或寄存器中操作。真正的“对象整体栈上分配”目前更多存在于理论和其他 JVM 实现（如 GraalVM 的某些实验配置）中。</p>
+<blockquote>
+<p>所以正确的认知是：逃逸分析 → 标量替换，效果等价于“栈上分配”，但实现方式不同。</p>
+</blockquote>
+<h2 class="heading-element" id="22-标量替换scalar-replacement"><span>2.2 标量替换（Scalar Replacement）</span>
+  <a href="#22-%e6%a0%87%e9%87%8f%e6%9b%bf%e6%8d%a2scalar-replacement" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 class="heading-element" id="什么是标量scalar"><span>什么是标量（Scalar）？</span>
+  <a href="#%e4%bb%80%e4%b9%88%e6%98%af%e6%a0%87%e9%87%8fscalar" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><strong>标量</strong>是指不可再分解的基本数据单元。在 Java 中，原始类型（int、long、double、reference 等）是标量；对象（Object）是<strong>聚合量</strong>（Aggregate），因为它由多个标量字段组合而成。</p>
+<h3 class="heading-element" id="替换过程"><span>替换过程</span>
+  <a href="#%e6%9b%bf%e6%8d%a2%e8%bf%87%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>当逃逸分析判定一个对象不逃逸后，JIT 可以把这个对象”打散”：</p>
+<div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    subgraph before["❌ 优化前：聚合量 (Aggregate)"]
+        OBJ["📦 Point 对象 (≈24 字节堆内存)\n┌──────────────────┐\n│  Object Header   │ 12~16 字节\n│  int x = 3       │  4 字节\n│  int y = 4       │  4 字节\n└──────────────────┘"]
+    end
+    
+    subgraph after["✅ 优化后：标量 (Scalars)"]
+        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
+    end
+    
+    before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after
+    
+    style OBJ fill:#ffcdd2,stroke:#c62828
+    style S1 fill:#c8e6c9,stroke:#2e7d32
+    style S2 fill:#c8e6c9,stroke:#2e7d32
+    style before fill:#fafafa,stroke:#999
+    style after fill:#fafafa,stroke:#999</pre>
+  <pre class="mermaid-dark">flowchart LR
+    subgraph before["❌ 优化前：聚合量 (Aggregate)"]
+        OBJ["📦 Point 对象 (≈24 字节堆内存)\n┌──────────────────┐\n│  Object Header   │ 12~16 字节\n│  int x = 3       │  4 字节\n│  int y = 4       │  4 字节\n└──────────────────┘"]
+    end
+    
+    subgraph after["✅ 优化后：标量 (Scalars)"]
+        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
+    end
+    
+    before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after
+    
+    style OBJ fill:#ffcdd2,stroke:#c62828
+    style S1 fill:#c8e6c9,stroke:#2e7d32
+    style S2 fill:#c8e6c9,stroke:#2e7d32
+    style before fill:#fafafa,stroke:#999
+    style after fill:#fafafa,stroke:#999</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    subgraph before["❌ 优化前：聚合量 (Aggregate)"]
+        OBJ["📦 Point 对象 (≈24 字节堆内存)\n┌──────────────────┐\n│  Object Header   │ 12~16 字节\n│  int x = 3       │  4 字节\n│  int y = 4       │  4 字节\n└──────────────────┘"]
+    end
+    
+    subgraph after["✅ 优化后：标量 (Scalars)"]
+        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
+    end
+    
+    before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after
+    
+    style OBJ fill:#ffcdd2,stroke:#c62828
+    style S1 fill:#c8e6c9,stroke:#2e7d32
+    style S2 fill:#c8e6c9,stroke:#2e7d32
+    style before fill:#fafafa,stroke:#999
+    style after fill:#fafafa,stroke:#999</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    subgraph before["❌ 优化前：聚合量 (Aggregate)"]
+        OBJ["📦 Point 对象 (≈24 字节堆内存)\n┌──────────────────┐\n│  Object Header   │ 12~16 字节\n│  int x = 3       │  4 字节\n│  int y = 4       │  4 字节\n└──────────────────┘"]
+    end
+    
+    subgraph after["✅ 优化后：标量 (Scalars)"]
+        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
+    end
+    
+    before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after
+    
+    style OBJ fill:#ffcdd2,stroke:#c62828
+    style S1 fill:#c8e6c9,stroke:#2e7d32
+    style S2 fill:#c8e6c9,stroke:#2e7d32
+    style before fill:#fafafa,stroke:#999
+    style after fill:#fafafa,stroke:#999</pre></template>
+</div><p>编译器不再分配一个完整的 <code>Point</code> 对象，而是直接分配两个 <code>int</code>。这样一来：</p>
+<ul>
+<li><strong>无对象头开销</strong>：HotSpot 中每个对象头至少占 12 字节（64 位 JVM 开启压缩指针）到 16 字节，标量替换后这笔开销归零</li>
+<li><strong>可进一步优化</strong>：标量可以放进寄存器，参与 JIT 的其他优化（常量折叠、死代码消除、循环不变量外提等）</li>
+<li><strong>内存访问减少</strong>：无需通过对象引用间接寻址，直接访问栈位置或寄存器</li>
+</ul>
+<h3 class="heading-element" id="代码示例"><span>代码示例</span>
+  <a href="#%e4%bb%a3%e7%a0%81%e7%a4%ba%e4%be%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 优化前：标准的 Point 对象</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calc</span>() {
+</span></span><span style="display:flex;"><span>    Point p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Point(3, 4);   <span style="color:#75715e">// 堆分配一个 Point 对象</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> p.<span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> p.<span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> p.<span style="color:#a6e22e">y</span> <span style="color:#f92672">*</span> p.<span style="color:#a6e22e">y</span>; <span style="color:#75715e">// 通过引用访问字段</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 逃逸分析 + 标量替换后，JIT 将其等价变换为：</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calc</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> 3;                    <span style="color:#75715e">// 标量，可能放寄存器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> 4;                    <span style="color:#75715e">// 标量，可能放寄存器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> y <span style="color:#f92672">*</span> y;         <span style="color:#75715e">// 纯寄存器运算</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h3 class="heading-element" id="触发条件"><span>触发条件</span>
+  <a href="#%e8%a7%a6%e5%8f%91%e6%9d%a1%e4%bb%b6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>标量替换需要同时满足：</p>
+<ol>
+<li><code>-XX:+DoEscapeAnalysis</code>（默认开启）</li>
+<li><code>-XX:+EliminateAllocations</code>（默认开启）</li>
+<li>对象不被方法外部的任何代码路径访问到</li>
+<li>对象不是 <code>finalize()</code> 方法的接收者（<code>finalize</code> 需要 GC 感知）</li>
+</ol>
+<h2 class="heading-element" id="23-锁消除lock-elision"><span>2.3 锁消除（Lock Elision）</span>
+  <a href="#23-%e9%94%81%e6%b6%88%e9%99%a4lock-elision" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 class="heading-element" id="问题场景"><span>问题场景</span>
+  <a href="#%e9%97%ae%e9%a2%98%e5%9c%ba%e6%99%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>我们在写线程安全的代码时，经常会给局部对象加锁——但很多时候这个对象只在当前线程的方法内使用，锁完全是多余的：</p>
+<div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">buildMessage</span>(String name) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// StringBuffer 是线程安全的，每个 append 都加了 synchronized</span>
+</span></span><span style="display:flex;"><span>    StringBuffer sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuffer();  <span style="color:#75715e">// sb 永远不会被其他线程看到！</span>
+</span></span><span style="display:flex;"><span>    sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;Hello, &#34;</span>);
+</span></span><span style="display:flex;"><span>    sb.<span style="color:#a6e22e">append</span>(name);
+</span></span><span style="display:flex;"><span>    sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;!&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p><code>synchronized</code> 的加锁/解锁在现代 JVM 中已经很快（偏向锁、轻量级锁），但<strong>快不等于免费</strong>。每次加锁至少涉及一次 CAS 操作，这对 CPU 流水线是有影响的。</p>
+<h3 class="heading-element" id="优化原理"><span>优化原理</span>
+  <a href="#%e4%bc%98%e5%8c%96%e5%8e%9f%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>逃逸分析发现 <code>sb</code> 对象不会逃逸出当前线程，于是 JIT 直接把所有 <code>synchronized</code> 块消除——相当于运行时把 <code>StringBuffer</code> 退化成了 <code>StringBuilder</code>（非线程安全版本）。</p>
+<div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    subgraph before["❌ 优化前：有锁"]
+        direction TB
+        B1["🔒 CAS 加锁\n获取 Monitor"] --> B2["📝 执行临界区代码"] --> B3["🔓 CAS 解锁\n释放 Monitor"]
+    end
+    
+    subgraph after["✅ 优化后：锁消除"]
+        direction TB
+        A1["🚫 跳过锁操作"] --> A2["📝 直接执行临界区代码"]
+    end
+    
+    before -->|"逃逸分析发现\n对象不逃逸"| after
+    
+    style before fill:#ffebee,stroke:#c62828
+    style after fill:#e8f5e9,stroke:#2e7d32</pre>
+  <pre class="mermaid-dark">flowchart LR
+    subgraph before["❌ 优化前：有锁"]
+        direction TB
+        B1["🔒 CAS 加锁\n获取 Monitor"] --> B2["📝 执行临界区代码"] --> B3["🔓 CAS 解锁\n释放 Monitor"]
+    end
+    
+    subgraph after["✅ 优化后：锁消除"]
+        direction TB
+        A1["🚫 跳过锁操作"] --> A2["📝 直接执行临界区代码"]
+    end
+    
+    before -->|"逃逸分析发现\n对象不逃逸"| after
+    
+    style before fill:#ffebee,stroke:#c62828
+    style after fill:#e8f5e9,stroke:#2e7d32</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    subgraph before["❌ 优化前：有锁"]
+        direction TB
+        B1["🔒 CAS 加锁\n获取 Monitor"] --> B2["📝 执行临界区代码"] --> B3["🔓 CAS 解锁\n释放 Monitor"]
+    end
+    
+    subgraph after["✅ 优化后：锁消除"]
+        direction TB
+        A1["🚫 跳过锁操作"] --> A2["📝 直接执行临界区代码"]
+    end
+    
+    before -->|"逃逸分析发现\n对象不逃逸"| after
+    
+    style before fill:#ffebee,stroke:#c62828
+    style after fill:#e8f5e9,stroke:#2e7d32</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    subgraph before["❌ 优化前：有锁"]
+        direction TB
+        B1["🔒 CAS 加锁\n获取 Monitor"] --> B2["📝 执行临界区代码"] --> B3["🔓 CAS 解锁\n释放 Monitor"]
+    end
+    
+    subgraph after["✅ 优化后：锁消除"]
+        direction TB
+        A1["🚫 跳过锁操作"] --> A2["📝 直接执行临界区代码"]
+    end
+    
+    before -->|"逃逸分析发现\n对象不逃逸"| after
+    
+    style before fill:#ffebee,stroke:#c62828
+    style after fill:#e8f5e9,stroke:#2e7d32</pre></template>
+</div><h3 class="heading-element" id="相关参数"><span>相关参数</span>
+  <a href="#%e7%9b%b8%e5%85%b3%e5%8f%82%e6%95%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="table-wrapper">
+  <table>
+    <thead>
+        <tr>
+            <th>参数</th>
+            <th>默认值</th>
+            <th>含义</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>-XX:+DoEscapeAnalysis</code></td>
+            <td>true</td>
+            <td>开启逃逸分析</td>
+        </tr>
+        <tr>
+            <td><code>-XX:+EliminateLocks</code></td>
+            <td>true</td>
+            <td>开启锁消除</td>
+        </tr>
+    </tbody>
+  </table>
+</div><hr>
+<h1 class="heading-element" id="三代码实战逃逸与非逃逸的直观对比"><span>三、代码实战：逃逸与非逃逸的直观对比</span>
+  <a href="#%e4%b8%89%e4%bb%a3%e7%a0%81%e5%ae%9e%e6%88%98%e9%80%83%e9%80%b8%e4%b8%8e%e9%9d%9e%e9%80%83%e9%80%b8%e7%9a%84%e7%9b%b4%e8%a7%82%e5%af%b9%e6%af%94" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h1><blockquote>
+<p>以下测试建议在 <strong>JDK 8+</strong> 下运行，使用 <code>-XX:+PrintGC</code> 观察 GC 行为。为了让 JIT 充分编译，测试循环需要足够的预热次数。</p>
+</blockquote>
+<h2 class="heading-element" id="31-典型逃逸场景"><span>3.1 典型逃逸场景</span>
+  <a href="#31-%e5%85%b8%e5%9e%8b%e9%80%83%e9%80%b8%e5%9c%ba%e6%99%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 class="heading-element" id="场景一返回新对象--方法逃逸"><span>场景一：返回新对象 → 方法逃逸</span>
+  <a href="#%e5%9c%ba%e6%99%af%e4%b8%80%e8%bf%94%e5%9b%9e%e6%96%b0%e5%af%b9%e8%b1%a1--%e6%96%b9%e6%b3%95%e9%80%83%e9%80%b8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EscapeDemo</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Box</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> value;
+</span></span><span style="display:flex;"><span>        Box(<span style="color:#66d9ef">int</span> v) { <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> v; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">get</span>() { <span style="color:#66d9ef">return</span> value; }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ❌ 逃逸：Box 对象作为返回值，逃逸到调用方</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Box <span style="color:#a6e22e">createBox_escape</span>(<span style="color:#66d9ef">int</span> v) {
+</span></span><span style="display:flex;"><span>        Box b <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Box(v);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> b;  <span style="color:#75715e">// b 逃逸了！</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ✅ 不逃逸：只取字段值返回，对象不对外暴露</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">createBox_noEscape</span>(<span style="color:#66d9ef">int</span> v) {
+</span></span><span style="display:flex;"><span>        Box b <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Box(v);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> b.<span style="color:#a6e22e">get</span>();  <span style="color:#75715e">// b 不逃逸，可被标量替换</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 预热</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> 10_000; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            createBox_escape(i);
+</span></span><span style="display:flex;"><span>            createBox_noEscape(i);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 测试：1 亿次调用</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> start <span style="color:#f92672">=</span> System.<span style="color:#a6e22e">nanoTime</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> sum <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> 100_000_000; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">+=</span> createBox_escape(i).<span style="color:#a6e22e">get</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> escapeTime <span style="color:#f92672">=</span> System.<span style="color:#a6e22e">nanoTime</span>() <span style="color:#f92672">-</span> start;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        start <span style="color:#f92672">=</span> System.<span style="color:#a6e22e">nanoTime</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> 100_000_000; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">+=</span> createBox_noEscape(i);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> noEscapeTime <span style="color:#f92672">=</span> System.<span style="color:#a6e22e">nanoTime</span>() <span style="color:#f92672">-</span> start;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;逃逸版本耗时:  &#34;</span> <span style="color:#f92672">+</span> escapeTime <span style="color:#f92672">/</span> 1_000_000 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; ms&#34;</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;非逃逸版本耗时: &#34;</span> <span style="color:#f92672">+</span> noEscapeTime <span style="color:#f92672">/</span> 1_000_000 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; ms&#34;</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(sum); <span style="color:#75715e">// 防止 Dead Code Elimination 把循环优化掉</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h3 class="heading-element" id="场景二赋值给成员静态字段--线程逃逸"><span>场景二：赋值给成员/静态字段 → 线程逃逸</span>
+  <a href="#%e5%9c%ba%e6%99%af%e4%ba%8c%e8%b5%8b%e5%80%bc%e7%bb%99%e6%88%90%e5%91%98%e9%9d%99%e6%80%81%e5%ad%97%e6%ae%b5--%e7%ba%bf%e7%a8%8b%e9%80%83%e9%80%b8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadEscapeDemo</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Data</span> { <span style="color:#75715e">/* 大型对象 */</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Data field;           <span style="color:#75715e">// 实例字段 — 可能被其他线程通过该对象访问</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Data global;   <span style="color:#75715e">// 静态字段 — 全局可见，必然线程逃逸</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ❌ 线程逃逸：赋值给实例字段</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">escapeToField</span>() {
+</span></span><span style="display:flex;"><span>        field <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Data();       <span style="color:#75715e">// this.field 可能被其他线程读到</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ❌ 线程逃逸：赋值给静态字段</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">escapeToGlobal</span>() {
+</span></span><span style="display:flex;"><span>        global <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Data();      <span style="color:#75715e">// 任何线程都能看到</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h3 class="heading-element" id="场景三作为参数传入可能对外存储的方法"><span>场景三：作为参数传入「可能对外存储」的方法</span>
+  <a href="#%e5%9c%ba%e6%99%af%e4%b8%89%e4%bd%9c%e4%b8%ba%e5%8f%82%e6%95%b0%e4%bc%a0%e5%85%a5%e5%8f%af%e8%83%bd%e5%af%b9%e5%a4%96%e5%ad%98%e5%82%a8%e7%9a%84%e6%96%b9%e6%b3%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">maybeEscape</span>(Object o) {
+</span></span><span style="display:flex;"><span>    someCollection.<span style="color:#a6e22e">add</span>(o);        <span style="color:#75715e">// 编译器无法分析 someCollection 的后续行为 → 保守判定逃逸</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p><strong>注意</strong>：如果一个方法内部仅仅读取参数而不存储，编译器可能通过**内联（Inlining）**进一步分析。方法内联是逃逸分析的放大器——内联得越深，编译器能看到的作用域越大，“不逃逸”的判定就越宽。</p>
+<h2 class="heading-element" id="32-典型非逃逸场景"><span>3.2 典型非逃逸场景</span>
+  <a href="#32-%e5%85%b8%e5%9e%8b%e9%9d%9e%e9%80%83%e9%80%b8%e5%9c%ba%e6%99%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 class="heading-element" id="场景一纯计算对象"><span>场景一：纯计算对象</span>
+  <a href="#%e5%9c%ba%e6%99%af%e4%b8%80%e7%ba%af%e8%ae%a1%e7%ae%97%e5%af%b9%e8%b1%a1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NoEscapeDemo</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Complex</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> re, im;
+</span></span><span style="display:flex;"><span>        Complex(<span style="color:#66d9ef">double</span> r, <span style="color:#66d9ef">double</span> i) { re <span style="color:#f92672">=</span> r; im <span style="color:#f92672">=</span> i; }
+</span></span><span style="display:flex;"><span>        Complex <span style="color:#a6e22e">add</span>(Complex o) { <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Complex(re <span style="color:#f92672">+</span> o.<span style="color:#a6e22e">re</span>, im <span style="color:#f92672">+</span> o.<span style="color:#a6e22e">im</span>); }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">abs</span>() { <span style="color:#66d9ef">return</span> Math.<span style="color:#a6e22e">sqrt</span>(re <span style="color:#f92672">*</span> re <span style="color:#f92672">+</span> im <span style="color:#f92672">*</span> im); }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ✅ 不逃逸：两个临时对象都只在方法内使用</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">magnitude</span>(<span style="color:#66d9ef">double</span> a, <span style="color:#66d9ef">double</span> b, <span style="color:#66d9ef">double</span> c, <span style="color:#66d9ef">double</span> d) {
+</span></span><span style="display:flex;"><span>        Complex c1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Complex(a, b);   <span style="color:#75715e">// 不逃逸 → 标量替换</span>
+</span></span><span style="display:flex;"><span>        Complex c2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Complex(c, d);   <span style="color:#75715e">// 不逃逸 → 标量替换</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> c1.<span style="color:#a6e22e">add</span>(c2).<span style="color:#a6e22e">abs</span>();          <span style="color:#75715e">// add() 返回的临时对象也不逃逸</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h3 class="heading-element" id="场景二局部-stringbuilderstringbuffer"><span>场景二：局部 StringBuilder/StringBuffer</span>
+  <a href="#%e5%9c%ba%e6%99%af%e4%ba%8c%e5%b1%80%e9%83%a8-stringbuilderstringbuffer" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ✅ StringBuffer 完全在方法内使用 → 不逃逸 → 锁消除 + 标量替换</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">concatLocal</span>(List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> items) {
+</span></span><span style="display:flex;"><span>    StringBuffer sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuffer();  <span style="color:#75715e">// 线程安全但没用上</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (String item : items) {
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(item);                   <span style="color:#75715e">// synchronized → 被消除</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ 更好的写法：直接用 StringBuilder（也是不逃逸）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">concatLocalBetter</span>(List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> items) {
+</span></span><span style="display:flex;"><span>    StringBuilder sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (String item : items) {
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(item);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><blockquote>
+<p>在逃逸分析开启的情况下，<code>concatLocal</code>（StringBuffer）和 <code>concatLocalBetter</code>（StringBuilder）的执行性能几乎相同——锁消除抹平了差异。但这不代表你可以无脑用 <code>StringBuffer</code>：当对象<strong>确实</strong>逃逸时，锁就是真开销。</p>
+</blockquote>
+<h3 class="heading-element" id="场景三lambda-捕获的对象"><span>场景三：Lambda 捕获的对象</span>
+  <a href="#%e5%9c%ba%e6%99%af%e4%b8%89lambda-%e6%8d%95%e8%8e%b7%e7%9a%84%e5%af%b9%e8%b1%a1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ✅ 不逃逸：Runnable 中的对象仅被当前线程的 lambda 引用</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processLocal</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> data <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>100<span style="color:#f92672">]</span>;           <span style="color:#75715e">// 不逃逸</span>
+</span></span><span style="display:flex;"><span>    Runnable task <span style="color:#f92672">=</span> () <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> data.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            data<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> i;             <span style="color:#75715e">// data 虽然被 lambda 捕获，但 task 没逃逸</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    task.<span style="color:#a6e22e">run</span>();                          <span style="color:#75715e">// 在当前线程执行，不提交给其他线程</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>但如果把 <code>task</code> 提交给线程池——那就逃逸了：</p>
+<div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ❌ 逃逸：lambda 提交给线程池 → data 被另一个线程访问</span>
+</span></span><span style="display:flex;"><span>executorService.<span style="color:#a6e22e">submit</span>(task);            <span style="color:#f92672">//</span> data 发生线程逃逸</span></span></code></pre></div><hr>
+<h1 class="heading-element" id="四避坑指南逃逸分析不是万能药"><span>四、避坑指南：逃逸分析不是万能药</span>
+  <a href="#%e5%9b%9b%e9%81%bf%e5%9d%91%e6%8c%87%e5%8d%97%e9%80%83%e9%80%b8%e5%88%86%e6%9e%90%e4%b8%8d%e6%98%af%e4%b8%87%e8%83%bd%e8%8d%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h1><h2 class="heading-element" id="41-逃逸分析的性能成本"><span>4.1 逃逸分析的性能成本</span>
+  <a href="#41-%e9%80%83%e9%80%b8%e5%88%86%e6%9e%90%e7%9a%84%e6%80%a7%e8%83%bd%e6%88%90%e6%9c%ac" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>逃逸分析本身<strong>不是免费的午餐</strong>。它的成本体现在两个方面：</p>
+<h3 class="heading-element" id="-编译时间开销"><span>① 编译时间开销</span>
+  <a href="#-%e7%bc%96%e8%af%91%e6%97%b6%e9%97%b4%e5%bc%80%e9%94%80" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>逃逸分析是一个<strong>过程间分析（Inter-procedural Analysis）</strong>：编译器需要遍历方法调用图（Call Graph），追踪对象的引用传递路径。方法调用链越深、分支越多，分析的时间就呈指数级增长。</p>
+<p>JVM 对此的策略是<strong>分层编译（Tiered Compilation）</strong>：</p>
+<ul>
+<li><strong>C1 编译器</strong>（Client Compiler）：快速编译，不做逃逸分析</li>
+<li><strong>C2 编译器</strong>（Server Compiler）：充分编译，才做逃逸分析</li>
+</ul>
+<p>这也是为什么 JVM 需要预热（Warm-up）——只有当方法被调用足够多次（达到 <code>-XX:CompileThreshold</code> 阈值）后，C2 才会介入。</p>
+<div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    A["📝 解释执行\n字节码逐条解释"] -->|"调用次数\n达到阈值"| B["⚡ C1 编译\n快速编译，不做 EA"]
+    B -->|"热点代码\n进一步触发"| C["🔥 C2 编译\n充分优化，执行 EA"]
+    
+    A -->|"立即"| D["⏱️ 响应快\n但峰值性能低"]
+    B -->|"中等"| E["⚖️ 折中"]
+    C -->|"慢编译"| F["🚀 峰值性能高"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#fff9c4,stroke:#f9a825
+    style C fill:#ffcc80,stroke:#ef6c00
+    style D fill:#f5f5f5,stroke:#999
+    style E fill:#f5f5f5,stroke:#999
+    style F fill:#c8e6c9,stroke:#2e7d32</pre>
+  <pre class="mermaid-dark">flowchart LR
+    A["📝 解释执行\n字节码逐条解释"] -->|"调用次数\n达到阈值"| B["⚡ C1 编译\n快速编译，不做 EA"]
+    B -->|"热点代码\n进一步触发"| C["🔥 C2 编译\n充分优化，执行 EA"]
+    
+    A -->|"立即"| D["⏱️ 响应快\n但峰值性能低"]
+    B -->|"中等"| E["⚖️ 折中"]
+    C -->|"慢编译"| F["🚀 峰值性能高"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#fff9c4,stroke:#f9a825
+    style C fill:#ffcc80,stroke:#ef6c00
+    style D fill:#f5f5f5,stroke:#999
+    style E fill:#f5f5f5,stroke:#999
+    style F fill:#c8e6c9,stroke:#2e7d32</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    A["📝 解释执行\n字节码逐条解释"] -->|"调用次数\n达到阈值"| B["⚡ C1 编译\n快速编译，不做 EA"]
+    B -->|"热点代码\n进一步触发"| C["🔥 C2 编译\n充分优化，执行 EA"]
+    
+    A -->|"立即"| D["⏱️ 响应快\n但峰值性能低"]
+    B -->|"中等"| E["⚖️ 折中"]
+    C -->|"慢编译"| F["🚀 峰值性能高"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#fff9c4,stroke:#f9a825
+    style C fill:#ffcc80,stroke:#ef6c00
+    style D fill:#f5f5f5,stroke:#999
+    style E fill:#f5f5f5,stroke:#999
+    style F fill:#c8e6c9,stroke:#2e7d32</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    A["📝 解释执行\n字节码逐条解释"] -->|"调用次数\n达到阈值"| B["⚡ C1 编译\n快速编译，不做 EA"]
+    B -->|"热点代码\n进一步触发"| C["🔥 C2 编译\n充分优化，执行 EA"]
+    
+    A -->|"立即"| D["⏱️ 响应快\n但峰值性能低"]
+    B -->|"中等"| E["⚖️ 折中"]
+    C -->|"慢编译"| F["🚀 峰值性能高"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#fff9c4,stroke:#f9a825
+    style C fill:#ffcc80,stroke:#ef6c00
+    style D fill:#f5f5f5,stroke:#999
+    style E fill:#f5f5f5,stroke:#999
+    style F fill:#c8e6c9,stroke:#2e7d32</pre></template>
+</div><p>这就是 JVM「先慢后快」的根源——C2 编译耗时但优化彻底（包括逃逸分析），所以启动阶段性能平平，预热充分后性能飙升。</p>
+<h3 class="heading-element" id="-并非所有不逃逸都能被识别"><span>② 并非所有“不逃逸”都能被识别</span>
+  <a href="#-%e5%b9%b6%e9%9d%9e%e6%89%80%e6%9c%89%e4%b8%8d%e9%80%83%e9%80%b8%e9%83%bd%e8%83%bd%e8%a2%ab%e8%af%86%e5%88%ab" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>逃逸分析是<strong>保守的</strong>（Conservative）：如果编译器无法<strong>100% 确定</strong>对象不逃逸，它就按“逃逸”处理。以下情况会让逃逸分析失效：</p>
+<div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 场景A：分支过于复杂</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">complexBranch</span>(Object o, <span style="color:#66d9ef">boolean</span> flag) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (flag) {
+</span></span><span style="display:flex;"><span>        cache.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>, o);      <span style="color:#75715e">// 这条路径上 o 会逃逸</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 另一条路径上 o 不逃逸</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// → 编译器保守判定：o 逃逸</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 场景B：反射调用</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">viaReflection</span>() {
+</span></span><span style="display:flex;"><span>    Object obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Data();
+</span></span><span style="display:flex;"><span>    Method m <span style="color:#f92672">=</span> SomeClass.<span style="color:#a6e22e">class</span>.<span style="color:#a6e22e">getDeclaredMethod</span>(<span style="color:#e6db74">&#34;handler&#34;</span>);
+</span></span><span style="display:flex;"><span>    m.<span style="color:#a6e22e">invoke</span>(obj);                <span style="color:#75715e">// 编译器完全无法分析 → 判定逃逸</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 场景C：JNI 调用</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">nativeMethod</span>(Object o);  <span style="color:#f92672">//</span> 编译器无法分析 <span style="color:#66d9ef">native</span> 代码 <span style="color:#960050;background-color:#1e0010">→</span> 判定逃逸</span></span></code></pre></div><h3 class="heading-element" id="-逃逸对象太多时分析收益递减"><span>③ 逃逸对象太多时，分析收益递减</span>
+  <a href="#-%e9%80%83%e9%80%b8%e5%af%b9%e8%b1%a1%e5%a4%aa%e5%a4%9a%e6%97%b6%e5%88%86%e6%9e%90%e6%94%b6%e7%9b%8a%e9%80%92%e5%87%8f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>如果你的应用本身就是“对象大量逃逸到多处复用”的模式（比如典型的 Web 应用，请求对象贯穿整个处理链），那逃逸分析基本帮不上忙——编译器会发现几乎所有对象都逃逸了，白白做了分析。</p>
+<h2 class="heading-element" id="42-为什么没有绝对的栈上分配"><span>4.2 为什么没有绝对的“栈上分配”？</span>
+  <a href="#42-%e4%b8%ba%e4%bb%80%e4%b9%88%e6%b2%a1%e6%9c%89%e7%bb%9d%e5%af%b9%e7%9a%84%e6%a0%88%e4%b8%8a%e5%88%86%e9%85%8d" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>如 2.1 节所述，<strong>HotSpot 至今没有实现严格意义上的“对象整体分配到栈”</strong>。原因有几点：</p>
+<h3 class="heading-element" id="-jvm-规范的限制"><span>① JVM 规范的限制</span>
+  <a href="#-jvm-%e8%a7%84%e8%8c%83%e7%9a%84%e9%99%90%e5%88%b6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>《Java 虚拟机规范》并没有规定对象必须在堆上分配，但也<strong>没有定义栈上对象的行为语义</strong>。比如：</p>
+<ul>
+<li><code>Object.hashCode()</code> 的默认实现通常与对象地址关联（虽然 HotSpot 用的是随机数）</li>
+<li><code>System.identityHashCode()</code> 期望返回“同一对象”的稳定标识</li>
+<li><code>wait()/notify()</code> 机制天然依赖于对象在堆上的存在</li>
+</ul>
+<p>如果 HotSpot 把一个对象分配在栈上，这些语义会出现微妙的差异——而 Java 对兼容性的要求是<strong>极高的</strong>。</p>
+<h3 class="heading-element" id="-标量替换已经覆盖了主要收益"><span>② 标量替换已经覆盖了主要收益</span>
+  <a href="#-%e6%a0%87%e9%87%8f%e6%9b%bf%e6%8d%a2%e5%b7%b2%e7%bb%8f%e8%a6%86%e7%9b%96%e4%ba%86%e4%b8%bb%e8%a6%81%e6%94%b6%e7%9b%8a" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>在大多数“不逃逸”的场景里，我们真正需要的并不是对象本身，而是对象的<strong>字段值</strong>。标量替换把这个部分做到了极致——字段直接变成了寄存器里的值，比“栈上的完整对象”还要快。</p>
+<h3 class="heading-element" id="-栈空间有限"><span>③ 栈空间有限</span>
+  <a href="#-%e6%a0%88%e7%a9%ba%e9%97%b4%e6%9c%89%e9%99%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>每个线程的栈大小是有限的（默认 1MB 左右）。如果放任大量对象在栈上分配，稍有不慎就会 <code>StackOverflowError</code>——堆上的 <code>OutOfMemoryError</code> 通常更容易排查。</p>
+<hr>
+<h1 class="heading-element" id="五总结与-jvm-参数锦囊"><span>五、总结与 JVM 参数锦囊</span>
+  <a href="#%e4%ba%94%e6%80%bb%e7%bb%93%e4%b8%8e-jvm-%e5%8f%82%e6%95%b0%e9%94%a6%e5%9b%8a" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h1><h2 class="heading-element" id="核心结论"><span>核心结论</span>
+  <a href="#%e6%a0%b8%e5%bf%83%e7%bb%93%e8%ae%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><div class="table-wrapper">
+  <table>
+    <thead>
+        <tr>
+            <th>要点</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>逃逸分析是什么</strong></td>
+            <td>JIT 编译器判断对象是否会在创建作用域之外被使用</td>
+        </tr>
+        <tr>
+            <td><strong>两个级别</strong></td>
+            <td>方法逃逸（传出方法外）、线程逃逸（被其他线程访问）</td>
+        </tr>
+        <tr>
+            <td><strong>三大优化</strong></td>
+            <td>锁消除 → 标量替换 → 等价效果“栈上分配”</td>
+        </tr>
+        <tr>
+            <td><strong>HotSpot 实现</strong></td>
+            <td>并未真正做栈上分配，而是通过标量替换达到同样效果</td>
+        </tr>
+        <tr>
+            <td><strong>不是万能药</strong></td>
+            <td>保守分析、编译开销、对重度逃逸场景无效</td>
+        </tr>
+    </tbody>
+  </table>
+</div><h2 class="heading-element" id="jvm-参数锦囊"><span>JVM 参数锦囊</span>
+  <a href="#jvm-%e5%8f%82%e6%95%b0%e9%94%a6%e5%9b%8a" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 class="heading-element" id="逃逸分析相关"><span>逃逸分析相关</span>
+  <a href="#%e9%80%83%e9%80%b8%e5%88%86%e6%9e%90%e7%9b%b8%e5%85%b3" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 关闭逃逸分析（用于对比测试）</span>
+</span></span><span style="display:flex;"><span>-XX:-DoEscapeAnalysis
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 关闭标量替换（用于对比测试）</span>
+</span></span><span style="display:flex;"><span>-XX:-EliminateAllocations
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 关闭锁消除（用于对比测试）</span>
+</span></span><span style="display:flex;"><span>-XX:-EliminateLocks</span></span></code></pre></div><h3 class="heading-element" id="观测与诊断"><span>观测与诊断</span>
+  <a href="#%e8%a7%82%e6%b5%8b%e4%b8%8e%e8%af%8a%e6%96%ad" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 打印逃逸分析结果（JDK 8 可用，需要 debug 版 JVM 或 hsdis）</span>
+</span></span><span style="display:flex;"><span>-XX:+UnlockDiagnosticVMOptions
+</span></span><span style="display:flex;"><span>-XX:+PrintEscapeAnalysis
+</span></span><span style="display:flex;"><span>-XX:+PrintEliminateAllocations
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看 JIT 编译产生的方法</span>
+</span></span><span style="display:flex;"><span>-XX:+PrintCompilation
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看内联情况（内联是逃逸分析的放大器）</span>
+</span></span><span style="display:flex;"><span>-XX:+PrintInlining
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看生成的汇编代码（需要 hsdis 插件）</span>
+</span></span><span style="display:flex;"><span>-XX:+UnlockDiagnosticVMOptions
+</span></span><span style="display:flex;"><span>-XX:+PrintAssembly</span></span></code></pre></div><h3 class="heading-element" id="实战建议"><span>实战建议</span>
+  <a href="#%e5%ae%9e%e6%88%98%e5%bb%ba%e8%ae%ae" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 标准高性能配置（这些选项在 JDK 8+ 都是默认值，无需显式设置）</span>
+</span></span><span style="display:flex;"><span>-XX:+DoEscapeAnalysis        <span style="color:#75715e"># 默认开启</span>
+</span></span><span style="display:flex;"><span>-XX:+EliminateAllocations    <span style="color:#75715e"># 默认开启</span>
+</span></span><span style="display:flex;"><span>-XX:+EliminateLocks          <span style="color:#75715e"># 默认开启</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果确定应用是 CPU 密集型且大量使用局部对象，</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 可以适当增加内联阈值，提高逃逸分析覆盖面</span>
+</span></span><span style="display:flex;"><span>-XX:MaxInlineSize<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>         <span style="color:#75715e"># 默认 35（字节码大小）</span>
+</span></span><span style="display:flex;"><span>-XX:FreqInlineSize<span style="color:#f92672">=</span><span style="color:#ae81ff">400</span>       <span style="color:#75715e"># 默认 325</span></span></span></code></pre></div><h2 class="heading-element" id="写在最后"><span>写在最后</span>
+  <a href="#%e5%86%99%e5%9c%a8%e6%9c%80%e5%90%8e" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>逃逸分析是现代 JVM 最精巧的优化之一。它告诉我们一个反直觉的事实：<strong>有些对象根本不需要“对象”</strong>。编译器替你拆掉了不必要的抽象，把字段直接变成了寄存器里的值——这正是 Java“先慢后快”（预热后性能飙升）的重要原因之一。</p>
+<p>理解逃逸分析不是为了手写 JVM 参数（多数情况下默认配置就是最优解），而是为了写出<strong>对编译器友好的代码</strong>：尽量缩小对象的作用域、避免不必要的全局状态、让对象的生命周期清晰可判。做到这些，JIT 自然会还你一份性能惊喜。</p>
+<hr>
+<p><em>本文测试环境：JDK 8 / JDK 17 / JDK 21，HotSpot 64-Bit Server VM。不同 JVM 实现（如 OpenJ9、GraalVM）的行为可能不同。</em></p>
+</div><hr class="awesome-hr" />
+    <h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/my-tech-blog/posts/jvm/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="一个对象从创建到回收的全生命周期">一个对象从创建到回收的全生命周期</a></li></ul><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod"><span title="更新于 2026-06-26 00:00:00">更新于 2026-06-26&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="vscode://file//Users/zyguo/AI/github/my-tech-blog/content/posts/JVM/JVM%e5%86%85%e5%ad%98%e6%a8%a1%e5%9e%8b%e6%b7%b1%e5%ba%a6%e6%8b%86%e8%a7%a3.md" title="在编辑器中打开" target="_blank" rel="external nofollow noopener noreferrer" class="link-to-vscode">在编辑器中打开</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 X" data-sharer="twitter" data-url="http://localhost:1313/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/" data-title="JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除" data-hashtags="JAVA,JVM,逃逸分析,性能优化"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:1313/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/" data-hashtag="JAVA"><i class="fa-brands fa-facebook-square" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:1313/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/" data-title="JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除"><i class="fa-brands fa-weibo" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href="/my-tech-blog/tags/java/" class="post-tag" title="标签 - JAVA">JAVA</a><a href="/my-tech-blog/tags/jvm/" class="post-tag" title="标签 - JVM">JVM</a><a href="/my-tech-blog/tags/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" class="post-tag" title="标签 - 逃逸分析">逃逸分析</a><a href="/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="post-tag" title="标签 - 性能优化">性能优化</a></section>
+    <section><span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/my-tech-blog/">主页</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/my-tech-blog/posts/jvm/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-nav-item" rel="prev" title="一个对象从创建到回收的全生命周期"><i class="fa-solid fa-angle-left" aria-hidden="true"></i>一个对象从创建到回收的全生命周期</a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside><dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog">
+      <div class="toc">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-drawer"><nav >
+  <ul>
+    <li><a href="#11-逃逸定义">1.1 逃逸定义</a></li>
+    <li><a href="#12-逃逸的两种级别">1.2 逃逸的两种级别</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-栈上分配stack-allocation">2.1 栈上分配（Stack Allocation）</a>
+      <ul>
+        <li><a href="#原理">原理</a></li>
+        <li><a href="#收益">收益</a></li>
+        <li><a href="#重要澄清hotspot-的实现方式">重要澄清：HotSpot 的实现方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#22-标量替换scalar-replacement">2.2 标量替换（Scalar Replacement）</a>
+      <ul>
+        <li><a href="#什么是标量scalar">什么是标量（Scalar）？</a></li>
+        <li><a href="#替换过程">替换过程</a></li>
+        <li><a href="#代码示例">代码示例</a></li>
+        <li><a href="#触发条件">触发条件</a></li>
+      </ul>
+    </li>
+    <li><a href="#23-锁消除lock-elision">2.3 锁消除（Lock Elision）</a>
+      <ul>
+        <li><a href="#问题场景">问题场景</a></li>
+        <li><a href="#优化原理">优化原理</a></li>
+        <li><a href="#相关参数">相关参数</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-典型逃逸场景">3.1 典型逃逸场景</a>
+      <ul>
+        <li><a href="#场景一返回新对象--方法逃逸">场景一：返回新对象 → 方法逃逸</a></li>
+        <li><a href="#场景二赋值给成员静态字段--线程逃逸">场景二：赋值给成员/静态字段 → 线程逃逸</a></li>
+        <li><a href="#场景三作为参数传入可能对外存储的方法">场景三：作为参数传入「可能对外存储」的方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#32-典型非逃逸场景">3.2 典型非逃逸场景</a>
+      <ul>
+        <li><a href="#场景一纯计算对象">场景一：纯计算对象</a></li>
+        <li><a href="#场景二局部-stringbuilderstringbuffer">场景二：局部 StringBuilder/StringBuffer</a></li>
+        <li><a href="#场景三lambda-捕获的对象">场景三：Lambda 捕获的对象</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-逃逸分析的性能成本">4.1 逃逸分析的性能成本</a>
+      <ul>
+        <li><a href="#-编译时间开销">① 编译时间开销</a></li>
+        <li><a href="#-并非所有不逃逸都能被识别">② 并非所有“不逃逸”都能被识别</a></li>
+        <li><a href="#-逃逸对象太多时分析收益递减">③ 逃逸对象太多时，分析收益递减</a></li>
+      </ul>
+    </li>
+    <li><a href="#42-为什么没有绝对的栈上分配">4.2 为什么没有绝对的“栈上分配”？</a>
+      <ul>
+        <li><a href="#-jvm-规范的限制">① JVM 规范的限制</a></li>
+        <li><a href="#-标量替换已经覆盖了主要收益">② 标量替换已经覆盖了主要收益</a></li>
+        <li><a href="#-栈空间有限">③ 栈空间有限</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#核心结论">核心结论</a></li>
+    <li><a href="#jvm-参数锦囊">JVM 参数锦囊</a>
+      <ul>
+        <li><a href="#逃逸分析相关">逃逸分析相关</a></li>
+        <li><a href="#观测与诊断">观测与诊断</a></li>
+        <li><a href="#实战建议">实战建议</a></li>
+      </ul>
+    </li>
+    <li><a href="#写在最后">写在最后</a></li>
+  </ul>
+</nav></div>
+      </div>
+    </dialog></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.163.3"><img class="hugo-icon" src="/my-tech-blog/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.5"><img class="fixit-icon" src="/my-tech-blog/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="/my-tech-blog/"></a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></div><div id="toc-drawer-button" class="fixed-button toc-drawer-button d-none" role="button" aria-label="目录"><i class="fa-solid fa-bars" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/my-tech-blog/lib/cookieconsent/cookieconsent.min.css"><script src="/my-tech-blog/lib/autocomplete/autocomplete.min.js" defer></script><script src="/my-tech-blog/lib/sharer/sharer.min.js" async defer></script><script src="/my-tech-blog/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="/my-tech-blog/lib/cell-tooltip/cell-tooltip.umd.js" defer></script><script src="/my-tech-blog/js/config/defd4a5960482b697e93f8b66bc5ea90.js" defer></script><script src="/my-tech-blog/js/lib/mermaid.js" type="module"></script><script src="/my-tech-blog/js/theme.min.js" defer></script></body>
+</html>
