@@ -3,7 +3,7 @@
 # =====================================================================================
 
 title = "My Tech Blog"
-baseURL = "http://localhost:1313"
+baseURL = "https://guozy502.github.io/my-tech-blog/"
 theme = ["FixIt"]
 defaultContentLanguage = "zh-cn"
 locale = "zh-CN"
