@@ -125,12 +125,18 @@ enableEmoji = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-    # Social share
-    [params.page.share]
-      enable = true
-    # Related posts
-    [params.page.related]
-      enable = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    noClasses = false
+    lineNos = false
+
+  # Social share
+  [params.page.share]
+    enable = true
+  # Related posts
+  [params.page.related]
+    enable = true
 
   # Comments (Giscus)
   [params.comment]

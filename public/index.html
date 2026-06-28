@@ -91,7 +91,57 @@
     <div id="search-dropdown-mobile"></div>
   </div><main class="fi-container"><div class="page home posts"><div class="home-profile"><h1 class="home-title"></h1><p class="home-subtitle"><span class="d-none">记录技术，分享成长</span><span class="typeit"><template>记录技术，分享成长</template></span></p><div class="links"><a href="/my-tech-blog/index.xml" title="RSS" target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss" aria-hidden="true"></i>
     </a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/jvm/jit%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%88%86%E5%B1%82%E7%BC%96%E8%AF%91%E4%B8%8E%E5%86%85%E8%81%94%E4%BC%98%E5%8C%96/">JIT编译器的分层编译与内联优化</a>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E5%88%86%E5%B8%83%E5%BC%8F/cap%E4%B8%8E%E5%85%B1%E8%AF%86%E4%B8%BA%E4%BB%80%E4%B9%88zookeeper%E9%80%89zab%E8%80%8Cetcd%E9%80%89raft/">CAP与共识——为什么ZooKeeper选ZAB而etcd选Raft</a>
+  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="post-category" title="分类 - 分布式系统"><i class="fa-regular fa-folder" aria-hidden="true"></i> 分布式系统</a></span></div><div class="content"><div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    A["🧠 共识算法"]
+    A --> B["ZAB\n(ZooKeeper Atomic Broadcast)\n主从模型，顺序共识"]
+    A --> C["Raft\nLeader 选举 + 日志复制\n全复制模型"]
+    
+    B --> D["ZooKeeper\nCP 强一致\nConfig/分布式锁/服务发现"]
+    C --> E["etcd\nCP 强一致\nK8s Config/分布式锁"]
+    
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e3f2fd,stroke:#1565c0</pre>
+  <pre class="mermaid-dark">flowchart LR
+    A["🧠 共识算法"]
+    A --> B["ZAB\n(ZooKeeper Atomic Broadcast)\n主从模型，顺序共识"]
+    A --> C["Raft\nLeader 选举 + 日志复制\n全复制模型"]
+    
+    B --> D["ZooKeeper\nCP 强一致\nConfig/分布式锁/服务发现"]
+    C --> E["etcd\nCP 强一致\nK8s Config/分布式锁"]
+    
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e3f2fd,stroke:#1565c0</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    A["🧠 共识算法"]
+    A --> B["ZAB\n(ZooKeeper Atomic Broadcast)\n主从模型，顺序共识"]
+    A --> C["Raft\nLeader 选举 + 日志复制\n全复制模型"]
+    
+    B --> D["ZooKeeper\nCP 强一致\nConfig/分布式锁/服务发现"]
+    C --> E["etcd\nCP 强一致\nK8s Config/分布式锁"]
+    
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e3f2fd,stroke:#1565c0</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    A["🧠 共识算法"]
+    A --> B["ZAB\n(ZooKeeper Atomic Broadcast)\n主从模型，顺序共识"]
+    A --> C["Raft\nLeader 选举 + 日志复制\n全复制模型"]
+    
+    B --> D["ZooKeeper\nCP 强一致\nConfig/分布式锁/服务发现"]
+    C --> E["etcd\nCP 强一致\nK8s Config/分布式锁"]
+    
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e3f2fd,stroke:#1565c0</pre></template>
+</div><hr>
+<h3 class="heading-element" id="一zab-与-raft-的分道扬镳" data-decreased><span>一、ZAB 与 Raft 的分道扬镳</span>
+  <a href="#%e4%b8%80zab-%e4%b8%8e-raft-%e7%9a%84%e5%88%86%e9%81%93%e6%89%ac%e9%95%b3" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>ZooKeeper 诞生于 2010 年，那时的共识算法只有 Paxos——出了名的难懂。ZooKeeper 团队设计了 <strong>ZAB（ZooKeeper Atomic Broadcast）</strong> 作为自己的共识协议。</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/%E5%88%86%E5%B8%83%E5%BC%8F/cap%E4%B8%8E%E5%85%B1%E8%AF%86%E4%B8%BA%E4%BB%80%E4%B9%88zookeeper%E9%80%89zab%E8%80%8Cetcd%E9%80%89raft/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class="post-tag">分布式</a><a href='/my-tech-blog/tags/cap/' class="post-tag">CAP</a><a href='/my-tech-blog/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/' class="post-tag">共识算法</a><a href='/my-tech-blog/tags/raft/' class="post-tag">Raft</a><a href='/my-tech-blog/tags/zab/' class="post-tag">ZAB</a><a href='/my-tech-blog/tags/zookeeper/' class="post-tag">ZooKeeper</a><a href='/my-tech-blog/tags/etcd/' class="post-tag">Etcd</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/jvm/jit%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%88%86%E5%B1%82%E7%BC%96%E8%AF%91%E4%B8%8E%E5%86%85%E8%81%94%E4%BC%98%E5%8C%96/">JIT编译器的分层编译与内联优化</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
       Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="content"><div class="diagram-container">
   <pre class="mermaid">flowchart LR
@@ -216,8 +266,8 @@
   <a href="#11-%e5%8d%95%e7%82%b9%e5%86%99%e5%85%a5%e7%9a%84%e5%9b%b0%e5%b1%80" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><pre tabindex="0"><code>传统主从：Client → Master (写入) → Slave (只读)
-Master 挂了怎么办？→ 人工切主 → 数据可能丢失</code></pre><p><strong>共识算法要解决的核心问题</strong>：一组机器在没有&quot;上帝视角&quot;的情况下，对&quot;谁是主&quot;&ldquo;日志顺序是什么&quot;达成一致——即使部分节点故障、网络分区。</p></div><div class="post-footer">
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><div class="code-header language-fallback"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="action-btn line-nos-btn" aria-label="切换行号" role="button" title="切换行号" data-ct-tooltip><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="action-btn line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行" data-ct-tooltip><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="action-btn copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板" data-copied-text="已复制" data-ct-tooltip><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="1" style="--fi-max-shown-lines:10;--fi-line-digit:1;--fi-line-start:1;"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">传统主从：Client → Master (写入) → Slave (只读)
+</span></span><span class="line"><span class="cl">Master 挂了怎么办？→ 人工切主 → 数据可能丢失</span></span></code></pre></div></div><p><strong>共识算法要解决的核心问题</strong>：一组机器在没有&quot;上帝视角&quot;的情况下，对&quot;谁是主&quot;&ldquo;日志顺序是什么&quot;达成一致——即使部分节点故障、网络分区。</p></div><div class="post-footer">
     <a href="/my-tech-blog/posts/%E5%88%86%E5%B8%83%E5%BC%8F/raft%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E4%BB%8E%E9%80%89%E4%B8%BB%E5%88%B0%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class="post-tag">分布式</a><a href='/my-tech-blog/tags/raft/' class="post-tag">Raft</a><a href='/my-tech-blog/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/' class="post-tag">共识算法</a><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/' class="post-tag">分布式一致性</a><a href='/my-tech-blog/tags/leader-election/' class="post-tag">Leader Election</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/semaphore-vs-countdownlatch-vs-cyclicbarrier%E4%B8%89%E5%85%84%E5%BC%9F%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/">Semaphore vs CountDownLatch vs CyclicBarrier——三兄弟的使用场景</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
@@ -315,17 +365,17 @@ Master 挂了怎么办？→ 人工切主 → 数据可能丢失</code></pre><p>
   <a href="#21-%e6%a0%b8%e5%bf%83%e5%8e%9f%e7%90%86" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 创建一个有 3 个许可证的信号量</span>
-</span></span><span style="display:flex;"><span>Semaphore semaphore <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Semaphore(3);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 线程获取许可证（acquire 会阻塞直到有许可证）</span>
-</span></span><span style="display:flex;"><span>semaphore.<span style="color:#a6e22e">acquire</span>();  <span style="color:#75715e">// permits: 3 → 2</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 访问受限资源（如数据库连接池）</span>
-</span></span><span style="display:flex;"><span>    doWork();
-</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
-</span></span><span style="display:flex;"><span>    semaphore.<span style="color:#a6e22e">release</span>();  <span style="color:#75715e">// permits: 2 → 3（归还）</span>
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><div class="diagram-container">
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><div class="code-header language-java"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="action-btn line-nos-btn" aria-label="切换行号" role="button" title="切换行号" data-ct-tooltip><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="action-btn line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行" data-ct-tooltip><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="action-btn copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板" data-copied-text="已复制" data-ct-tooltip><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 创建一个有 3 个许可证的信号量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">Semaphore</span><span class="w"> </span><span class="n">semaphore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Semaphore</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 线程获取许可证（acquire 会阻塞直到有许可证）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">semaphore</span><span class="p">.</span><span class="na">acquire</span><span class="p">();</span><span class="w">  </span><span class="c1">// permits: 3 → 2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 访问受限资源（如数据库连接池）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">doWork</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">semaphore</span><span class="p">.</span><span class="na">release</span><span class="p">();</span><span class="w">  </span><span class="c1">// permits: 2 → 3（归还）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><div class="code-expand-btn" aria-label="展开或折叠代码块" role="button"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></div></div><div class="diagram-container">
   <pre class="mermaid">flowchart TD
     T1["线程 1"] -->|"acquire ✅"| POOL["许可池\npermits=3->2"]
     T2["线程 2"] -->|"acquire ✅"| POOL
@@ -374,34 +424,34 @@ Master 挂了怎么办？→ 人工切主 → 数据可能丢失</code></pre><p>
   <a href="#22-%e7%bb%8f%e5%85%b8%e5%9c%ba%e6%99%af%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%9e%e6%8e%a5%e6%b1%a0" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConnectionPool</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> Semaphore semaphore;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> List<span style="color:#f92672">&lt;</span>Connection<span style="color:#f92672">&gt;</span> pool;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ConnectionPool</span>(<span style="color:#66d9ef">int</span> size) {
-</span></span><span style="display:flex;"><span>        semaphore <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Semaphore(size);
-</span></span><span style="display:flex;"><span>        pool <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>(size);
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 初始化 size 个连接</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Connection <span style="color:#a6e22e">borrow</span>() <span style="color:#66d9ef">throws</span> InterruptedException {
-</span></span><span style="display:flex;"><span>        semaphore.<span style="color:#a6e22e">acquire</span>();           <span style="color:#75715e">// 拿许可证，没空闲就等</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> pool.<span style="color:#a6e22e">remove</span>(0);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">release</span>(Connection conn) {
-</span></span><span style="display:flex;"><span>        pool.<span style="color:#a6e22e">add</span>(conn);
-</span></span><span style="display:flex;"><span>        semaphore.<span style="color:#a6e22e">release</span>();           <span style="color:#75715e">// 还许可证，唤醒等待者</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h3 class="heading-element" id="23-公平模式-vs-非公平模式"><span>2.3 公平模式 vs 非公平模式</span>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><div class="code-header language-java"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="action-btn line-nos-btn" aria-label="切换行号" role="button" title="切换行号" data-ct-tooltip><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="action-btn line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行" data-ct-tooltip><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="action-btn copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板" data-copied-text="已复制" data-ct-tooltip><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConnectionPool</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Semaphore</span><span class="w"> </span><span class="n">semaphore</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Connection</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pool</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ConnectionPool</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">semaphore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Semaphore</span><span class="p">(</span><span class="n">size</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 初始化 size 个连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Connection</span><span class="w"> </span><span class="nf">borrow</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">semaphore</span><span class="p">.</span><span class="na">acquire</span><span class="p">();</span><span class="w">           </span><span class="c1">// 拿许可证，没空闲就等</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">pool</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">conn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">pool</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">conn</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">semaphore</span><span class="p">.</span><span class="na">release</span><span class="p">();</span><span class="w">           </span><span class="c1">// 还许可证，唤醒等待者</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><div class="code-expand-btn" aria-label="展开或折叠代码块" role="button"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></div></div><h3 class="heading-element" id="23-公平模式-vs-非公平模式"><span>2.3 公平模式 vs 非公平模式</span>
   <a href="#23-%e5%85%ac%e5%b9%b3%e6%a8%a1%e5%bc%8f-vs-%e9%9d%9e%e5%85%ac%e5%b9%b3%e6%a8%a1%e5%bc%8f" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 非公平（默认）：新来的 acquire 可能插队</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> Semaphore(3);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 公平：按 FIFO 顺序排队获取</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> Semaphore(3, <span style="color:#66d9ef">true</span>);</span></span></code></pre></div><blockquote>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><div class="code-header language-java"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="action-btn line-nos-btn" aria-label="切换行号" role="button" title="切换行号" data-ct-tooltip><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="action-btn line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行" data-ct-tooltip><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="action-btn copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板" data-copied-text="已复制" data-ct-tooltip><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="1" style="--fi-max-shown-lines:10;--fi-line-digit:1;--fi-line-start:1;"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 非公平（默认）：新来的 acquire 可能插队</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">new</span><span class="w"> </span><span class="n">Semaphore</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 公平：按 FIFO 顺序排队获取</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">new</span><span class="w"> </span><span class="n">Semaphore</span><span class="p">(</span><span class="n">3</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span></span></span></code></pre></div></div><blockquote>
 <p>非公平模式吞吐量更高（减少上下文切换），公平模式保证不会饥饿。</p></div><div class="post-footer">
     <a href="/my-tech-blog/posts/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/semaphore-vs-countdownlatch-vs-cyclicbarrier%E4%B8%89%E5%85%84%E5%BC%9F%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">JAVA</a><a href='/my-tech-blog/tags/%E5%B9%B6%E5%8F%91/' class="post-tag">并发</a><a href='/my-tech-blog/tags/semaphore/' class="post-tag">Semaphore</a><a href='/my-tech-blog/tags/countdownlatch/' class="post-tag">CountDownLatch</a><a href='/my-tech-blog/tags/cyclicbarrier/' class="post-tag">CyclicBarrier</a><a href='/my-tech-blog/tags/aqs/' class="post-tag">AQS</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/jvm/synchronized%E9%94%81%E5%8D%87%E7%BA%A7%E5%85%A8%E9%93%BE%E8%B7%AF%E4%BB%8E%E5%AF%B9%E8%B1%A1%E5%A4%B4%E5%88%B0%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81/">Synchronized锁升级全链路——从对象头到重量级锁</a>
@@ -454,141 +504,170 @@ Master 挂了怎么办？→ 人工切主 → 数据可能丢失</code></pre><p>
   </a>
 </h3><p>每个 Java 对象在堆上的布局：</p></div><div class="post-footer">
     <a href="/my-tech-blog/posts/jvm/synchronized%E9%94%81%E5%8D%87%E7%BA%A7%E5%85%A8%E9%93%BE%E8%B7%AF%E4%BB%8E%E5%AF%B9%E8%B1%A1%E5%A4%B4%E5%88%B0%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">JAVA</a><a href='/my-tech-blog/tags/jvm/' class="post-tag">JVM</a><a href='/my-tech-blog/tags/synchronized/' class="post-tag">Synchronized</a><a href='/my-tech-blog/tags/%E9%94%81%E5%8D%87%E7%BA%A7/' class="post-tag">锁升级</a><a href='/my-tech-blog/tags/%E5%B9%B6%E5%8F%91/' class="post-tag">并发</a><a href='/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class="post-tag">性能优化</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BFredisson%E7%9A%84%E7%BA%A2%E9%94%81%E4%BA%89%E8%AE%BA/">分布式锁的正确姿势——Redisson的红锁(RedLock)争论</a>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%96%B9%E6%A1%88%E5%85%A8%E6%99%AF2pctccsaga%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8/">分布式事务方案全景——2PC→TCC→Saga→本地消息表</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
       Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="post-category" title="分类 - 分布式系统"><i class="fa-regular fa-folder" aria-hidden="true"></i> 分布式系统</a></span></div><div class="content"><div class="diagram-container">
-  <pre class="mermaid">flowchart LR
-    A["🔒 单机锁\nsynchronized / ReentrantLock"] --> B["🔐 单 Redis 分布式锁\nSET NX PX + Lua 续期"]
-    B --> C["🔴 RedLock\n多实例多数派加锁"]
-    C --> D{"安全吗？"}
-    D -->|"antirez: 安全"| E["多数派 + 时钟漂移容错"]
-    D -->|"Martin: 不安全"| F["GC 停顿 / 时钟跳跃\n破坏互斥性"]
-    E --> G["fencing token\n应用层单调递增号"]
-    F --> G
+  <pre class="mermaid">flowchart TD
+    Q1{"一致性要求？"}
+    Q1 -->|"强一致\n金融/支付"| Q2{"能接受\n性能损失？"}
+    Q2 -->|"是"| A1["2PC / XA"]
+    Q2 -->|"否，要高并发"| A2["TCC\nTry-Confirm-Cancel"]
     
-    style A fill:#f5f5f5
-    style B fill:#fff3e0
-    style C fill:#ffcdd2
-    style G fill:#e8f5e9,stroke:#2e7d32</pre>
-  <pre class="mermaid-dark">flowchart LR
-    A["🔒 单机锁\nsynchronized / ReentrantLock"] --> B["🔐 单 Redis 分布式锁\nSET NX PX + Lua 续期"]
-    B --> C["🔴 RedLock\n多实例多数派加锁"]
-    C --> D{"安全吗？"}
-    D -->|"antirez: 安全"| E["多数派 + 时钟漂移容错"]
-    D -->|"Martin: 不安全"| F["GC 停顿 / 时钟跳跃\n破坏互斥性"]
-    E --> G["fencing token\n应用层单调递增号"]
-    F --> G
+    Q1 -->|"最终一致\n常规业务"| Q3{"能改造\n业务代码？"}
+    Q3 -->|"是"| Q4{"事务链长？"}
+    Q4 -->|"短(2-3步)"| A2
+    Q4 -->|"长(5+步)"| A3["Saga\n正向+补偿编排"]
+    Q3 -->|"否，零侵入"| A4["本地消息表\n+ MQ 投递"]
     
-    style A fill:#f5f5f5
-    style B fill:#fff3e0
-    style C fill:#ffcdd2
-    style G fill:#e8f5e9,stroke:#2e7d32</pre>
-  <pre class="mermaid-neutral">flowchart LR
-    A["🔒 单机锁\nsynchronized / ReentrantLock"] --> B["🔐 单 Redis 分布式锁\nSET NX PX + Lua 续期"]
-    B --> C["🔴 RedLock\n多实例多数派加锁"]
-    C --> D{"安全吗？"}
-    D -->|"antirez: 安全"| E["多数派 + 时钟漂移容错"]
-    D -->|"Martin: 不安全"| F["GC 停顿 / 时钟跳跃\n破坏互斥性"]
-    E --> G["fencing token\n应用层单调递增号"]
-    F --> G
+    style A1 fill:#ffebee,stroke:#c62828
+    style A2 fill:#fff3e0,stroke:#f57c00
+    style A3 fill:#e3f2fd,stroke:#1565c0
+    style A4 fill:#e8f5e9,stroke:#2e7d32</pre>
+  <pre class="mermaid-dark">flowchart TD
+    Q1{"一致性要求？"}
+    Q1 -->|"强一致\n金融/支付"| Q2{"能接受\n性能损失？"}
+    Q2 -->|"是"| A1["2PC / XA"]
+    Q2 -->|"否，要高并发"| A2["TCC\nTry-Confirm-Cancel"]
     
-    style A fill:#f5f5f5
-    style B fill:#fff3e0
-    style C fill:#ffcdd2
-    style G fill:#e8f5e9,stroke:#2e7d32</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
-<template><pre>flowchart LR
-    A["🔒 单机锁\nsynchronized / ReentrantLock"] --> B["🔐 单 Redis 分布式锁\nSET NX PX + Lua 续期"]
-    B --> C["🔴 RedLock\n多实例多数派加锁"]
-    C --> D{"安全吗？"}
-    D -->|"antirez: 安全"| E["多数派 + 时钟漂移容错"]
-    D -->|"Martin: 不安全"| F["GC 停顿 / 时钟跳跃\n破坏互斥性"]
-    E --> G["fencing token\n应用层单调递增号"]
-    F --> G
+    Q1 -->|"最终一致\n常规业务"| Q3{"能改造\n业务代码？"}
+    Q3 -->|"是"| Q4{"事务链长？"}
+    Q4 -->|"短(2-3步)"| A2
+    Q4 -->|"长(5+步)"| A3["Saga\n正向+补偿编排"]
+    Q3 -->|"否，零侵入"| A4["本地消息表\n+ MQ 投递"]
     
-    style A fill:#f5f5f5
-    style B fill:#fff3e0
-    style C fill:#ffcdd2
-    style G fill:#e8f5e9,stroke:#2e7d32</pre></template>
+    style A1 fill:#ffebee,stroke:#c62828
+    style A2 fill:#fff3e0,stroke:#f57c00
+    style A3 fill:#e3f2fd,stroke:#1565c0
+    style A4 fill:#e8f5e9,stroke:#2e7d32</pre>
+  <pre class="mermaid-neutral">flowchart TD
+    Q1{"一致性要求？"}
+    Q1 -->|"强一致\n金融/支付"| Q2{"能接受\n性能损失？"}
+    Q2 -->|"是"| A1["2PC / XA"]
+    Q2 -->|"否，要高并发"| A2["TCC\nTry-Confirm-Cancel"]
+    
+    Q1 -->|"最终一致\n常规业务"| Q3{"能改造\n业务代码？"}
+    Q3 -->|"是"| Q4{"事务链长？"}
+    Q4 -->|"短(2-3步)"| A2
+    Q4 -->|"长(5+步)"| A3["Saga\n正向+补偿编排"]
+    Q3 -->|"否，零侵入"| A4["本地消息表\n+ MQ 投递"]
+    
+    style A1 fill:#ffebee,stroke:#c62828
+    style A2 fill:#fff3e0,stroke:#f57c00
+    style A3 fill:#e3f2fd,stroke:#1565c0
+    style A4 fill:#e8f5e9,stroke:#2e7d32</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart TD
+    Q1{"一致性要求？"}
+    Q1 -->|"强一致\n金融/支付"| Q2{"能接受\n性能损失？"}
+    Q2 -->|"是"| A1["2PC / XA"]
+    Q2 -->|"否，要高并发"| A2["TCC\nTry-Confirm-Cancel"]
+    
+    Q1 -->|"最终一致\n常规业务"| Q3{"能改造\n业务代码？"}
+    Q3 -->|"是"| Q4{"事务链长？"}
+    Q4 -->|"短(2-3步)"| A2
+    Q4 -->|"长(5+步)"| A3["Saga\n正向+补偿编排"]
+    Q3 -->|"否，零侵入"| A4["本地消息表\n+ MQ 投递"]
+    
+    style A1 fill:#ffebee,stroke:#c62828
+    style A2 fill:#fff3e0,stroke:#f57c00
+    style A3 fill:#e3f2fd,stroke:#1565c0
+    style A4 fill:#e8f5e9,stroke:#2e7d32</pre></template>
 </div><hr>
-<h3 class="heading-element" id="一为什么需要分布式锁" data-decreased><span>一、为什么需要分布式锁？</span>
-  <a href="#%e4%b8%80%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81" class="heading-mark">
+<h3 class="heading-element" id="一2pc--xa强一致性的巅峰与代价" data-decreased><span>一、2PC / XA——强一致性的巅峰与代价</span>
+  <a href="#%e4%b8%802pc--xa%e5%bc%ba%e4%b8%80%e8%87%b4%e6%80%a7%e7%9a%84%e5%b7%85%e5%b3%b0%e4%b8%8e%e4%bb%a3%e4%bb%b7" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 class="heading-element" id="11-单机锁的边界"><span>1.1 单机锁的边界</span>
-  <a href="#11-%e5%8d%95%e6%9c%ba%e9%94%81%e7%9a%84%e8%be%b9%e7%95%8c" class="heading-mark">
+</h3><h3 class="heading-element" id="11-两阶段提交"><span>1.1 两阶段提交</span>
+  <a href="#11-%e4%b8%a4%e9%98%b6%e6%ae%b5%e6%8f%90%e4%ba%a4" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 单机：一把 synchronized 搞定</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">synchronized</span> (<span style="color:#66d9ef">this</span>) {
-</span></span><span style="display:flex;"><span>    deductStock(); <span style="color:#75715e">// 扣库存</span>
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>部署一台机器 → 没问题。部署 3 台机器 → 三个 JVM 各锁各的，库存被超卖。</p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BFredisson%E7%9A%84%E7%BA%A2%E9%94%81%E4%BA%89%E8%AE%BA/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class="post-tag">分布式</a><a href='/my-tech-blog/tags/redis/' class="post-tag">Redis</a><a href='/my-tech-blog/tags/redisson/' class="post-tag">Redisson</a><a href='/my-tech-blog/tags/redlock/' class="post-tag">RedLock</a><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/' class="post-tag">分布式锁</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E5%85%A8%E6%99%AF%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%E4%B8%8Espi%E6%89%93%E7%A0%B4%E5%A7%94%E6%B4%BE%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E7%94%B1/">类加载机制全景——双亲委派模型与SPI打破委派的设计理由</a>
-  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="content"><div class="diagram-container">
-  <pre class="mermaid">flowchart LR
-    A["📥 加载\nLoading"] --> B["🔗 链接\nLinking"]
-    B --> C["⚡ 初始化\nInitialization"]
-    C --> D["📦 使用\nUsing"]
-    D --> E["🗑️ 卸载\nUnloading"]
+</h3><div class="diagram-container">
+  <pre class="mermaid">sequenceDiagram
+    participant TC as 协调者 TM
+    participant A as 服务 A
+    participant B as 服务 B
     
-    B --> B1["验证\nVerification"] --> B2["准备\nPreparation"] --> B3["解析\nResolution"]
+    Note over TC,B: Phase 1: Prepare
+    TC->>A: Prepare
+    A-->>TC: Yes (资源锁定)
+    TC->>B: Prepare
+    B-->>TC: Yes
     
-    style A fill:#e3f2fd,stroke:#1565c0
-    style B fill:#fff3e0,stroke:#f57c00
-    style C fill:#e8f5e9,stroke:#2e7d32
-    style D fill:#f5f5f5,stroke:#999
-    style E fill:#ffebee,stroke:#c62828</pre>
-  <pre class="mermaid-dark">flowchart LR
-    A["📥 加载\nLoading"] --> B["🔗 链接\nLinking"]
-    B --> C["⚡ 初始化\nInitialization"]
-    C --> D["📦 使用\nUsing"]
-    D --> E["🗑️ 卸载\nUnloading"]
+    Note over TC,B: Phase 2: Commit
+    TC->>A: Commit
+    A-->>TC: OK
+    TC->>B: Commit
+    B-->>TC: OK</pre>
+  <pre class="mermaid-dark">sequenceDiagram
+    participant TC as 协调者 TM
+    participant A as 服务 A
+    participant B as 服务 B
     
-    B --> B1["验证\nVerification"] --> B2["准备\nPreparation"] --> B3["解析\nResolution"]
+    Note over TC,B: Phase 1: Prepare
+    TC->>A: Prepare
+    A-->>TC: Yes (资源锁定)
+    TC->>B: Prepare
+    B-->>TC: Yes
     
-    style A fill:#e3f2fd,stroke:#1565c0
-    style B fill:#fff3e0,stroke:#f57c00
-    style C fill:#e8f5e9,stroke:#2e7d32
-    style D fill:#f5f5f5,stroke:#999
-    style E fill:#ffebee,stroke:#c62828</pre>
-  <pre class="mermaid-neutral">flowchart LR
-    A["📥 加载\nLoading"] --> B["🔗 链接\nLinking"]
-    B --> C["⚡ 初始化\nInitialization"]
-    C --> D["📦 使用\nUsing"]
-    D --> E["🗑️ 卸载\nUnloading"]
+    Note over TC,B: Phase 2: Commit
+    TC->>A: Commit
+    A-->>TC: OK
+    TC->>B: Commit
+    B-->>TC: OK</pre>
+  <pre class="mermaid-neutral">sequenceDiagram
+    participant TC as 协调者 TM
+    participant A as 服务 A
+    participant B as 服务 B
     
-    B --> B1["验证\nVerification"] --> B2["准备\nPreparation"] --> B3["解析\nResolution"]
+    Note over TC,B: Phase 1: Prepare
+    TC->>A: Prepare
+    A-->>TC: Yes (资源锁定)
+    TC->>B: Prepare
+    B-->>TC: Yes
     
-    style A fill:#e3f2fd,stroke:#1565c0
-    style B fill:#fff3e0,stroke:#f57c00
-    style C fill:#e8f5e9,stroke:#2e7d32
-    style D fill:#f5f5f5,stroke:#999
-    style E fill:#ffebee,stroke:#c62828</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
-<template><pre>flowchart LR
-    A["📥 加载\nLoading"] --> B["🔗 链接\nLinking"]
-    B --> C["⚡ 初始化\nInitialization"]
-    C --> D["📦 使用\nUsing"]
-    D --> E["🗑️ 卸载\nUnloading"]
+    Note over TC,B: Phase 2: Commit
+    TC->>A: Commit
+    A-->>TC: OK
+    TC->>B: Commit
+    B-->>TC: OK</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>sequenceDiagram
+    participant TC as 协调者 TM
+    participant A as 服务 A
+    participant B as 服务 B
     
-    B --> B1["验证\nVerification"] --> B2["准备\nPreparation"] --> B3["解析\nResolution"]
+    Note over TC,B: Phase 1: Prepare
+    TC->>A: Prepare
+    A-->>TC: Yes (资源锁定)
+    TC->>B: Prepare
+    B-->>TC: Yes
     
-    style A fill:#e3f2fd,stroke:#1565c0
-    style B fill:#fff3e0,stroke:#f57c00
-    style C fill:#e8f5e9,stroke:#2e7d32
-    style D fill:#f5f5f5,stroke:#999
-    style E fill:#ffebee,stroke:#c62828</pre></template>
-</div><hr>
-<h3 class="heading-element" id="一类加载的五个阶段" data-decreased><span>一、类加载的五个阶段</span>
-  <a href="#%e4%b8%80%e7%b1%bb%e5%8a%a0%e8%bd%bd%e7%9a%84%e4%ba%94%e4%b8%aa%e9%98%b6%e6%ae%b5" class="heading-mark">
+    Note over TC,B: Phase 2: Commit
+    TC->>A: Commit
+    A-->>TC: OK
+    TC->>B: Commit
+    B-->>TC: OK</pre></template>
+</div><h3 class="heading-element" id="12-致命伤"><span>1.2 致命伤</span>
+  <a href="#12-%e8%87%b4%e5%91%bd%e4%bc%a4" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 class="heading-element" id="11-加载loading"><span>1.1 加载（Loading）</span>
-  <a href="#11-%e5%8a%a0%e8%bd%bdloading" class="heading-mark">
+</h3><ul>
+<li>Prepare 期间资源锁定，并发度极低</li>
+<li>协调者单点故障 → 所有参与者阻塞</li>
+<li>部分 Commit 失败 → 需人工介入</li>
+<li><strong>适用场景极窄</strong>：只有央行清算级别的强一致需求</li>
+</ul>
+<hr>
+<h3 class="heading-element" id="二tcc业务层的-2pc" data-decreased><span>二、TCC——业务层的 2PC</span>
+  <a href="#%e4%ba%8ctcc%e4%b8%9a%e5%8a%a1%e5%b1%82%e7%9a%84-2pc" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>JVM 不关心 Class 文件从哪来——文件系统、网络、运行时生成、ZIP 包都行。<strong>加载</strong>阶段只做三件事：</p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E5%85%A8%E6%99%AF%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%E4%B8%8Espi%E6%89%93%E7%A0%B4%E5%A7%94%E6%B4%BE%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E7%94%B1/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">JAVA</a><a href='/my-tech-blog/tags/jvm/' class="post-tag">JVM</a><a href='/my-tech-blog/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD/' class="post-tag">类加载</a><a href='/my-tech-blog/tags/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/' class="post-tag">双亲委派</a><a href='/my-tech-blog/tags/spi/' class="post-tag">SPI</a><a href='/my-tech-blog/tags/classloader/' class="post-tag">ClassLoader</a></div></div>
+</h3><h3 class="heading-element" id="21-try-confirm-cancel"><span>2.1 Try-Confirm-Cancel</span>
+  <a href="#21-try-confirm-cancel" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><div class="code-header language-fallback"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="action-btn line-nos-btn" aria-label="切换行号" role="button" title="切换行号" data-ct-tooltip><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="action-btn line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行" data-ct-tooltip><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="action-btn copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板" data-copied-text="已复制" data-ct-tooltip><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="1" style="--fi-max-shown-lines:10;--fi-line-digit:1;--fi-line-start:1;"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Try:     冻结资源（余额不变，冻结额度+100）
+</span></span><span class="line"><span class="cl">Confirm: 真正执行（解冻+扣减）
+</span></span><span class="line"><span class="cl">Cancel:  释放冻结（解冻+退回）</span></span></code></pre></div></div><p><strong>优点</strong>：无锁、高性能、业务可控。<strong>缺点</strong>：每个接口写 3 个方法，Cancel 失败要重试。</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%96%B9%E6%A1%88%E5%85%A8%E6%99%AF2pctccsaga%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class="post-tag">分布式</a><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/' class="post-tag">分布式事务</a><a href='/my-tech-blog/tags/2pc/' class="post-tag">2PC</a><a href='/my-tech-blog/tags/tcc/' class="post-tag">TCC</a><a href='/my-tech-blog/tags/saga/' class="post-tag">Saga</a><a href='/my-tech-blog/tags/seata/' class="post-tag">Seata</a><a href='/my-tech-blog/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/' class="post-tag">消息队列</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
           <span class="page-link">
             <a href="/my-tech-blog/">1</a>
@@ -596,6 +675,10 @@ Master 挂了怎么办？→ 人工切主 → 数据可能丢失</code></pre><p>
         </li><li class="page-item">
           <span class="page-link">
             <a href="/my-tech-blog/page/2/">2</a>
+          </span>
+        </li><li class="page-item">
+          <span class="page-link">
+            <a href="/my-tech-blog/page/3/">3</a>
           </span>
         </li></ul></div></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.163.3"><img class="hugo-icon" src="/my-tech-blog/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.5"><img class="fixit-icon" src="/my-tech-blog/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
