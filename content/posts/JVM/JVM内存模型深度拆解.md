@@ -598,3 +598,10 @@ public native void nativeMethod(Object o);  // 编译器无法分析 native 代�
 ---
 
 *本文测试环境：JDK 8 / JDK 17 / JDK 21，HotSpot 64-Bit Server VM。不同 JVM 实现（如 OpenJ9、GraalVM）的行为可能不同。*
+
+*本文参考资料：*
+- 周志明《深入理解 Java 虚拟机（第 3 版）》——第 2 章（内存区域）、第 3 章（GC）、第 8 章（类加载）、第 11-12 章（后端编译与优化）
+- Oracle HotSpot Runtime Overview: https://openjdk.org/groups/hotspot/docs/RuntimeOverview.html
+- JSR-133 (Java Memory Model and Thread Specification): https://jcp.org/en/jsr/detail?id=133
+- OpenJDK Wiki - Synchronization: https://wiki.openjdk.org/display/HotSpot/Synchronization
+- JEP 189: Shenandoah / JEP 304: Garbage Collector Interface / JEP 333: ZGC

@@ -331,6 +331,14 @@ flowchart TD
 
 ---
 
+
+*本文参考资料：*
+- 周志明《深入理解 Java 虚拟机（第 3 版）》——第 2 章（内存区域）、第 3 章（GC）、第 8 章（类加载）、第 11-12 章（后端编译与优化）
+- Oracle HotSpot Runtime Overview: https://openjdk.org/groups/hotspot/docs/RuntimeOverview.html
+- JSR-133 (Java Memory Model and Thread Specification): https://jcp.org/en/jsr/detail?id=133
+- OpenJDK Wiki - Synchronization: https://wiki.openjdk.org/display/HotSpot/Synchronization
+- JEP 189: Shenandoah / JEP 304: Garbage Collector Interface / JEP 333: ZGC
+
 # 附：JVM 系列索引
 
 | 文章 | 与类加载的关联 |

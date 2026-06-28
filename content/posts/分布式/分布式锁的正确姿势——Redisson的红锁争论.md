@@ -341,3 +341,13 @@ flowchart TD
 - *antirez, "Is Redlock safe?" (2016)*
 - *Martin Kleppmann, "How to do distributed locking" (2016)*
 - *Redisson 官方文档: https://github.com/redisson/redisson/wiki*
+
+*本文参考资料：*
+- Martin Kleppmann《Designing Data-Intensive Applications》（DDIA）——第 5 章（复制）、第 7 章（事务）、第 8-9 章（分布式系统与共识）
+- Diego Ongaro, "In Search of an Understandable Consensus Algorithm (Raft)", 2014: https://raft.github.io/raft.pdf
+- Leslie Lamport, "Paxos Made Simple", 2001
+- antirez, "Is Redlock safe?", 2016: http://antirez.com/news/101
+- Eric Brewer, "CAP Twelve Years Later", 2012
+- Daniel Abadi, "PACELC", 2010
+- Alibaba Seata 官方文档: https://seata.io/
+- Redis 官方文档 - Distributed Locks: https://redis.io/docs/manual/patterns/distributed-locks/

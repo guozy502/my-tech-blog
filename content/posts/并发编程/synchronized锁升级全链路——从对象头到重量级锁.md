@@ -3,7 +3,7 @@ title: "synchronized锁升级全链路——从对象头到重量级锁"
 date: 2026-06-28
 description: 从 Mark Word 的 64 位布局出发，逐级拆解无锁→偏向锁→轻量级锁→重量级锁的完整升级链路，理解每一次升级的条件、操作和性能代价。
 tags: ["JAVA","JVM","synchronized","锁升级","并发","性能优化"]
-categories: ["Java"]
+categories: ["JAVA并发"]
 ---
 
 ```mermaid
@@ -334,6 +334,14 @@ flowchart LR
 > **锁升级的本质是 JVM 在面对未知竞争时，从乐观到悲观的逐步退让。** 偏向锁假设"没人抢"，轻量级锁假设"抢了但很快放手"，重量级锁承认"真的在抢"。每一步升级都伴随着更高的开销，但也都是对上一步假设错误的矫正。理解这个链条，就理解了 `synchronized` 从 JDK 1.6 后为什么不再是性能杀手。
 
 ---
+
+
+*本文参考资料：*
+- Brian Goetz et al.《Java Concurrency in Practice》——第 3-5 章（共享与组合对象）、第 6-8 章（任务执行与线程池）、第 11-12 章（性能与可伸缩性）
+- Doug Lea, "The java.util.concurrent Synchronizer Framework"（AQS 论文）, 2004
+- Java Language Specification, Chapter 17: Threads and Locks（JMM）: https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html
+- JSR-133 FAQ: https://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html
+- OpenJDK 源码: java.util.concurrent 包（AbstractQueuedSynchronizer / ThreadPoolExecutor / ReentrantLock 等）
 
 # 附：JVM 系列索引
 

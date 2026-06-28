@@ -150,3 +150,13 @@ public void transfer(String from, String to, BigDecimal amt) {
 # 七、总结
 
 > **本地消息表解决 90% 的分布式事务需求。TCC 留给对一致性有极致要求的场景。2PC 能不用就不用。** 再加上消费端幂等 + 对账任务，就是工程上最可靠的分布式事务三板斧。
+
+*本文参考资料：*
+- Martin Kleppmann《Designing Data-Intensive Applications》（DDIA）——第 5 章（复制）、第 7 章（事务）、第 8-9 章（分布式系统与共识）
+- Diego Ongaro, "In Search of an Understandable Consensus Algorithm (Raft)", 2014: https://raft.github.io/raft.pdf
+- Leslie Lamport, "Paxos Made Simple", 2001
+- antirez, "Is Redlock safe?", 2016: http://antirez.com/news/101
+- Eric Brewer, "CAP Twelve Years Later", 2012
+- Daniel Abadi, "PACELC", 2010
+- Alibaba Seata 官方文档: https://seata.io/
+- Redis 官方文档 - Distributed Locks: https://redis.io/docs/manual/patterns/distributed-locks/

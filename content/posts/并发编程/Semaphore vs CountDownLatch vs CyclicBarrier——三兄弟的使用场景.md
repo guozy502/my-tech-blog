@@ -303,3 +303,10 @@ flowchart TD
 | **控制最多 N 个并发** | Semaphore |
 
 > 三兄弟本质上是 **AQS**（AbstractQueuedSynchronizer）在不同场景下的封装。理解它们的关键不是背 API，而是理解每种场景下"谁在等谁、等多久、能不能重复等"的差异。
+
+*本文参考资料：*
+- Brian Goetz et al.《Java Concurrency in Practice》——第 3-5 章（共享与组合对象）、第 6-8 章（任务执行与线程池）、第 11-12 章（性能与可伸缩性）
+- Doug Lea, "The java.util.concurrent Synchronizer Framework"（AQS 论文）, 2004
+- Java Language Specification, Chapter 17: Threads and Locks（JMM）: https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html
+- JSR-133 FAQ: https://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html
+- OpenJDK 源码: java.util.concurrent 包（AbstractQueuedSynchronizer / ThreadPoolExecutor / ReentrantLock 等）
