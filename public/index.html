@@ -9,8 +9,8 @@
     <title>My Tech Blog</title><meta name="author" content="">
 <meta name="description" content="">
 	<meta itemprop="name" content="My Tech Blog">
-	<meta itemprop="datePublished" content="2026-06-26T00:00:00+00:00">
-	<meta itemprop="dateModified" content="2026-06-26T19:18:33+08:00"><meta property="og:url" content="http://localhost:1313/my-tech-blog/">
+	<meta itemprop="datePublished" content="2026-06-28T00:00:00+00:00">
+	<meta itemprop="dateModified" content="2026-06-28T00:00:00+00:00"><meta property="og:url" content="http://localhost:1313/my-tech-blog/">
 	<meta property="og:site_name" content="My Tech Blog">
 	<meta property="og:title" content="My Tech Blog">
 	<meta property="og:locale" content="zh_CN">
@@ -91,549 +91,513 @@
     <div id="search-dropdown-mobile"></div>
   </div><main class="fi-container"><div class="page home posts"><div class="home-profile"><h1 class="home-title"></h1><p class="home-subtitle"><span class="d-none">记录技术，分享成长</span><span class="typeit"><template>记录技术，分享成长</template></span></p><div class="links"><a href="/my-tech-blog/index.xml" title="RSS" target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss" aria-hidden="true"></i>
     </a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/">JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除</a>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/jvm/jit%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%88%86%E5%B1%82%E7%BC%96%E8%AF%91%E4%B8%8E%E5%86%85%E8%81%94%E4%BC%98%E5%8C%96/">JIT编译器的分层编译与内联优化</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-26 00:00:00'>发布于 <time datetime="2026-06-26">2026-06-26</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a>&ensp;<a href="/my-tech-blog/categories/jvm/" class="post-category" title="分类 - JVM"><i class="fa-regular fa-folder" aria-hidden="true"></i> JVM</a></span></div><div class="content"><h3 class="heading-element" id="一什么是逃逸分析escape-analysis" data-decreased><span>一、什么是逃逸分析（Escape Analysis）？</span>
-  <a href="#%e4%b8%80%e4%bb%80%e4%b9%88%e6%98%af%e9%80%83%e9%80%b8%e5%88%86%e6%9e%90escape-analysis" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 class="heading-element" id="11-逃逸定义"><span>1.1 逃逸定义</span>
-  <a href="#11-%e9%80%83%e9%80%b8%e5%ae%9a%e4%b9%89" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><p><strong>逃逸分析</strong>（Escape Analysis）是 JVM 即时编译器（JIT Compiler）的一项静态代码分析技术：它判断一个对象在<strong>创建它的方法</strong>之外是否会被其他方法或线程访问到。如果对象的引用“逃”出了它的创建作用域，我们就说这个对象发生了<strong>逃逸</strong>。</p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">JAVA</a><a href='/my-tech-blog/tags/jvm/' class="post-tag">JVM</a><a href='/my-tech-blog/tags/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/' class="post-tag">逃逸分析</a><a href='/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class="post-tag">性能优化</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/jvm/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">一个对象从创建到回收的全生命周期</a>
-  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-26 00:00:00'>发布于 <time datetime="2026-06-26">2026-06-26</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="content"><div class="diagram-container">
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="content"><div class="diagram-container">
   <pre class="mermaid">flowchart LR
-    A["🏗️ 创建\n类加载+分配+初始化"] --> B["📐 布局\n对象头+数据+填充"]
-    B --> C["📍 访问\n句柄/直接指针"]
-    C --> D["🏠 使用\n引用传递+GC晋升"]
-    D --> E["⚰️ 死亡\n可达性判定"]
-    E --> F["♻️ 回收\nGC算法+收集器"]</pre>
+    A["📝 解释执行\n字节码逐条翻译"] -->|"热点计数\n达到阈值"| B["⚡ C1 编译\n快速编译，简单优化"]
+    B -->|"热点继续累积"| C["🔥 C2 编译\n激进优化，包括内联"]
+    C --> D["🚀 巅峰性能\n机器码直接执行"]
+    
+    style A fill:#f5f5f5,stroke:#999
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#ffcc80,stroke:#ef6c00
+    style D fill:#e8f5e9,stroke:#2e7d32</pre>
   <pre class="mermaid-dark">flowchart LR
-    A["🏗️ 创建\n类加载+分配+初始化"] --> B["📐 布局\n对象头+数据+填充"]
-    B --> C["📍 访问\n句柄/直接指针"]
-    C --> D["🏠 使用\n引用传递+GC晋升"]
-    D --> E["⚰️ 死亡\n可达性判定"]
-    E --> F["♻️ 回收\nGC算法+收集器"]</pre>
+    A["📝 解释执行\n字节码逐条翻译"] -->|"热点计数\n达到阈值"| B["⚡ C1 编译\n快速编译，简单优化"]
+    B -->|"热点继续累积"| C["🔥 C2 编译\n激进优化，包括内联"]
+    C --> D["🚀 巅峰性能\n机器码直接执行"]
+    
+    style A fill:#f5f5f5,stroke:#999
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#ffcc80,stroke:#ef6c00
+    style D fill:#e8f5e9,stroke:#2e7d32</pre>
   <pre class="mermaid-neutral">flowchart LR
-    A["🏗️ 创建\n类加载+分配+初始化"] --> B["📐 布局\n对象头+数据+填充"]
-    B --> C["📍 访问\n句柄/直接指针"]
-    C --> D["🏠 使用\n引用传递+GC晋升"]
-    D --> E["⚰️ 死亡\n可达性判定"]
-    E --> F["♻️ 回收\nGC算法+收集器"]</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+    A["📝 解释执行\n字节码逐条翻译"] -->|"热点计数\n达到阈值"| B["⚡ C1 编译\n快速编译，简单优化"]
+    B -->|"热点继续累积"| C["🔥 C2 编译\n激进优化，包括内联"]
+    C --> D["🚀 巅峰性能\n机器码直接执行"]
+    
+    style A fill:#f5f5f5,stroke:#999
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#ffcc80,stroke:#ef6c00
+    style D fill:#e8f5e9,stroke:#2e7d32</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
 <template><pre>flowchart LR
-    A["🏗️ 创建\n类加载+分配+初始化"] --> B["📐 布局\n对象头+数据+填充"]
-    B --> C["📍 访问\n句柄/直接指针"]
-    C --> D["🏠 使用\n引用传递+GC晋升"]
-    D --> E["⚰️ 死亡\n可达性判定"]
-    E --> F["♻️ 回收\nGC算法+收集器"]</pre></template>
+    A["📝 解释执行\n字节码逐条翻译"] -->|"热点计数\n达到阈值"| B["⚡ C1 编译\n快速编译，简单优化"]
+    B -->|"热点继续累积"| C["🔥 C2 编译\n激进优化，包括内联"]
+    C --> D["🚀 巅峰性能\n机器码直接执行"]
+    
+    style A fill:#f5f5f5,stroke:#999
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#ffcc80,stroke:#ef6c00
+    style D fill:#e8f5e9,stroke:#2e7d32</pre></template>
 </div><hr>
-<h3 class="heading-element" id="一对象的诞生new-一行代码背后发生了什么" data-decreased><span>一、对象的诞生：<code>new</code> 一行代码背后发生了什么？</span>
-  <a href="#%e4%b8%80%e5%af%b9%e8%b1%a1%e7%9a%84%e8%af%9e%e7%94%9fnew-%e4%b8%80%e8%a1%8c%e4%bb%a3%e7%a0%81%e8%83%8c%e5%90%8e%e5%8f%91%e7%94%9f%e4%ba%86%e4%bb%80%e4%b9%88" class="heading-mark">
+<h3 class="heading-element" id="一为什么-java-要先解释再编译" data-decreased><span>一、为什么 Java 要先&quot;解释&quot;再&quot;编译&quot;？</span>
+  <a href="#%e4%b8%80%e4%b8%ba%e4%bb%80%e4%b9%88-java-%e8%a6%81%e5%85%88%e8%a7%a3%e9%87%8a%e5%86%8d%e7%bc%96%e8%af%91" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 class="heading-element" id="11-类加载检查"><span>1.1 类加载检查</span>
-  <a href="#11-%e7%b1%bb%e5%8a%a0%e8%bd%bd%e6%a3%80%e6%9f%a5" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>JVM 遇到 <code>new</code> 指令，先去<strong>常量池</strong>定位类的符号引用</li>
-<li>检查类是否已完成<strong>加载 → 链接 → 初始化</strong>三步</li>
-<li>未加载则触发类加载过程（双亲委派模型简述）</li>
-</ul>
-<h3 class="heading-element" id="12-内存分配"><span>1.2 内存分配</span>
-  <a href="#12-%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li><strong>分配方式</strong>：指针碰撞（Bump the Pointer，Serial/ParNew 等带压缩的收集器）vs 空闲列表（Free List，CMS 等非压缩收集器）</li>
-<li><strong>TLAB（Thread Local Allocation Buffer）</strong>：线程私有的分配缓冲区，避免 CAS 竞争</li>
-<li><strong>分配失败</strong>：TLAB 不够 → 堆上 CAS 分配 → 都不行 → 触发 Minor GC → 还不行 → Full GC → 再不行 → OOM</li>
-</ul>
-<h3 class="heading-element" id="13-对象初始化"><span>1.3 对象初始化</span>
-  <a href="#13-%e5%af%b9%e8%b1%a1%e5%88%9d%e5%a7%8b%e5%8c%96" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li><strong>零值初始化</strong>：分配到的内存空间先全部归零（保证实例字段默认值）</li>
-<li><strong>对象头设置</strong>：Mark Word（hashCode、GC 分代年龄、锁状态）+ Klass Pointer（类型元数据指针）</li>
-<li><strong><code>&lt;init&gt;</code> 方法</strong>：执行构造器代码，按顺序完成实例变量赋值 + 构造代码块</li>
-</ul>
-<hr>
-<h3 class="heading-element" id="二对象的内存布局24-字节里装了什么" data-decreased><span>二、对象的内存布局：24 字节里装了什么？</span>
-  <a href="#%e4%ba%8c%e5%af%b9%e8%b1%a1%e7%9a%84%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%8024-%e5%ad%97%e8%8a%82%e9%87%8c%e8%a3%85%e4%ba%86%e4%bb%80%e4%b9%88" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 class="heading-element" id="21-mark-word标记字"><span>2.1 Mark Word（标记字）</span>
-  <a href="#21-mark-word%e6%a0%87%e8%ae%b0%e5%ad%97" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>记录对象自身的运行时数据：hashCode、GC 分代年龄、锁状态标志、线程持有的锁、偏向线程 ID</li>
-<li>Mark Word 的动态复用机制——同一块空间在不同锁状态下存储不同含义的数据</li>
-<li>偏向锁 → 轻量级锁 → 重量级锁 → GC 标记的 Mark Word 变化过程</li>
-</ul>
-<h3 class="heading-element" id="22-klass-pointer类型指针"><span>2.2 Klass Pointer（类型指针）</span>
-  <a href="#22-klass-pointer%e7%b1%bb%e5%9e%8b%e6%8c%87%e9%92%88" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>指向方法区中 <code>Klass</code> 元数据的指针</li>
-<li>压缩指针（<code>-XX:+UseCompressedOops</code>）：64 位下 8 字节 → 4 字节</li>
-</ul>
-<h3 class="heading-element" id="23-实例数据与对齐填充"><span>2.3 实例数据与对齐填充</span>
-  <a href="#23-%e5%ae%9e%e4%be%8b%e6%95%b0%e6%8d%ae%e4%b8%8e%e5%af%b9%e9%bd%90%e5%a1%ab%e5%85%85" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>实例数据排列规则：父类字段在前、同宽度字段尽量排在一起</li>
-<li><strong>对齐填充（Padding）</strong>：HotSpot 要求对象大小必须是 8 字节的整数倍</li>
-<li>一个 <code>new Object()</code> 到底占多少字节？32 位 vs 64 位 vs 64位+压缩指针</li>
-</ul>
-<hr>
-<h3 class="heading-element" id="三对象的访问定位怎么找到它" data-decreased><span>三、对象的访问定位：怎么找到它？</span>
-  <a href="#%e4%b8%89%e5%af%b9%e8%b1%a1%e7%9a%84%e8%ae%bf%e9%97%ae%e5%ae%9a%e4%bd%8d%e6%80%8e%e4%b9%88%e6%89%be%e5%88%b0%e5%ae%83" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 class="heading-element" id="31-两种主流方式"><span>3.1 两种主流方式</span>
-  <a href="#31-%e4%b8%a4%e7%a7%8d%e4%b8%bb%e6%b5%81%e6%96%b9%e5%bc%8f" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><div class="diagram-container">
-  <pre class="mermaid">flowchart LR
-    subgraph handle["句柄访问"]
-        direction TB
-        H1["栈 reference"] --> H2["句柄池\n 对象指针\n 类型指针"] --> H3["实例数据"]
-        H2 --> H4["类型数据"]
-    end
-    subgraph direct["直接指针 HotSpot"]
-        direction TB
-        D1["栈 reference"] --> D2["对象实例\n 对象头 Mark Word + Klass\n 实例数据"] --> D3["类型数据"]
-    end</pre>
-  <pre class="mermaid-dark">flowchart LR
-    subgraph handle["句柄访问"]
-        direction TB
-        H1["栈 reference"] --> H2["句柄池\n 对象指针\n 类型指针"] --> H3["实例数据"]
-        H2 --> H4["类型数据"]
-    end
-    subgraph direct["直接指针 HotSpot"]
-        direction TB
-        D1["栈 reference"] --> D2["对象实例\n 对象头 Mark Word + Klass\n 实例数据"] --> D3["类型数据"]
-    end</pre>
-  <pre class="mermaid-neutral">flowchart LR
-    subgraph handle["句柄访问"]
-        direction TB
-        H1["栈 reference"] --> H2["句柄池\n 对象指针\n 类型指针"] --> H3["实例数据"]
-        H2 --> H4["类型数据"]
-    end
-    subgraph direct["直接指针 HotSpot"]
-        direction TB
-        D1["栈 reference"] --> D2["对象实例\n 对象头 Mark Word + Klass\n 实例数据"] --> D3["类型数据"]
-    end</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
-<template><pre>flowchart LR
-    subgraph handle["句柄访问"]
-        direction TB
-        H1["栈 reference"] --> H2["句柄池\n 对象指针\n 类型指针"] --> H3["实例数据"]
-        H2 --> H4["类型数据"]
-    end
-    subgraph direct["直接指针 HotSpot"]
-        direction TB
-        D1["栈 reference"] --> D2["对象实例\n 对象头 Mark Word + Klass\n 实例数据"] --> D3["类型数据"]
-    end</pre></template>
-</div><ul>
-<li><strong>句柄访问</strong>：栈上 reference → 句柄池（含对象指针 + 类型指针）→ 实例数据 / 类型数据。好处：GC 移动对象时只改句柄池，reference 本身不变</li>
-<li><strong>直接指针</strong>：栈上 reference → 对象（含类型指针）→ 类型数据。好处：少一次间接寻址，更快</li>
-</ul>
-<h3 class="heading-element" id="32-hotspot-的选择"><span>3.2 HotSpot 的选择</span>
-  <a href="#32-hotspot-%e7%9a%84%e9%80%89%e6%8b%a9" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>HotSpot 采用<strong>直接指针</strong>访问（少一次间接寻址，性能更好）</li>
-<li>代价：GC 移动对象时必须更新所有指向它的 reference</li>
-</ul>
-<hr>
-<h3 class="heading-element" id="四对象的生存堆里的日子" data-decreased><span>四、对象的生存：堆里的日子</span>
-  <a href="#%e5%9b%9b%e5%af%b9%e8%b1%a1%e7%9a%84%e7%94%9f%e5%ad%98%e5%a0%86%e9%87%8c%e7%9a%84%e6%97%a5%e5%ad%90" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 class="heading-element" id="41-引用与逃逸"><span>4.1 引用与逃逸</span>
-  <a href="#41-%e5%bc%95%e7%94%a8%e4%b8%8e%e9%80%83%e9%80%b8" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>对象被引用传递：局部变量 → 方法参数 → 成员字段 → static 字段</li>
-<li><strong>逃逸分析回顾</strong>：不逃逸则标量替换 / 锁消除（详见上篇）</li>
-<li>引用强度决定了 GC 对它的态度（见 5.4）</li>
-</ul>
-<h3 class="heading-element" id="42-分代晋升之路"><span>4.2 分代晋升之路</span>
-  <a href="#42-%e5%88%86%e4%bb%a3%e6%99%8b%e5%8d%87%e4%b9%8b%e8%b7%af" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li><strong>Eden 区出生</strong>：绝大多数对象在这里分配</li>
-<li><strong>第一次 Minor GC</strong>：存活对象 → Survivor0（From 区），分代年龄 +1</li>
-<li><strong>反复横跳</strong>：每次 Minor GC，在 S0 / S1 之间来回拷贝，年龄 +1</li>
-<li><strong>晋升老年代</strong>：年龄达到 <code>-XX:MaxTenuringThreshold</code>（默认 15）→ 或者 Survivor 空间不够 → <strong>空间担保分配</strong>直接进老年代</li>
-<li><strong>大对象直接进老年代</strong>：超过 <code>-XX:PretenureSizeThreshold</code> 的对象</li>
-</ul>
-<h3 class="heading-element" id="43-对象在堆里的三种状态"><span>4.3 对象在堆里的三种&quot;状态&quot;</span>
-  <a href="#43-%e5%af%b9%e8%b1%a1%e5%9c%a8%e5%a0%86%e9%87%8c%e7%9a%84%e4%b8%89%e7%a7%8d%e7%8a%b6%e6%80%81" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li><strong>强可达</strong>（Strongly Reachable）：至少有一条 GC Roots 强引用链</li>
-<li><strong>软可达/弱可达/虚可达</strong>：JDK 引用类型决定（见 5.4）</li>
-<li><strong>不可达</strong>：等待被清除的「垃圾」</li>
-</ul>
-<hr>
-<h3 class="heading-element" id="五对象的死亡gc-怎么判定谁能回收" data-decreased><span>五、对象的死亡：GC 怎么判定谁能回收？</span>
-  <a href="#%e4%ba%94%e5%af%b9%e8%b1%a1%e7%9a%84%e6%ad%bb%e4%ba%a1gc-%e6%80%8e%e4%b9%88%e5%88%a4%e5%ae%9a%e8%b0%81%e8%83%bd%e5%9b%9e%e6%94%b6" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 class="heading-element" id="51-引用计数法java-没选这条路"><span>5.1 引用计数法（Java 没选这条路）</span>
-  <a href="#51-%e5%bc%95%e7%94%a8%e8%ae%a1%e6%95%b0%e6%b3%95java-%e6%b2%a1%e9%80%89%e8%bf%99%e6%9d%a1%e8%b7%af" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>原理：每个对象维护被引用次数，归零即回收</li>
-<li>致命缺陷：<strong>循环引用</strong>导致永远无法回收（A ↔ B，但外部已不可达）</li>
-<li>为什么不用：Java 对象间双向引用太常见</li>
-</ul>
-<h3 class="heading-element" id="52-可达性分析reachability-analysisjava-的方案"><span>5.2 可达性分析（Reachability Analysis）——Java 的方案</span>
-  <a href="#52-%e5%8f%af%e8%be%be%e6%80%a7%e5%88%86%e6%9e%90reachability-analysisjava-%e7%9a%84%e6%96%b9%e6%a1%88" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li><strong>GC Roots 集合</strong>：哪些引用可以当作&quot;绝对存活的根&quot;？
-<ul>
-<li>虚拟机栈中引用的对象（局部变量）</li>
-<li>方法区中 static 字段引用的对象</li>
-<li>方法区中常量池引用的对象（<code>String.intern()</code>）</li>
-<li>JNI 引用的对象</li>
-<li>虚拟机内部引用（Class 对象、常驻异常对象、ClassLoader）</li>
-<li>所有被 synchronized 持有的对象</li>
-</ul>
-</li>
-<li>从 GC Roots 向下搜索引用链（Reference Chain），链上的对象存活，不在链上的……也不是立刻死</li>
-</ul>
-<h3 class="heading-element" id="53-对象的两次标记与自救"><span>5.3 对象的&quot;两次标记&quot;与自救</span>
-  <a href="#53-%e5%af%b9%e8%b1%a1%e7%9a%84%e4%b8%a4%e6%ac%a1%e6%a0%87%e8%ae%b0%e4%b8%8e%e8%87%aa%e6%95%91" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>第一次标记：不可达 → 进入筛选队列</li>
-<li><strong>finalize() 自救</strong>：重写 <code>finalize()</code> 并在方法内重新建立 GC Roots 引用链 → 逃脱回收（<strong>仅一次机会</strong>，finalize 只会被 JVM 调用一次）</li>
-<li>第二次标记：队列中的对象如果 finalize 也没自救 → 真正回收</li>
-<li><code>finalize()</code> 已被 JDK 9 标记为 <code>@Deprecated</code>，JDK 18+ 正式废弃——替代方案：<code>Cleaner</code> + <code>PhantomReference</code></li>
-</ul>
-<h3 class="heading-element" id="54-四种引用强度核心面试题"><span>5.4 四种引用强度（核心面试题）</span>
-  <a href="#54-%e5%9b%9b%e7%a7%8d%e5%bc%95%e7%94%a8%e5%bc%ba%e5%ba%a6%e6%a0%b8%e5%bf%83%e9%9d%a2%e8%af%95%e9%a2%98" class="heading-mark">
+</h3><h3 class="heading-element" id="11-编译与解释的古老争论"><span>1.1 编译与解释的古老争论</span>
+  <a href="#11-%e7%bc%96%e8%af%91%e4%b8%8e%e8%a7%a3%e9%87%8a%e7%9a%84%e5%8f%a4%e8%80%81%e4%ba%89%e8%ae%ba" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><div class="table-wrapper">
   <table>
     <thead>
         <tr>
-            <th>引用类型</th>
-            <th>回收时机</th>
-            <th>典型用途</th>
+            <th></th>
+            <th>AOT 编译（C/C++/Go）</th>
+            <th>解释执行（早期 JVM）</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>强引用</strong> Strong</td>
-            <td>永不回收（除非 GC Roots 不可达）</td>
-            <td><code>Object o = new Object()</code></td>
+            <td><strong>启动</strong></td>
+            <td>编译慢（几分钟），运行快</td>
+            <td>启动快，但每条指令都要翻译</td>
         </tr>
         <tr>
-            <td><strong>软引用</strong> Soft</td>
-            <td>内存不足（OOM 前）才回收</td>
-            <td>缓存、图片缓存</td>
+            <td><strong>优化</strong></td>
+            <td>编译时一次性优化</td>
+            <td>无法做深度优化</td>
         </tr>
         <tr>
-            <td><strong>弱引用</strong> Weak</td>
-            <td>下次 GC 立即回收</td>
-            <td><code>WeakHashMap</code>、ThreadLocal</td>
-        </tr>
-        <tr>
-            <td><strong>虚引用</strong> Phantom</td>
-            <td>任何时候，仅作为回收通知</td>
-            <td><code>Cleaner</code> 机制、NIO 直接内存回收</td>
+            <td><strong>跨平台</strong></td>
+            <td>需要重新编译</td>
+            <td>一次编译，到处运行</td>
         </tr>
     </tbody>
   </table>
-</div><hr>
-<h3 class="heading-element" id="六对象的回收gc-如何真正清理" data-decreased><span>六、对象的回收：GC 如何真正清理？</span>
-  <a href="#%e5%85%ad%e5%af%b9%e8%b1%a1%e7%9a%84%e5%9b%9e%e6%94%b6gc-%e5%a6%82%e4%bd%95%e7%9c%9f%e6%ad%a3%e6%b8%85%e7%90%86" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 class="heading-element" id="61-三大基础算法"><span>6.1 三大基础算法</span>
-  <a href="#61-%e4%b8%89%e5%a4%a7%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><div class="diagram-container">
+</div><p>Java 的选择：<strong>两个都要</strong>——先解释执行保证快速启动，再把热点代码<strong>动态编译</strong>成机器码。</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/jvm/jit%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%88%86%E5%B1%82%E7%BC%96%E8%AF%91%E4%B8%8E%E5%86%85%E8%81%94%E4%BC%98%E5%8C%96/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">JAVA</a><a href='/my-tech-blog/tags/jvm/' class="post-tag">JVM</a><a href='/my-tech-blog/tags/jit/' class="post-tag">JIT</a><a href='/my-tech-blog/tags/%E7%BC%96%E8%AF%91%E5%99%A8/' class="post-tag">编译器</a><a href='/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class="post-tag">性能优化</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E5%88%86%E5%B8%83%E5%BC%8F/raft%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E4%BB%8E%E9%80%89%E4%B8%BB%E5%88%B0%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6/">Raft共识算法图解——从选主到日志复制</a>
+  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="post-category" title="分类 - 分布式系统"><i class="fa-regular fa-folder" aria-hidden="true"></i> 分布式系统</a></span></div><div class="content"><div class="diagram-container">
   <pre class="mermaid">flowchart LR
-    A["🗑️ 垃圾对象"] --> B["标记-清除\nMark-Sweep"]
-    A --> C["标记-复制\nMark-Copy"]
-    A --> D["标记-整理\nMark-Compact"]
-    B --> B1["❌ 内存碎片"]
-    C --> C1["✅ 无碎片\n⚠️ 浪费一半空间"]
-    D --> D1["✅ 无碎片\n⚠️ 移动对象有STW成本"]</pre>
+    A["👑 Leader 选举\nTerm + 随机超时"] --> B["📝 日志复制\nAppendEntries + 多数派确认"]
+    B --> C["🛡️ 安全性\n选举限制 + 提交限制"]
+    C --> D["⚙️ 成员变更\nJoint Consensus"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#e8f5e9,stroke:#2e7d32
+    style C fill:#fff3e0,stroke:#f57c00
+    style D fill:#f3e5f5,stroke:#7b1fa2</pre>
   <pre class="mermaid-dark">flowchart LR
-    A["🗑️ 垃圾对象"] --> B["标记-清除\nMark-Sweep"]
-    A --> C["标记-复制\nMark-Copy"]
-    A --> D["标记-整理\nMark-Compact"]
-    B --> B1["❌ 内存碎片"]
-    C --> C1["✅ 无碎片\n⚠️ 浪费一半空间"]
-    D --> D1["✅ 无碎片\n⚠️ 移动对象有STW成本"]</pre>
+    A["👑 Leader 选举\nTerm + 随机超时"] --> B["📝 日志复制\nAppendEntries + 多数派确认"]
+    B --> C["🛡️ 安全性\n选举限制 + 提交限制"]
+    C --> D["⚙️ 成员变更\nJoint Consensus"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#e8f5e9,stroke:#2e7d32
+    style C fill:#fff3e0,stroke:#f57c00
+    style D fill:#f3e5f5,stroke:#7b1fa2</pre>
   <pre class="mermaid-neutral">flowchart LR
-    A["🗑️ 垃圾对象"] --> B["标记-清除\nMark-Sweep"]
-    A --> C["标记-复制\nMark-Copy"]
-    A --> D["标记-整理\nMark-Compact"]
-    B --> B1["❌ 内存碎片"]
-    C --> C1["✅ 无碎片\n⚠️ 浪费一半空间"]
-    D --> D1["✅ 无碎片\n⚠️ 移动对象有STW成本"]</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+    A["👑 Leader 选举\nTerm + 随机超时"] --> B["📝 日志复制\nAppendEntries + 多数派确认"]
+    B --> C["🛡️ 安全性\n选举限制 + 提交限制"]
+    C --> D["⚙️ 成员变更\nJoint Consensus"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#e8f5e9,stroke:#2e7d32
+    style C fill:#fff3e0,stroke:#f57c00
+    style D fill:#f3e5f5,stroke:#7b1fa2</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
 <template><pre>flowchart LR
-    A["🗑️ 垃圾对象"] --> B["标记-清除\nMark-Sweep"]
-    A --> C["标记-复制\nMark-Copy"]
-    A --> D["标记-整理\nMark-Compact"]
-    B --> B1["❌ 内存碎片"]
-    C --> C1["✅ 无碎片\n⚠️ 浪费一半空间"]
-    D --> D1["✅ 无碎片\n⚠️ 移动对象有STW成本"]</pre></template>
-</div><h3 class="heading-element" id="62-分代收集理论generational-collection"><span>6.2 分代收集理论（Generational Collection）</span>
-  <a href="#62-%e5%88%86%e4%bb%a3%e6%94%b6%e9%9b%86%e7%90%86%e8%ae%bagenerational-collection" class="heading-mark">
+    A["👑 Leader 选举\nTerm + 随机超时"] --> B["📝 日志复制\nAppendEntries + 多数派确认"]
+    B --> C["🛡️ 安全性\n选举限制 + 提交限制"]
+    C --> D["⚙️ 成员变更\nJoint Consensus"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#e8f5e9,stroke:#2e7d32
+    style C fill:#fff3e0,stroke:#f57c00
+    style D fill:#f3e5f5,stroke:#7b1fa2</pre></template>
+</div><hr>
+<h3 class="heading-element" id="一为什么需要共识算法" data-decreased><span>一、为什么需要共识算法？</span>
+  <a href="#%e4%b8%80%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81%e5%85%b1%e8%af%86%e7%ae%97%e6%b3%95" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><ul>
-<li><strong>弱分代假说</strong>：绝大多数对象朝生夕死</li>
-<li><strong>强分代假说</strong>：熬过越多次 GC 的对象越难死</li>
-<li><strong>跨代引用假说</strong>：跨代引用相对同代引用只是极少数 → Remembered Set 解决</li>
-<li><strong>新生代（Young Gen）</strong>：Minor GC，标记-复制，高频快速</li>
-<li><strong>老年代（Old Gen）</strong>：Major/Full GC，标记-清除/整理，低频慢速</li>
-</ul>
-<h3 class="heading-element" id="63-hotspot-经典收集器速览"><span>6.3 HotSpot 经典收集器速览</span>
-  <a href="#63-hotspot-%e7%bb%8f%e5%85%b8%e6%94%b6%e9%9b%86%e5%99%a8%e9%80%9f%e8%a7%88" class="heading-mark">
+</h3><h3 class="heading-element" id="11-单点写入的困局"><span>1.1 单点写入的困局</span>
+  <a href="#11-%e5%8d%95%e7%82%b9%e5%86%99%e5%85%a5%e7%9a%84%e5%9b%b0%e5%b1%80" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><pre tabindex="0"><code>传统主从：Client → Master (写入) → Slave (只读)
+Master 挂了怎么办？→ 人工切主 → 数据可能丢失</code></pre><p><strong>共识算法要解决的核心问题</strong>：一组机器在没有&quot;上帝视角&quot;的情况下，对&quot;谁是主&quot;&ldquo;日志顺序是什么&quot;达成一致——即使部分节点故障、网络分区。</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/%E5%88%86%E5%B8%83%E5%BC%8F/raft%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E4%BB%8E%E9%80%89%E4%B8%BB%E5%88%B0%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class="post-tag">分布式</a><a href='/my-tech-blog/tags/raft/' class="post-tag">Raft</a><a href='/my-tech-blog/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/' class="post-tag">共识算法</a><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/' class="post-tag">分布式一致性</a><a href='/my-tech-blog/tags/leader-election/' class="post-tag">Leader Election</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/semaphore-vs-countdownlatch-vs-cyclicbarrier%E4%B8%89%E5%85%84%E5%BC%9F%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/">Semaphore vs CountDownLatch vs CyclicBarrier——三兄弟的使用场景</a>
+  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java%E5%B9%B6%E5%8F%91/" class="post-category" title="分类 - Java并发"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java并发</a></span></div><div class="content"><div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    SEM["🔑 Semaphore\n许可证管理器\n控制同时访问资源的线程数"]
+    CDL["⏳ CountDownLatch\n一次性门闩\n一个线程等 N 个线程完成"]
+    CB["🔄 CyclicBarrier\n可重复栅栏\nN 个线程互相等，齐了再走"]
+    
+    SEM -.->|"基于 AQS 共享模式"| BASE["AbstractQueuedSynchronizer"]
+    CDL -.->|"基于 AQS 共享模式"| BASE
+    CB -.->|"基于 ReentrantLock + Condition"| BASE
+    
+    style SEM fill:#e3f2fd,stroke:#1565c0
+    style CDL fill:#fff3e0,stroke:#f57c00
+    style CB fill:#e8f5e9,stroke:#2e7d32
+    style BASE fill:#f5f5f5,stroke:#999</pre>
+  <pre class="mermaid-dark">flowchart LR
+    SEM["🔑 Semaphore\n许可证管理器\n控制同时访问资源的线程数"]
+    CDL["⏳ CountDownLatch\n一次性门闩\n一个线程等 N 个线程完成"]
+    CB["🔄 CyclicBarrier\n可重复栅栏\nN 个线程互相等，齐了再走"]
+    
+    SEM -.->|"基于 AQS 共享模式"| BASE["AbstractQueuedSynchronizer"]
+    CDL -.->|"基于 AQS 共享模式"| BASE
+    CB -.->|"基于 ReentrantLock + Condition"| BASE
+    
+    style SEM fill:#e3f2fd,stroke:#1565c0
+    style CDL fill:#fff3e0,stroke:#f57c00
+    style CB fill:#e8f5e9,stroke:#2e7d32
+    style BASE fill:#f5f5f5,stroke:#999</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    SEM["🔑 Semaphore\n许可证管理器\n控制同时访问资源的线程数"]
+    CDL["⏳ CountDownLatch\n一次性门闩\n一个线程等 N 个线程完成"]
+    CB["🔄 CyclicBarrier\n可重复栅栏\nN 个线程互相等，齐了再走"]
+    
+    SEM -.->|"基于 AQS 共享模式"| BASE["AbstractQueuedSynchronizer"]
+    CDL -.->|"基于 AQS 共享模式"| BASE
+    CB -.->|"基于 ReentrantLock + Condition"| BASE
+    
+    style SEM fill:#e3f2fd,stroke:#1565c0
+    style CDL fill:#fff3e0,stroke:#f57c00
+    style CB fill:#e8f5e9,stroke:#2e7d32
+    style BASE fill:#f5f5f5,stroke:#999</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    SEM["🔑 Semaphore\n许可证管理器\n控制同时访问资源的线程数"]
+    CDL["⏳ CountDownLatch\n一次性门闩\n一个线程等 N 个线程完成"]
+    CB["🔄 CyclicBarrier\n可重复栅栏\nN 个线程互相等，齐了再走"]
+    
+    SEM -.->|"基于 AQS 共享模式"| BASE["AbstractQueuedSynchronizer"]
+    CDL -.->|"基于 AQS 共享模式"| BASE
+    CB -.->|"基于 ReentrantLock + Condition"| BASE
+    
+    style SEM fill:#e3f2fd,stroke:#1565c0
+    style CDL fill:#fff3e0,stroke:#f57c00
+    style CB fill:#e8f5e9,stroke:#2e7d32
+    style BASE fill:#f5f5f5,stroke:#999</pre></template>
+</div><hr>
+<h3 class="heading-element" id="一三句话认识三兄弟" data-decreased><span>一、三句话认识三兄弟</span>
+  <a href="#%e4%b8%80%e4%b8%89%e5%8f%a5%e8%af%9d%e8%ae%a4%e8%af%86%e4%b8%89%e5%85%84%e5%bc%9f" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><div class="table-wrapper">
   <table>
     <thead>
         <tr>
-            <th>收集器</th>
-            <th>位置</th>
-            <th>算法</th>
-            <th>特点</th>
+            <th>工具</th>
+            <th>一句话</th>
+            <th>生活类比</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>Serial</strong></td>
-            <td>新生代</td>
-            <td>标记-复制</td>
-            <td>单线程，Client 模式默认</td>
+            <td><strong>Semaphore</strong></td>
+            <td>控制&quot;最多 N 个线程同时访问&quot;</td>
+            <td>停车场只有 3 个车位，第 4 辆车等着</td>
         </tr>
         <tr>
-            <td><strong>ParNew</strong></td>
-            <td>新生代</td>
-            <td>标记-复制</td>
-            <td>Serial 的多线程版</td>
+            <td><strong>CountDownLatch</strong></td>
+            <td>一个线程等 N 个线程完成任务</td>
+            <td>导游等所有团员到齐再出发</td>
         </tr>
         <tr>
-            <td><strong>Parallel Scavenge</strong></td>
-            <td>新生代</td>
-            <td>标记-复制</td>
-            <td>吞吐量优先</td>
-        </tr>
-        <tr>
-            <td><strong>Serial Old</strong></td>
-            <td>老年代</td>
-            <td>标记-整理</td>
-            <td>Serial 的老年代版</td>
-        </tr>
-        <tr>
-            <td><strong>Parallel Old</strong></td>
-            <td>老年代</td>
-            <td>标记-整理</td>
-            <td>Parallel Scavenge 的老年代配对</td>
-        </tr>
-        <tr>
-            <td><strong>CMS</strong></td>
-            <td>老年代</td>
-            <td>标记-清除</td>
-            <td>低停顿，并发收集，已废弃(JDK14)</td>
-        </tr>
-        <tr>
-            <td><strong>G1</strong></td>
-            <td>全堆</td>
-            <td>混合 Mixed</td>
-            <td>区域化 Region，可预测停顿</td>
-        </tr>
-        <tr>
-            <td><strong>ZGC / Shenandoah</strong></td>
-            <td>全堆</td>
-            <td>染色指针</td>
-            <td>超低延迟（&lt;1ms），TB 级堆</td>
+            <td><strong>CyclicBarrier</strong></td>
+            <td>N 个线程互相等，凑齐了<strong>一起</strong>执行</td>
+            <td>公司团建：先到的人等其他人，人齐了统一出发，到下一个景点再等</td>
         </tr>
     </tbody>
   </table>
-</div><h3 class="heading-element" id="64-一个对象的临终时间线"><span>6.4 一个对象的&quot;临终&quot;时间线</span>
-  <a href="#64-%e4%b8%80%e4%b8%aa%e5%af%b9%e8%b1%a1%e7%9a%84%e4%b8%b4%e7%bb%88%e6%97%b6%e9%97%b4%e7%ba%bf" class="heading-mark">
+</div><hr>
+<h3 class="heading-element" id="二semaphore停车场管理员" data-decreased><span>二、Semaphore——停车场管理员</span>
+  <a href="#%e4%ba%8csemaphore%e5%81%9c%e8%bd%a6%e5%9c%ba%e7%ae%a1%e7%90%86%e5%91%98" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><pre tabindex="0"><code>new 分配 → Eden → Minor GC → Survivor 往返 → 晋升 Old → Major GC → 标记 → 清除/整理 → 内存归还</code></pre><hr>
-<h3 class="heading-element" id="七总结一张图走完一生" data-decreased><span>七、总结：一张图走完一生</span>
-  <a href="#%e4%b8%83%e6%80%bb%e7%bb%93%e4%b8%80%e5%bc%a0%e5%9b%be%e8%b5%b0%e5%ae%8c%e4%b8%80%e7%94%9f" class="heading-mark">
+</h3><h3 class="heading-element" id="21-核心原理"><span>2.1 核心原理</span>
+  <a href="#21-%e6%a0%b8%e5%bf%83%e5%8e%9f%e7%90%86" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><div class="diagram-container">
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 创建一个有 3 个许可证的信号量</span>
+</span></span><span style="display:flex;"><span>Semaphore semaphore <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Semaphore(3);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 线程获取许可证（acquire 会阻塞直到有许可证）</span>
+</span></span><span style="display:flex;"><span>semaphore.<span style="color:#a6e22e">acquire</span>();  <span style="color:#75715e">// permits: 3 → 2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 访问受限资源（如数据库连接池）</span>
+</span></span><span style="display:flex;"><span>    doWork();
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>    semaphore.<span style="color:#a6e22e">release</span>();  <span style="color:#75715e">// permits: 2 → 3（归还）</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><div class="diagram-container">
   <pre class="mermaid">flowchart TD
-    A["📝 new 指令"] --> B["🔍 类加载检查"]
-    B --> C["📦 堆上分配内存\nTLAB / CAS"]
-    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
-    D --> E["📍 引用定位\n直接指针"]
-    E --> F["🏠 Eden 区\n朝生夕死"]
-    F --> G{"Minor GC\n存活?"}
-    G -->|"是"| H["🔄 Survivor\n分代年龄+1"]
-    G -->|"否"| I["♻️ 标记-复制回收"]
-    H --> J{"年龄>=15\n或空间不够?"}
-    J -->|"否"| H
-    J -->|"是"| K["📦 晋升老年代"]
-    K --> L{"Major/Full GC\n可达?"}
-    L -->|"是，继续存活"| K
-    L -->|"否，不可达"| M["⚰️ 标记为垃圾"]
-    M --> N["🗑️ 标记-清除/整理\n内存回收"]
-    I --> O["💾 内存归还给分配器"]
-    N --> O
-    style A fill:#e1f5fe,stroke:#0288d1
-    style F fill:#e8f5e9,stroke:#388e3c
-    style I fill:#ffebee,stroke:#d32f2f
-    style M fill:#ffcdd2,stroke:#c62828
-    style O fill:#f5f5f5,stroke:#999</pre>
+    T1["线程 1"] -->|"acquire ✅"| POOL["许可池\npermits=3->2"]
+    T2["线程 2"] -->|"acquire ✅"| POOL
+    T3["线程 3"] -->|"acquire ✅"| POOL["permits=2->1->0"]
+    T4["线程 4"] -->|"acquire ⏳"| WAIT["阻塞排队\n等待有人 release"]
+    
+    T1 -->|"release"| POOL["permits=0->1"]
+    POOL -->|"唤醒"| T4
+    
+    style POOL fill:#e3f2fd,stroke:#1565c0
+    style WAIT fill:#ffebee,stroke:#c62828</pre>
   <pre class="mermaid-dark">flowchart TD
-    A["📝 new 指令"] --> B["🔍 类加载检查"]
-    B --> C["📦 堆上分配内存\nTLAB / CAS"]
-    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
-    D --> E["📍 引用定位\n直接指针"]
-    E --> F["🏠 Eden 区\n朝生夕死"]
-    F --> G{"Minor GC\n存活?"}
-    G -->|"是"| H["🔄 Survivor\n分代年龄+1"]
-    G -->|"否"| I["♻️ 标记-复制回收"]
-    H --> J{"年龄>=15\n或空间不够?"}
-    J -->|"否"| H
-    J -->|"是"| K["📦 晋升老年代"]
-    K --> L{"Major/Full GC\n可达?"}
-    L -->|"是，继续存活"| K
-    L -->|"否，不可达"| M["⚰️ 标记为垃圾"]
-    M --> N["🗑️ 标记-清除/整理\n内存回收"]
-    I --> O["💾 内存归还给分配器"]
-    N --> O
-    style A fill:#e1f5fe,stroke:#0288d1
-    style F fill:#e8f5e9,stroke:#388e3c
-    style I fill:#ffebee,stroke:#d32f2f
-    style M fill:#ffcdd2,stroke:#c62828
-    style O fill:#f5f5f5,stroke:#999</pre>
+    T1["线程 1"] -->|"acquire ✅"| POOL["许可池\npermits=3->2"]
+    T2["线程 2"] -->|"acquire ✅"| POOL
+    T3["线程 3"] -->|"acquire ✅"| POOL["permits=2->1->0"]
+    T4["线程 4"] -->|"acquire ⏳"| WAIT["阻塞排队\n等待有人 release"]
+    
+    T1 -->|"release"| POOL["permits=0->1"]
+    POOL -->|"唤醒"| T4
+    
+    style POOL fill:#e3f2fd,stroke:#1565c0
+    style WAIT fill:#ffebee,stroke:#c62828</pre>
   <pre class="mermaid-neutral">flowchart TD
-    A["📝 new 指令"] --> B["🔍 类加载检查"]
-    B --> C["📦 堆上分配内存\nTLAB / CAS"]
-    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
-    D --> E["📍 引用定位\n直接指针"]
-    E --> F["🏠 Eden 区\n朝生夕死"]
-    F --> G{"Minor GC\n存活?"}
-    G -->|"是"| H["🔄 Survivor\n分代年龄+1"]
-    G -->|"否"| I["♻️ 标记-复制回收"]
-    H --> J{"年龄>=15\n或空间不够?"}
-    J -->|"否"| H
-    J -->|"是"| K["📦 晋升老年代"]
-    K --> L{"Major/Full GC\n可达?"}
-    L -->|"是，继续存活"| K
-    L -->|"否，不可达"| M["⚰️ 标记为垃圾"]
-    M --> N["🗑️ 标记-清除/整理\n内存回收"]
-    I --> O["💾 内存归还给分配器"]
-    N --> O
-    style A fill:#e1f5fe,stroke:#0288d1
-    style F fill:#e8f5e9,stroke:#388e3c
-    style I fill:#ffebee,stroke:#d32f2f
-    style M fill:#ffcdd2,stroke:#c62828
-    style O fill:#f5f5f5,stroke:#999</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+    T1["线程 1"] -->|"acquire ✅"| POOL["许可池\npermits=3->2"]
+    T2["线程 2"] -->|"acquire ✅"| POOL
+    T3["线程 3"] -->|"acquire ✅"| POOL["permits=2->1->0"]
+    T4["线程 4"] -->|"acquire ⏳"| WAIT["阻塞排队\n等待有人 release"]
+    
+    T1 -->|"release"| POOL["permits=0->1"]
+    POOL -->|"唤醒"| T4
+    
+    style POOL fill:#e3f2fd,stroke:#1565c0
+    style WAIT fill:#ffebee,stroke:#c62828</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
 <template><pre>flowchart TD
-    A["📝 new 指令"] --> B["🔍 类加载检查"]
-    B --> C["📦 堆上分配内存\nTLAB / CAS"]
-    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
-    D --> E["📍 引用定位\n直接指针"]
-    E --> F["🏠 Eden 区\n朝生夕死"]
-    F --> G{"Minor GC\n存活?"}
-    G -->|"是"| H["🔄 Survivor\n分代年龄+1"]
-    G -->|"否"| I["♻️ 标记-复制回收"]
-    H --> J{"年龄>=15\n或空间不够?"}
-    J -->|"否"| H
-    J -->|"是"| K["📦 晋升老年代"]
-    K --> L{"Major/Full GC\n可达?"}
-    L -->|"是，继续存活"| K
-    L -->|"否，不可达"| M["⚰️ 标记为垃圾"]
-    M --> N["🗑️ 标记-清除/整理\n内存回收"]
-    I --> O["💾 内存归还给分配器"]
-    N --> O
-    style A fill:#e1f5fe,stroke:#0288d1
-    style F fill:#e8f5e9,stroke:#388e3c
-    style I fill:#ffebee,stroke:#d32f2f
-    style M fill:#ffcdd2,stroke:#c62828
-    style O fill:#f5f5f5,stroke:#999</pre></template>
-</div><hr>
-<h3 class="heading-element" id="附jvm-参数与诊断工具速查" data-decreased><span>附：JVM 参数与诊断工具速查</span>
-  <a href="#%e9%99%84jvm-%e5%8f%82%e6%95%b0%e4%b8%8e%e8%af%8a%e6%96%ad%e5%b7%a5%e5%85%b7%e9%80%9f%e6%9f%a5" class="heading-mark">
+    T1["线程 1"] -->|"acquire ✅"| POOL["许可池\npermits=3->2"]
+    T2["线程 2"] -->|"acquire ✅"| POOL
+    T3["线程 3"] -->|"acquire ✅"| POOL["permits=2->1->0"]
+    T4["线程 4"] -->|"acquire ⏳"| WAIT["阻塞排队\n等待有人 release"]
+    
+    T1 -->|"release"| POOL["permits=0->1"]
+    POOL -->|"唤醒"| T4
+    
+    style POOL fill:#e3f2fd,stroke:#1565c0
+    style WAIT fill:#ffebee,stroke:#c62828</pre></template>
+</div><h3 class="heading-element" id="22-经典场景数据库连接池"><span>2.2 经典场景：数据库连接池</span>
+  <a href="#22-%e7%bb%8f%e5%85%b8%e5%9c%ba%e6%99%af%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%9e%e6%8e%a5%e6%b1%a0" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><div class="table-wrapper">
-  <table>
-    <thead>
-        <tr>
-            <th>关注点</th>
-            <th>参数/工具</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>对象分配观察</td>
-            <td><code>-XX:+PrintGCDetails</code>、<code>-XX:+PrintGCDateStamps</code></td>
-        </tr>
-        <tr>
-            <td>堆内存布局</td>
-            <td><code>-Xms</code> <code>-Xmx</code> <code>-Xmn</code> <code>-XX:SurvivorRatio</code></td>
-        </tr>
-        <tr>
-            <td>晋升阈值</td>
-            <td><code>-XX:MaxTenuringThreshold</code>、<code>-XX:+PrintTenuringDistribution</code></td>
-        </tr>
-        <tr>
-            <td>大对象直接进老年代</td>
-            <td><code>-XX:PretenureSizeThreshold</code></td>
-        </tr>
-        <tr>
-            <td>GC 日志（JDK 8）</td>
-            <td><code>-XX:+PrintGCDetails -Xloggc:gc.log</code></td>
-        </tr>
-        <tr>
-            <td>GC 日志（JDK 11+）</td>
-            <td><code>-Xlog:gc*:file=gc.log:time,level,tags</code></td>
-        </tr>
-        <tr>
-            <td>堆 dump</td>
-            <td><code>-XX:+HeapDumpOnOutOfMemoryError</code>、<code>jmap</code></td>
-        </tr>
-        <tr>
-            <td>实时分析</td>
-            <td><code>jstat</code>、<code>jvisualvm</code>、<code>JProfiler</code>、Arthas</td>
-        </tr>
-    </tbody>
-  </table>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConnectionPool</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> Semaphore semaphore;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> List<span style="color:#f92672">&lt;</span>Connection<span style="color:#f92672">&gt;</span> pool;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ConnectionPool</span>(<span style="color:#66d9ef">int</span> size) {
+</span></span><span style="display:flex;"><span>        semaphore <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Semaphore(size);
+</span></span><span style="display:flex;"><span>        pool <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>(size);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 初始化 size 个连接</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Connection <span style="color:#a6e22e">borrow</span>() <span style="color:#66d9ef">throws</span> InterruptedException {
+</span></span><span style="display:flex;"><span>        semaphore.<span style="color:#a6e22e">acquire</span>();           <span style="color:#75715e">// 拿许可证，没空闲就等</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> pool.<span style="color:#a6e22e">remove</span>(0);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">release</span>(Connection conn) {
+</span></span><span style="display:flex;"><span>        pool.<span style="color:#a6e22e">add</span>(conn);
+</span></span><span style="display:flex;"><span>        semaphore.<span style="color:#a6e22e">release</span>();           <span style="color:#75715e">// 还许可证，唤醒等待者</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h3 class="heading-element" id="23-公平模式-vs-非公平模式"><span>2.3 公平模式 vs 非公平模式</span>
+  <a href="#23-%e5%85%ac%e5%b9%b3%e6%a8%a1%e5%bc%8f-vs-%e9%9d%9e%e5%85%ac%e5%b9%b3%e6%a8%a1%e5%bc%8f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 非公平（默认）：新来的 acquire 可能插队</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> Semaphore(3);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 公平：按 FIFO 顺序排队获取</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> Semaphore(3, <span style="color:#66d9ef">true</span>);</span></span></code></pre></div><blockquote>
+<p>非公平模式吞吐量更高（减少上下文切换），公平模式保证不会饥饿。</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/semaphore-vs-countdownlatch-vs-cyclicbarrier%E4%B8%89%E5%85%84%E5%BC%9F%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">JAVA</a><a href='/my-tech-blog/tags/%E5%B9%B6%E5%8F%91/' class="post-tag">并发</a><a href='/my-tech-blog/tags/semaphore/' class="post-tag">Semaphore</a><a href='/my-tech-blog/tags/countdownlatch/' class="post-tag">CountDownLatch</a><a href='/my-tech-blog/tags/cyclicbarrier/' class="post-tag">CyclicBarrier</a><a href='/my-tech-blog/tags/aqs/' class="post-tag">AQS</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/jvm/synchronized%E9%94%81%E5%8D%87%E7%BA%A7%E5%85%A8%E9%93%BE%E8%B7%AF%E4%BB%8E%E5%AF%B9%E8%B1%A1%E5%A4%B4%E5%88%B0%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81/">Synchronized锁升级全链路——从对象头到重量级锁</a>
+  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="content"><div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    NL["🔓 无锁\nNo Lock"] -->|"线程 A 第一次获取"| BL["🔵 偏向锁\nBiased Lock"]
+    BL -->|"线程 B 竞争\nCAS 撤销偏向"| LL["🟡 轻量级锁\nLightweight Lock"]
+    LL -->|"自旋超时\n或竞争加剧"| HL["🔴 重量级锁\nHeavyweight Lock"]
+    
+    style NL fill:#f5f5f5,stroke:#999
+    style BL fill:#e3f2fd,stroke:#1565c0
+    style LL fill:#fff3e0,stroke:#f57c00
+    style HL fill:#ffebee,stroke:#c62828</pre>
+  <pre class="mermaid-dark">flowchart LR
+    NL["🔓 无锁\nNo Lock"] -->|"线程 A 第一次获取"| BL["🔵 偏向锁\nBiased Lock"]
+    BL -->|"线程 B 竞争\nCAS 撤销偏向"| LL["🟡 轻量级锁\nLightweight Lock"]
+    LL -->|"自旋超时\n或竞争加剧"| HL["🔴 重量级锁\nHeavyweight Lock"]
+    
+    style NL fill:#f5f5f5,stroke:#999
+    style BL fill:#e3f2fd,stroke:#1565c0
+    style LL fill:#fff3e0,stroke:#f57c00
+    style HL fill:#ffebee,stroke:#c62828</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    NL["🔓 无锁\nNo Lock"] -->|"线程 A 第一次获取"| BL["🔵 偏向锁\nBiased Lock"]
+    BL -->|"线程 B 竞争\nCAS 撤销偏向"| LL["🟡 轻量级锁\nLightweight Lock"]
+    LL -->|"自旋超时\n或竞争加剧"| HL["🔴 重量级锁\nHeavyweight Lock"]
+    
+    style NL fill:#f5f5f5,stroke:#999
+    style BL fill:#e3f2fd,stroke:#1565c0
+    style LL fill:#fff3e0,stroke:#f57c00
+    style HL fill:#ffebee,stroke:#c62828</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    NL["🔓 无锁\nNo Lock"] -->|"线程 A 第一次获取"| BL["🔵 偏向锁\nBiased Lock"]
+    BL -->|"线程 B 竞争\nCAS 撤销偏向"| LL["🟡 轻量级锁\nLightweight Lock"]
+    LL -->|"自旋超时\n或竞争加剧"| HL["🔴 重量级锁\nHeavyweight Lock"]
+    
+    style NL fill:#f5f5f5,stroke:#999
+    style BL fill:#e3f2fd,stroke:#1565c0
+    style LL fill:#fff3e0,stroke:#f57c00
+    style HL fill:#ffebee,stroke:#c62828</pre></template>
 </div><hr>
-<p><em>本文与 <a href="/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/">JVM逃逸分析深度拆解</a> 互为姊妹篇——前者聚焦「对象如果没逃逸，JIT 如何极致优化」，本篇聚焦「对象如果正常分配在堆上，从生到死的完整旅程」。建议两篇配合阅读。</em></p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/jvm/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">JAVA</a><a href='/my-tech-blog/tags/jvm/' class="post-tag">JVM</a><a href='/my-tech-blog/tags/gc/' class="post-tag">GC</a><a href='/my-tech-blog/tags/%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/' class="post-tag">对象生命周期</a></div></div>
-</article></div></main><footer class="footer">
+<h3 class="heading-element" id="一基石mark-word锁信息的物理载体" data-decreased><span>一、基石：Mark Word——锁信息的物理载体</span>
+  <a href="#%e4%b8%80%e5%9f%ba%e7%9f%b3mark-word%e9%94%81%e4%bf%a1%e6%81%af%e7%9a%84%e7%89%a9%e7%90%86%e8%bd%bd%e4%bd%93" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h3 class="heading-element" id="11-对象头里藏了什么"><span>1.1 对象头里藏了什么？</span>
+  <a href="#11-%e5%af%b9%e8%b1%a1%e5%a4%b4%e9%87%8c%e8%97%8f%e4%ba%86%e4%bb%80%e4%b9%88" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>每个 Java 对象在堆上的布局：</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/jvm/synchronized%E9%94%81%E5%8D%87%E7%BA%A7%E5%85%A8%E9%93%BE%E8%B7%AF%E4%BB%8E%E5%AF%B9%E8%B1%A1%E5%A4%B4%E5%88%B0%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">JAVA</a><a href='/my-tech-blog/tags/jvm/' class="post-tag">JVM</a><a href='/my-tech-blog/tags/synchronized/' class="post-tag">Synchronized</a><a href='/my-tech-blog/tags/%E9%94%81%E5%8D%87%E7%BA%A7/' class="post-tag">锁升级</a><a href='/my-tech-blog/tags/%E5%B9%B6%E5%8F%91/' class="post-tag">并发</a><a href='/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class="post-tag">性能优化</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BFredisson%E7%9A%84%E7%BA%A2%E9%94%81%E4%BA%89%E8%AE%BA/">分布式锁的正确姿势——Redisson的红锁(RedLock)争论</a>
+  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="post-category" title="分类 - 分布式系统"><i class="fa-regular fa-folder" aria-hidden="true"></i> 分布式系统</a></span></div><div class="content"><div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    A["🔒 单机锁\nsynchronized / ReentrantLock"] --> B["🔐 单 Redis 分布式锁\nSET NX PX + Lua 续期"]
+    B --> C["🔴 RedLock\n多实例多数派加锁"]
+    C --> D{"安全吗？"}
+    D -->|"antirez: 安全"| E["多数派 + 时钟漂移容错"]
+    D -->|"Martin: 不安全"| F["GC 停顿 / 时钟跳跃\n破坏互斥性"]
+    E --> G["fencing token\n应用层单调递增号"]
+    F --> G
+    
+    style A fill:#f5f5f5
+    style B fill:#fff3e0
+    style C fill:#ffcdd2
+    style G fill:#e8f5e9,stroke:#2e7d32</pre>
+  <pre class="mermaid-dark">flowchart LR
+    A["🔒 单机锁\nsynchronized / ReentrantLock"] --> B["🔐 单 Redis 分布式锁\nSET NX PX + Lua 续期"]
+    B --> C["🔴 RedLock\n多实例多数派加锁"]
+    C --> D{"安全吗？"}
+    D -->|"antirez: 安全"| E["多数派 + 时钟漂移容错"]
+    D -->|"Martin: 不安全"| F["GC 停顿 / 时钟跳跃\n破坏互斥性"]
+    E --> G["fencing token\n应用层单调递增号"]
+    F --> G
+    
+    style A fill:#f5f5f5
+    style B fill:#fff3e0
+    style C fill:#ffcdd2
+    style G fill:#e8f5e9,stroke:#2e7d32</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    A["🔒 单机锁\nsynchronized / ReentrantLock"] --> B["🔐 单 Redis 分布式锁\nSET NX PX + Lua 续期"]
+    B --> C["🔴 RedLock\n多实例多数派加锁"]
+    C --> D{"安全吗？"}
+    D -->|"antirez: 安全"| E["多数派 + 时钟漂移容错"]
+    D -->|"Martin: 不安全"| F["GC 停顿 / 时钟跳跃\n破坏互斥性"]
+    E --> G["fencing token\n应用层单调递增号"]
+    F --> G
+    
+    style A fill:#f5f5f5
+    style B fill:#fff3e0
+    style C fill:#ffcdd2
+    style G fill:#e8f5e9,stroke:#2e7d32</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    A["🔒 单机锁\nsynchronized / ReentrantLock"] --> B["🔐 单 Redis 分布式锁\nSET NX PX + Lua 续期"]
+    B --> C["🔴 RedLock\n多实例多数派加锁"]
+    C --> D{"安全吗？"}
+    D -->|"antirez: 安全"| E["多数派 + 时钟漂移容错"]
+    D -->|"Martin: 不安全"| F["GC 停顿 / 时钟跳跃\n破坏互斥性"]
+    E --> G["fencing token\n应用层单调递增号"]
+    F --> G
+    
+    style A fill:#f5f5f5
+    style B fill:#fff3e0
+    style C fill:#ffcdd2
+    style G fill:#e8f5e9,stroke:#2e7d32</pre></template>
+</div><hr>
+<h3 class="heading-element" id="一为什么需要分布式锁" data-decreased><span>一、为什么需要分布式锁？</span>
+  <a href="#%e4%b8%80%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h3 class="heading-element" id="11-单机锁的边界"><span>1.1 单机锁的边界</span>
+  <a href="#11-%e5%8d%95%e6%9c%ba%e9%94%81%e7%9a%84%e8%be%b9%e7%95%8c" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="code-block highlight line-nos-hidden" data-mode="classic" data-copyable="true"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 单机：一把 synchronized 搞定</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">synchronized</span> (<span style="color:#66d9ef">this</span>) {
+</span></span><span style="display:flex;"><span>    deductStock(); <span style="color:#75715e">// 扣库存</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>部署一台机器 → 没问题。部署 3 台机器 → 三个 JVM 各锁各的，库存被超卖。</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BFredisson%E7%9A%84%E7%BA%A2%E9%94%81%E4%BA%89%E8%AE%BA/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class="post-tag">分布式</a><a href='/my-tech-blog/tags/redis/' class="post-tag">Redis</a><a href='/my-tech-blog/tags/redisson/' class="post-tag">Redisson</a><a href='/my-tech-blog/tags/redlock/' class="post-tag">RedLock</a><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/' class="post-tag">分布式锁</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E5%85%A8%E6%99%AF%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%E4%B8%8Espi%E6%89%93%E7%A0%B4%E5%A7%94%E6%B4%BE%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E7%94%B1/">类加载机制全景——双亲委派模型与SPI打破委派的设计理由</a>
+  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-06-28 00:00:00'>发布于 <time datetime="2026-06-28">2026-06-28</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="content"><div class="diagram-container">
+  <pre class="mermaid">flowchart LR
+    A["📥 加载\nLoading"] --> B["🔗 链接\nLinking"]
+    B --> C["⚡ 初始化\nInitialization"]
+    C --> D["📦 使用\nUsing"]
+    D --> E["🗑️ 卸载\nUnloading"]
+    
+    B --> B1["验证\nVerification"] --> B2["准备\nPreparation"] --> B3["解析\nResolution"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#2e7d32
+    style D fill:#f5f5f5,stroke:#999
+    style E fill:#ffebee,stroke:#c62828</pre>
+  <pre class="mermaid-dark">flowchart LR
+    A["📥 加载\nLoading"] --> B["🔗 链接\nLinking"]
+    B --> C["⚡ 初始化\nInitialization"]
+    C --> D["📦 使用\nUsing"]
+    D --> E["🗑️ 卸载\nUnloading"]
+    
+    B --> B1["验证\nVerification"] --> B2["准备\nPreparation"] --> B3["解析\nResolution"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#2e7d32
+    style D fill:#f5f5f5,stroke:#999
+    style E fill:#ffebee,stroke:#c62828</pre>
+  <pre class="mermaid-neutral">flowchart LR
+    A["📥 加载\nLoading"] --> B["🔗 链接\nLinking"]
+    B --> C["⚡ 初始化\nInitialization"]
+    C --> D["📦 使用\nUsing"]
+    D --> E["🗑️ 卸载\nUnloading"]
+    
+    B --> B1["验证\nVerification"] --> B2["准备\nPreparation"] --> B3["解析\nResolution"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#2e7d32
+    style D fill:#f5f5f5,stroke:#999
+    style E fill:#ffebee,stroke:#c62828</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart LR
+    A["📥 加载\nLoading"] --> B["🔗 链接\nLinking"]
+    B --> C["⚡ 初始化\nInitialization"]
+    C --> D["📦 使用\nUsing"]
+    D --> E["🗑️ 卸载\nUnloading"]
+    
+    B --> B1["验证\nVerification"] --> B2["准备\nPreparation"] --> B3["解析\nResolution"]
+    
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#2e7d32
+    style D fill:#f5f5f5,stroke:#999
+    style E fill:#ffebee,stroke:#c62828</pre></template>
+</div><hr>
+<h3 class="heading-element" id="一类加载的五个阶段" data-decreased><span>一、类加载的五个阶段</span>
+  <a href="#%e4%b8%80%e7%b1%bb%e5%8a%a0%e8%bd%bd%e7%9a%84%e4%ba%94%e4%b8%aa%e9%98%b6%e6%ae%b5" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h3 class="heading-element" id="11-加载loading"><span>1.1 加载（Loading）</span>
+  <a href="#11-%e5%8a%a0%e8%bd%bdloading" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>JVM 不关心 Class 文件从哪来——文件系统、网络、运行时生成、ZIP 包都行。<strong>加载</strong>阶段只做三件事：</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E5%85%A8%E6%99%AF%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%E4%B8%8Espi%E6%89%93%E7%A0%B4%E5%A7%94%E6%B4%BE%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E7%94%B1/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">JAVA</a><a href='/my-tech-blog/tags/jvm/' class="post-tag">JVM</a><a href='/my-tech-blog/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD/' class="post-tag">类加载</a><a href='/my-tech-blog/tags/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/' class="post-tag">双亲委派</a><a href='/my-tech-blog/tags/spi/' class="post-tag">SPI</a><a href='/my-tech-blog/tags/classloader/' class="post-tag">ClassLoader</a></div></div>
+</article><ul class="pagination"><li class="page-item active">
+          <span class="page-link">
+            <a href="/my-tech-blog/">1</a>
+          </span>
+        </li><li class="page-item">
+          <span class="page-link">
+            <a href="/my-tech-blog/page/2/">2</a>
+          </span>
+        </li></ul></div></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.163.3"><img class="hugo-icon" src="/my-tech-blog/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.5"><img class="fixit-icon" src="/my-tech-blog/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2026</span><span class="author" itemprop="copyrightHolder">

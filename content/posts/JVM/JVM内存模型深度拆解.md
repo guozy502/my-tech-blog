@@ -108,12 +108,12 @@ flowchart TD
     START["🔍 逃逸分析判定「不逃逸」"] --> O1
     
     O1["🔓 ① 锁消除 Lock Elision"]
-    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer -> StringBuilder"]
     
     O1 --> O2
     
     O2["📊 ② 标量替换 Scalar Replacement"]
-    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} -> int x, int y"]
     
     O2 --> O3
     
@@ -188,8 +188,8 @@ flowchart LR
     end
     
     subgraph after["✅ 优化后：标量 (Scalars)"]
-        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
-        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
+        S1["int x = 3\n-> 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n-> 寄存器 r2\n0 字节堆开销"]
     end
     
     before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after

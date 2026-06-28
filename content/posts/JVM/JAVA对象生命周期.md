@@ -13,6 +13,7 @@ flowchart LR
     C --> D["🏠 使用\n引用传递+GC晋升"]
     D --> E["⚰️ 死亡\n可达性判定"]
     E --> F["♻️ 回收\nGC算法+收集器"]
+
 ```
 
 ---
@@ -69,6 +70,7 @@ flowchart LR
         direction TB
         D1["栈 reference"] --> D2["对象实例\n 对象头 Mark Word + Klass\n 实例数据"] --> D3["类型数据"]
     end
+
 ```
 
 - **句柄访问**：栈上 reference → 句柄池（含对象指针 + 类型指针）→ 实例数据 / 类型数据。好处：GC 移动对象时只改句柄池，reference 本身不变
@@ -147,6 +149,7 @@ flowchart LR
     B --> B1["❌ 内存碎片"]
     C --> C1["✅ 无碎片\n⚠️ 浪费一半空间"]
     D --> D1["✅ 无碎片\n⚠️ 移动对象有STW成本"]
+
 ```
 
 ## 6.2 分代收集理论（Generational Collection）
@@ -183,7 +186,7 @@ new 分配 → Eden → Minor GC → Survivor 往返 → 晋升 Old → Major GC
 flowchart TD
     A["📝 new 指令"] --> B["🔍 类加载检查"]
     B --> C["📦 堆上分配内存\nTLAB / CAS"]
-    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
+    C --> D["🏗️ 初始化\n零值 -> 对象头 -> init"]
     D --> E["📍 引用定位\n直接指针"]
     E --> F["🏠 Eden 区\n朝生夕死"]
     F --> G{"Minor GC\n存活?"}
@@ -203,6 +206,7 @@ flowchart TD
     style I fill:#ffebee,stroke:#d32f2f
     style M fill:#ffcdd2,stroke:#c62828
     style O fill:#f5f5f5,stroke:#999
+
 ```
 
 ---

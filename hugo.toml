@@ -116,6 +116,15 @@ enableEmoji = true
     # Math formula (KaTeX)
     [params.page.math]
       enable = false
+
+# =====================================================================================
+# Markup (Goldmark)
+# =====================================================================================
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
     # Social share
     [params.page.share]
       enable = true

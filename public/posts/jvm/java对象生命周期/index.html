@@ -10,7 +10,7 @@
 	<meta itemprop="description" content="从一行 new 指令出发，追踪 Java 对象从诞生、内存布局、访问定位、分代晋升，到可达性判定、GC 回收的完整一生。">
 	<meta itemprop="datePublished" content="2026-06-26T00:00:00+00:00">
 	<meta itemprop="dateModified" content="2026-06-26T00:00:00+00:00">
-	<meta itemprop="wordCount" content="5446">
+	<meta itemprop="wordCount" content="5448">
 	<meta itemprop="keywords" content="JAVA,JVM,GC,对象生命周期"><meta property="og:url" content="http://localhost:1313/my-tech-blog/posts/jvm/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
 	<meta property="og:site_name" content="My Tech Blog">
 	<meta property="og:title" content="一个对象从创建到回收的全生命周期">
@@ -42,7 +42,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/my-tech-blog\/posts\/jvm\/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F\/"
-    },"genre": "posts","keywords": "JAVA, JVM, GC, 对象生命周期","wordcount":  5446 ,
+    },"genre": "posts","keywords": "JAVA, JVM, GC, 对象生命周期","wordcount":  5448 ,
     "url": "http:\/\/localhost:1313\/my-tech-blog\/posts\/jvm\/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F\/","datePublished": "2026-06-26T00:00:00+00:00","dateModified": "2026-06-26T00:00:00+00:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -124,7 +124,7 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>一个对象从创建到回收的全生命周期</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="post-meta-line"><span title="发布于 2026-06-26 00:00:00"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-06-26">2026-06-26</time></span>&nbsp;<span title="5446 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 5500 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 11 分钟</span>&nbsp;</div>
+      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="post-meta-line"><span title="发布于 2026-06-26 00:00:00"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-06-26">2026-06-26</time></span>&nbsp;<span title="5448 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 5500 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 11 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -556,7 +556,7 @@
   <pre class="mermaid">flowchart TD
     A["📝 new 指令"] --> B["🔍 类加载检查"]
     B --> C["📦 堆上分配内存\nTLAB / CAS"]
-    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
+    C --> D["🏗️ 初始化\n零值 -> 对象头 -> init"]
     D --> E["📍 引用定位\n直接指针"]
     E --> F["🏠 Eden 区\n朝生夕死"]
     F --> G{"Minor GC\n存活?"}
@@ -579,7 +579,7 @@
   <pre class="mermaid-dark">flowchart TD
     A["📝 new 指令"] --> B["🔍 类加载检查"]
     B --> C["📦 堆上分配内存\nTLAB / CAS"]
-    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
+    C --> D["🏗️ 初始化\n零值 -> 对象头 -> init"]
     D --> E["📍 引用定位\n直接指针"]
     E --> F["🏠 Eden 区\n朝生夕死"]
     F --> G{"Minor GC\n存活?"}
@@ -602,7 +602,7 @@
   <pre class="mermaid-neutral">flowchart TD
     A["📝 new 指令"] --> B["🔍 类加载检查"]
     B --> C["📦 堆上分配内存\nTLAB / CAS"]
-    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
+    C --> D["🏗️ 初始化\n零值 -> 对象头 -> init"]
     D --> E["📍 引用定位\n直接指针"]
     E --> F["🏠 Eden 区\n朝生夕死"]
     F --> G{"Minor GC\n存活?"}
@@ -625,7 +625,7 @@
 <template><pre>flowchart TD
     A["📝 new 指令"] --> B["🔍 类加载检查"]
     B --> C["📦 堆上分配内存\nTLAB / CAS"]
-    C --> D["🏗️ 初始化\n零值 → 对象头 → init"]
+    C --> D["🏗️ 初始化\n零值 -> 对象头 -> init"]
     D --> E["📍 引用定位\n直接指针"]
     E --> F["🏠 Eden 区\n朝生夕死"]
     F --> G{"Minor GC\n存活?"}
@@ -694,7 +694,8 @@
     </tbody>
   </table>
 </div><hr>
-<p><em>本文与 <a href="/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/">JVM逃逸分析深度拆解</a> 互为姊妹篇——前者聚焦「对象如果没逃逸，JIT 如何极致优化」，本篇聚焦「对象如果正常分配在堆上，从生到死的完整旅程」。建议两篇配合阅读。</em></p>
+<p><em>本文与 <a href="/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/">JVM逃逸分析深度拆解</a> 互为姊妹篇——前者聚焦「对象如果没逃逸，JIT 如何极致优化」，本篇聚焦「对象如果正常分配在堆上，从生到死的完整旅程」。建议两篇配合阅读。</em>
+��</p>
 </div><hr class="awesome-hr" />
     <h2 id="see-also">相关内容</h2>
     <ul><li>

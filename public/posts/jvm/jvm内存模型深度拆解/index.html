@@ -10,7 +10,7 @@
 	<meta itemprop="description" content="深入理解JVM逃逸分析的工作原理，掌握栈上分配、标量替换、锁消除三大优化手段，通过代码实战直观感受逃逸与非逃逸的性能差异。">
 	<meta itemprop="datePublished" content="2026-06-26T00:00:00+00:00">
 	<meta itemprop="dateModified" content="2026-06-26T00:00:00+00:00">
-	<meta itemprop="wordCount" content="10829">
+	<meta itemprop="wordCount" content="10809">
 	<meta itemprop="keywords" content="JAVA,JVM,逃逸分析,性能优化"><meta property="og:url" content="http://localhost:1313/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/">
 	<meta property="og:site_name" content="My Tech Blog">
 	<meta property="og:title" content="JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除">
@@ -31,7 +31,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/my-tech-blog/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/my-tech-blog/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/my-tech-blog/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/my-tech-blog/apple-touch-icon.png"><link rel="mask-icon" href="/my-tech-blog/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/" title="JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除 - My Tech Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/my-tech-blog/about/" title="关于" /><link rel="stylesheet" href="/my-tech-blog/css/config.min.css"><link rel="stylesheet" href="/my-tech-blog/css/style.min.css"><link rel="preload" href="/my-tech-blog/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/my-tech-blog/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/my-tech-blog/apple-touch-icon.png"><link rel="mask-icon" href="/my-tech-blog/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/my-tech-blog/posts/jvm/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3/" title="JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除 - My Tech Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/my-tech-blog/about/" title="关于" /><link rel="next" type="text/html" href="http://localhost:1313/my-tech-blog/posts/jvm/gc%E7%AE%97%E6%B3%95%E6%BC%94%E8%BF%9B%E5%8F%B2%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E4%B8%AA%E6%97%B6%E4%BB%A3%E9%9C%80%E8%A6%81%E4%B8%8D%E5%90%8C%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" title="GC算法演进史：为什么每个时代需要不同的垃圾回收器" /><link rel="stylesheet" href="/my-tech-blog/css/config.min.css"><link rel="stylesheet" href="/my-tech-blog/css/style.min.css"><link rel="preload" href="/my-tech-blog/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/my-tech-blog/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/my-tech-blog/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/my-tech-blog/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -42,7 +42,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/my-tech-blog\/posts\/jvm\/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3\/"
-    },"genre": "posts","keywords": "JAVA, JVM, 逃逸分析, 性能优化","wordcount":  10829 ,
+    },"genre": "posts","keywords": "JAVA, JVM, 逃逸分析, 性能优化","wordcount":  10809 ,
     "url": "http:\/\/localhost:1313\/my-tech-blog\/posts\/jvm\/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%8B%86%E8%A7%A3\/","datePublished": "2026-06-26T00:00:00+00:00","dateModified": "2026-06-26T00:00:00+00:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -124,7 +124,7 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>JVM逃逸分析深度拆解：栈上分配、标量替换、锁消除</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a>&ensp;<a href="/my-tech-blog/categories/jvm/" class="post-category" title="分类 - JVM"><i class="fa-regular fa-folder" aria-hidden="true"></i> JVM</a></span></div><div class="post-meta-line"><span title="发布于 2026-06-26 00:00:00"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-06-26">2026-06-26</time></span>&nbsp;<span title="10829 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 10900 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 22 分钟</span>&nbsp;</div>
+      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a>&ensp;<a href="/my-tech-blog/categories/jvm/" class="post-category" title="分类 - JVM"><i class="fa-regular fa-folder" aria-hidden="true"></i> JVM</a></span></div><div class="post-meta-line"><span title="发布于 2026-06-26 00:00:00"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-06-26">2026-06-26</time></span>&nbsp;<span title="10809 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 10900 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 22 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -440,12 +440,12 @@
     START["🔍 逃逸分析判定「不逃逸」"] --> O1
     
     O1["🔓 ① 锁消除 Lock Elision"]
-    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer -> StringBuilder"]
     
     O1 --> O2
     
     O2["📊 ② 标量替换 Scalar Replacement"]
-    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} -> int x, int y"]
     
     O2 --> O3
     
@@ -467,12 +467,12 @@
     START["🔍 逃逸分析判定「不逃逸」"] --> O1
     
     O1["🔓 ① 锁消除 Lock Elision"]
-    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer -> StringBuilder"]
     
     O1 --> O2
     
     O2["📊 ② 标量替换 Scalar Replacement"]
-    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} -> int x, int y"]
     
     O2 --> O3
     
@@ -494,12 +494,12 @@
     START["🔍 逃逸分析判定「不逃逸」"] --> O1
     
     O1["🔓 ① 锁消除 Lock Elision"]
-    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer -> StringBuilder"]
     
     O1 --> O2
     
     O2["📊 ② 标量替换 Scalar Replacement"]
-    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} -> int x, int y"]
     
     O2 --> O3
     
@@ -521,12 +521,12 @@
     START["🔍 逃逸分析判定「不逃逸」"] --> O1
     
     O1["🔓 ① 锁消除 Lock Elision"]
-    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer → StringBuilder"]
+    O1_D["最安全：去掉不必要的同步\n典型效果：StringBuffer -> StringBuilder"]
     
     O1 --> O2
     
     O2["📊 ② 标量替换 Scalar Replacement"]
-    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} → int x, int y"]
+    O2_D["最激进：打散对象为基本类型\n典型效果：Point{x,y} -> int x, int y"]
     
     O2 --> O3
     
@@ -660,8 +660,8 @@
     end
     
     subgraph after["✅ 优化后：标量 (Scalars)"]
-        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
-        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
+        S1["int x = 3\n-> 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n-> 寄存器 r2\n0 字节堆开销"]
     end
     
     before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after
@@ -677,8 +677,8 @@
     end
     
     subgraph after["✅ 优化后：标量 (Scalars)"]
-        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
-        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
+        S1["int x = 3\n-> 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n-> 寄存器 r2\n0 字节堆开销"]
     end
     
     before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after
@@ -694,8 +694,8 @@
     end
     
     subgraph after["✅ 优化后：标量 (Scalars)"]
-        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
-        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
+        S1["int x = 3\n-> 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n-> 寄存器 r2\n0 字节堆开销"]
     end
     
     before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after
@@ -711,8 +711,8 @@
     end
     
     subgraph after["✅ 优化后：标量 (Scalars)"]
-        S1["int x = 3\n→ 寄存器 r1\n0 字节堆开销"]
-        S2["int y = 4\n→ 寄存器 r2\n0 字节堆开销"]
+        S1["int x = 3\n-> 寄存器 r1\n0 字节堆开销"]
+        S2["int y = 4\n-> 寄存器 r2\n0 字节堆开销"]
     end
     
     before -->|"🔧 逃逸分析\n+ 标量替换\n-XX:+EliminateAllocations"| after
@@ -1235,7 +1235,8 @@
 </h2><p>逃逸分析是现代 JVM 最精巧的优化之一。它告诉我们一个反直觉的事实：<strong>有些对象根本不需要“对象”</strong>。编译器替你拆掉了不必要的抽象，把字段直接变成了寄存器里的值——这正是 Java“先慢后快”（预热后性能飙升）的重要原因之一。</p>
 <p>理解逃逸分析不是为了手写 JVM 参数（多数情况下默认配置就是最优解），而是为了写出<strong>对编译器友好的代码</strong>：尽量缩小对象的作用域、避免不必要的全局状态、让对象的生命周期清晰可判。做到这些，JIT 自然会还你一份性能惊喜。</p>
 <hr>
-<p><em>本文测试环境：JDK 8 / JDK 17 / JDK 21，HotSpot 64-Bit Server VM。不同 JVM 实现（如 OpenJ9、GraalVM）的行为可能不同。</em></p>
+<p><em>本文测试环境：JDK 8 / JDK 17 / JDK 21，HotSpot 64-Bit Server VM。不同 JVM 实现（如 OpenJ9、GraalVM）的行为可能不同。</em>
+����</p>
 </div><hr class="awesome-hr" />
     <h2 id="see-also">相关内容</h2>
     <ul><li>
@@ -1259,7 +1260,7 @@
     <section class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href="/my-tech-blog/tags/java/" class="post-tag" title="标签 - JAVA">JAVA</a><a href="/my-tech-blog/tags/jvm/" class="post-tag" title="标签 - JVM">JVM</a><a href="/my-tech-blog/tags/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" class="post-tag" title="标签 - 逃逸分析">逃逸分析</a><a href="/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="post-tag" title="标签 - 性能优化">性能优化</a></section>
     <section><span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/my-tech-blog/">主页</a></span>
     </section>
-  </div><div class="post-nav"><a href="/my-tech-blog/posts/jvm/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-nav-item" rel="prev" title="一个对象从创建到回收的全生命周期"><i class="fa-solid fa-angle-left" aria-hidden="true"></i>一个对象从创建到回收的全生命周期</a></div>
+  </div><div class="post-nav"><a href="/my-tech-blog/posts/jvm/java%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-nav-item" rel="prev" title="一个对象从创建到回收的全生命周期"><i class="fa-solid fa-angle-left" aria-hidden="true"></i>一个对象从创建到回收的全生命周期</a><a href="/my-tech-blog/posts/jvm/gc%E7%AE%97%E6%B3%95%E6%BC%94%E8%BF%9B%E5%8F%B2%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E4%B8%AA%E6%97%B6%E4%BB%A3%E9%9C%80%E8%A6%81%E4%B8%8D%E5%90%8C%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" class="post-nav-item" rel="next" title="GC算法演进史：为什么每个时代需要不同的垃圾回收器">GC算法演进史：为什么每个时代需要不同的垃圾回收器<i class="fa-solid fa-angle-right" aria-hidden="true"></i></a></div>
 </div>
 </article>
 
