@@ -97,4 +97,4 @@ Disallow: /
 User-agent: ClaudeBot
 Disallow: /
 
-Sitemap: https://guozy502.github.io/sitemap.xml
+Sitemap: http://localhost:1313/sitemap.xml
