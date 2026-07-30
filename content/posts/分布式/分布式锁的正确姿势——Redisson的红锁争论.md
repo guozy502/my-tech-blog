@@ -1,6 +1,6 @@
 ---
 title: "分布式锁的正确姿势——Redisson的红锁(RedLock)争论"
-date: 2026-06-28
+date: 2026-07-27
 description: 深度拆解分布式锁从单实例到 RedLock 的演进，还原 Martin Kleppmann 与 antirez 的著名争论，给出生产环境的选型建议。
 tags: ["分布式","Redis","Redisson","RedLock","分布式锁"]
 categories: ["分布式系统"]
@@ -25,6 +25,8 @@ flowchart LR
 ---
 
 # 一、为什么需要分布式锁？
+
+> **前置阅读**：本文涉及 CAP 与 Paxos/Raft 共识算法的前置知识。建议先读 [CAP/PACELC 理论](/posts/分布式/分布式一致性模型cap不是二分法paclec才是工程指导/) 理解 CP/AP 的取舍框架，以及 [ZooKeeper vs etcd](/posts/分布式/cap与共识为什么zookeeper选zab而etcd选raft/) 理解基于共识算法的锁如何工作。
 
 ## 1.1 单机锁的边界
 
@@ -338,16 +340,7 @@ flowchart TD
 ---
 
 *参考文献：*
-- *antirez, "Is Redlock safe?" (2016)*
-- *Martin Kleppmann, "How to do distributed locking" (2016)*
+- *antirez, "Is Redlock safe?" (2016): http://antirez.com/news/101*
+- *Martin Kleppmann, "How to do distributed locking" (2016): https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html*
 - *Redisson 官方文档: https://github.com/redisson/redisson/wiki*
-
-*本文参考资料：*
-- Martin Kleppmann《Designing Data-Intensive Applications》（DDIA）——第 5 章（复制）、第 7 章（事务）、第 8-9 章（分布式系统与共识）
-- Diego Ongaro, "In Search of an Understandable Consensus Algorithm (Raft)", 2014: https://raft.github.io/raft.pdf
-- Leslie Lamport, "Paxos Made Simple", 2001
-- antirez, "Is Redlock safe?", 2016: http://antirez.com/news/101
-- Eric Brewer, "CAP Twelve Years Later", 2012
-- Daniel Abadi, "PACELC", 2010
-- Alibaba Seata 官方文档: https://seata.io/
-- Redis 官方文档 - Distributed Locks: https://redis.io/docs/manual/patterns/distributed-locks/
+- *Martin Kleppmann《Designing Data-Intensive Applications》（DDIA）—— 第 8 章（分布式系统）*
