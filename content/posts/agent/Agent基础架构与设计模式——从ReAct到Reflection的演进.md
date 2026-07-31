@@ -1,3 +1,11 @@
+---
+title: "Agent 基础架构与设计模式——从ReAct到Reflection的演进"
+date: 2026-07-29
+description: 从Agent核心定义出发，拆解感知-规划-执行-反馈循环，逐层分析ReAct、Plan-and-Execute、Reflection三大主流设计模式。
+tags: ["Agent","AI","LLM","ReAct","设计模式","Reflection","Plan-Execute"]
+categories: ["agent"]
+---
+
 # Agent 基础架构与设计模式——从 ReAct 到 Reflection 的演进
 
 > LLM 能回答问题，但 Agent 能自主做事。两者之间差了什么？本文从 Agent 的核心定义出发，拆解感知-规划-执行-反馈循环，逐层分析 ReAct、Plan-and-Execute、Reflection 三大主流设计模式。

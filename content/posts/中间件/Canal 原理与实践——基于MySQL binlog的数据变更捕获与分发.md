@@ -1,3 +1,11 @@
+---
+title: "Canal 原理与实践——基于MySQL binlog的数据变更捕获与分发"
+date: 2026-07-30
+description: 从MySQL binlog基础讲起，拆解Canal伪装Slave的核心原理，覆盖缓存一致性、ES同步、数据审计三个实战场景的Java代码实现与生产避坑指南。
+tags: ["Canal","MySQL","binlog","CDC","Kafka","数据同步","缓存一致性"]
+categories: ["Canal","bigdata"]
+---
+
 # Canal 原理与实践——基于 MySQL binlog 的数据变更捕获与分发
 
 > 缓存一致性、多存储同步、实时数仓、数据审计——这些场景都有一个共同需求：**知道数据库里发生了什么变更**。传统方案是在应用层埋点、发消息、双写——侵入代码且无法保证一致性。Canal 换个思路，把自己伪装成 MySQL Slave，"偷听" binlog，把数据库变成事件源。

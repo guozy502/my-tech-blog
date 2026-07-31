@@ -1,3 +1,11 @@
+---
+title: "Multi-Agent 系统——多Agent协作的架构模式与实践"
+date: 2026-07-29
+description: 从顺序、层级、辩论、投票四大协作模式拆到LangGraph、AutoGen、CrewAI三大框架对比，覆盖生产环境中错误级联、对话循环、token爆炸等真实陷阱。
+tags: ["Multi-Agent","LangGraph","AutoGen","CrewAI","协作模式","Agent"]
+categories: ["agent"]
+---
+
 # Multi-Agent 系统——多Agent协作的架构模式与实践
 
 > 单 Agent 能做的事有限。真正复杂的任务需要拆解、分工、辩论、互相校验。Multi-Agent 是 Agent 领域的进阶话题，也是面试中能让你脱颖而出的深度考点。本文从协作模式拆到框架选型，覆盖顺序、层级、辩论、投票四大模式，以及生产环境中真正会遇到的坑。

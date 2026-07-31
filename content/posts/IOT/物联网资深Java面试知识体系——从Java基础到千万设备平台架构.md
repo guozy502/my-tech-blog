@@ -1,3 +1,11 @@
+---
+title: "物联网资深Java面试知识体系——从Java基础到千万设备平台架构"
+date: 2026-07-30
+description: 从Java底层到Netty网络编程，从MQTT协议深度到IoT平台架构设计，拆解物联网资深Java工程师必须掌握的核心知识体系。
+tags: ["物联网","Java","Netty","MQTT","IoT平台","面试","分布式"]
+categories: ["IOT"]
+---
+
 # 物联网资深 Java 面试知识体系——从 Java 基础到千万设备平台架构
 
 > 物联网 Java 研发跟传统 Web 后端的核心差异在于：你面对的不是浏览器用户，而是百万级的长连接设备。本文从 Java 底层到 Netty 网络编程，从 MQTT 协议深度到 IoT 平台架构设计，拆解一个物联网资深 Java 工程师必须掌握的知识体系。

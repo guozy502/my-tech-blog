@@ -1,3 +1,11 @@
+---
+title: "Function Calling 深度解析——Agent如何调用工具而不是只动嘴"
+date: 2026-07-29
+description: 从底层机制到生产实践，拆解Agent工具系统的全部设计要点——JSON Schema定义、完整调用链路、并行调用、幻觉参数应对与安全设计。
+tags: ["Agent","Function Calling","Tool Use","LLM","JSON Schema","OpenAI"]
+categories: ["agent"]
+---
+
 # Function Calling / Tool Use 深度解析——Agent 如何"动手"而不是只"动嘴"
 
 > Function Calling 是 Agent 从"能说"到"能做"的关键一跃。但 LLM 怎么输出一个结构化的函数调用而不是自由文本？参数选错了怎么办？多个工具怎么编排？本文从底层机制到生产实践，拆解 Agent 工具系统的全部设计要点。

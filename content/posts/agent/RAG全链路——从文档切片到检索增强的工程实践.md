@@ -1,3 +1,11 @@
+---
+title: "RAG 全链路——从文档切片到检索增强的工程实践"
+date: 2026-07-29
+description: 从chunking策略讲起，穿越embedding、向量检索、reranker，一路到HyDE、Multi-Query、Self-RAG和GraphRAG等前沿增强技术，覆盖生产级RAG的完整链路。
+tags: ["RAG","Embedding","向量数据库","HyDE","Reranker","GraphRAG","Self-RAG"]
+categories: ["agent"]
+---
+
 # RAG 全链路——从文档切片到检索增强的工程实践
 
 > RAG (Retrieval-Augmented Generation) 是目前让 LLM 拥有"外部知识"最成熟的方式，也是 Agent 面试中最高频的话题。本文从 chunking 策略讲起，穿越 embedding、向量检索、reranker、一路到 HyDE 和 Self-RAG 等前沿增强技术，覆盖生产级 RAG 的完整链路。

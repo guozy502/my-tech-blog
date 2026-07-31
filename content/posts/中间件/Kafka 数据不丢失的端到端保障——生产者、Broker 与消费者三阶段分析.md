@@ -1,3 +1,11 @@
+---
+title: "Kafka 数据不丢失的端到端保障——生产者、Broker与消费者三阶段分析"
+date: 2026-07-31
+description: 从Producer的acks+幂等、Broker的ISR+unclean.leader.election、Consumer的手动提交+死信队列，端到端拆解Kafka保证数据不丢失的配置模板与排查清单。
+tags: ["Kafka","数据可靠性","Producer","Consumer","ISR","acks","消息队列"]
+categories: ["中间件"]
+---
+
 # Kafka 数据不丢失的端到端保障——生产者、Broker 与消费者三阶段分析
 
 > Kafka 的"数据不丢失"不是一个配置项就能解决的——它需要生产端、Broker 端、消费端三方协同。任何一个环节配置错了，数据就丢了。本文从每个阶段的丢数据场景出发，倒推需要做什么配置、为什么有效、以及配置之间的制约关系。
