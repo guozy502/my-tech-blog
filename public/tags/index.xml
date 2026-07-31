@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Tags on My Tech Blog</title>
-		<link>http://localhost:1313/my-tech-blog/tags/</link>
+		<link>https://guozy502.github.io/my-tech-blog/tags/</link>
 		<description>Recent content in Tags on My Tech Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -10,1253 +10,2989 @@
 		
 		
 		
-			<lastBuildDate>Sun, 28 Jun 2026 00:00:00 +0000</lastBuildDate>
+			<lastBuildDate>Fri, 31 Jul 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="http://localhost:1313/my-tech-blog/tags/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://guozy502.github.io/my-tech-blog/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
-				<title>@EnableAutoConfiguration</title>
-				<link>http://localhost:1313/my-tech-blog/tags/@enableautoconfiguration/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/@enableautoconfiguration/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>@PostConstruct</title>
-				<link>http://localhost:1313/my-tech-blog/tags/@postconstruct/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/@postconstruct/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>2PC</title>
-				<link>http://localhost:1313/my-tech-blog/tags/2pc/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/2pc/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>AOF</title>
-				<link>http://localhost:1313/my-tech-blog/tags/aof/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/aof/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>AOP</title>
-				<link>http://localhost:1313/my-tech-blog/tags/aop/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/aop/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>AQS</title>
-				<link>http://localhost:1313/my-tech-blog/tags/aqs/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/aqs/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>ArrayList</title>
-				<link>http://localhost:1313/my-tech-blog/tags/arraylist/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/arraylist/</guid>
+				<title>Acks</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/acks/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/acks/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Arthas</title>
-				<link>http://localhost:1313/my-tech-blog/tags/arthas/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/arthas/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/arthas/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/arthas/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>AutoConfigurationImportSelector</title>
-				<link>http://localhost:1313/my-tech-blog/tags/autoconfigurationimportselector/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/autoconfigurationimportselector/</guid>
+				<title>B&#43;Tree</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/b&#43;tree/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/b&#43;tree/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>BeanFactoryPostProcessor</title>
-				<link>http://localhost:1313/my-tech-blog/tags/beanfactorypostprocessor/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/beanfactorypostprocessor/</guid>
+				<title>BFS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bfs/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bfs/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>BeanPostProcessor</title>
-				<link>http://localhost:1313/my-tech-blog/tags/beanpostprocessor/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/beanpostprocessor/</guid>
+				<title>BitMap</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bitmap/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bitmap/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Bean生命周期</title>
-				<link>http://localhost:1313/my-tech-blog/tags/bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
+				<title>Consumer</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/consumer/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/consumer/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Bug排查</title>
-				<link>http://localhost:1313/my-tech-blog/tags/bug%E6%8E%92%E6%9F%A5/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/bug%E6%8E%92%E6%9F%A5/</guid>
+				<title>CPU</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cpu/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cpu/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>ByteBuf</title>
-				<link>http://localhost:1313/my-tech-blog/tags/bytebuf/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/bytebuf/</guid>
+				<title>DFS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/dfs/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/dfs/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Cache Aside</title>
-				<link>http://localhost:1313/my-tech-blog/tags/cache-aside/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/cache-aside/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>CAP</title>
-				<link>http://localhost:1313/my-tech-blog/tags/cap/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/cap/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>CAS</title>
-				<link>http://localhost:1313/my-tech-blog/tags/cas/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/cas/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>CGLIB</title>
-				<link>http://localhost:1313/my-tech-blog/tags/cglib/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/cglib/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>ChannelFuture</title>
-				<link>http://localhost:1313/my-tech-blog/tags/channelfuture/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/channelfuture/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>ChannelFutureListener</title>
-				<link>http://localhost:1313/my-tech-blog/tags/channelfuturelistener/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/channelfuturelistener/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>ChannelHandler</title>
-				<link>http://localhost:1313/my-tech-blog/tags/channelhandler/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/channelhandler/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>ClassLoader</title>
-				<link>http://localhost:1313/my-tech-blog/tags/classloader/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/classloader/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>CLH</title>
-				<link>http://localhost:1313/my-tech-blog/tags/clh/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/clh/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Cluster</title>
-				<link>http://localhost:1313/my-tech-blog/tags/cluster/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/cluster/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>ConcurrentHashMap</title>
-				<link>http://localhost:1313/my-tech-blog/tags/concurrenthashmap/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/concurrenthashmap/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Condition</title>
-				<link>http://localhost:1313/my-tech-blog/tags/condition/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/condition/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Controller</title>
-				<link>http://localhost:1313/my-tech-blog/tags/controller/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/controller/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>CopyOnWriteArrayList</title>
-				<link>http://localhost:1313/my-tech-blog/tags/copyonwritearraylist/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/copyonwritearraylist/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>CountDownLatch</title>
-				<link>http://localhost:1313/my-tech-blog/tags/countdownlatch/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/countdownlatch/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>COW</title>
-				<link>http://localhost:1313/my-tech-blog/tags/cow/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/cow/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>CyclicBarrier</title>
-				<link>http://localhost:1313/my-tech-blog/tags/cyclicbarrier/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/cyclicbarrier/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>DCL</title>
-				<link>http://localhost:1313/my-tech-blog/tags/dcl/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/dcl/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>DispatcherServlet</title>
-				<link>http://localhost:1313/my-tech-blog/tags/dispatcherservlet/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/dispatcherservlet/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Epoll</title>
-				<link>http://localhost:1313/my-tech-blog/tags/epoll/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/epoll/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Etcd</title>
-				<link>http://localhost:1313/my-tech-blog/tags/etcd/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/etcd/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>EventLoop</title>
-				<link>http://localhost:1313/my-tech-blog/tags/eventloop/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/eventloop/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Fail-Fast</title>
-				<link>http://localhost:1313/my-tech-blog/tags/fail-fast/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/fail-fast/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Future</title>
-				<link>http://localhost:1313/my-tech-blog/tags/future/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/future/</guid>
+				<title>Dijkstra</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/dijkstra/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/dijkstra/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>GC</title>
-				<link>http://localhost:1313/my-tech-blog/tags/gc/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/gc/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Grafana</title>
-				<link>http://localhost:1313/my-tech-blog/tags/grafana/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/grafana/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>HandlerMapping</title>
-				<link>http://localhost:1313/my-tech-blog/tags/handlermapping/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/handlermapping/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Happens-Before</title>
-				<link>http://localhost:1313/my-tech-blog/tags/happens-before/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/happens-before/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/gc/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/gc/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>HashMap</title>
-				<link>http://localhost:1313/my-tech-blog/tags/hashmap/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/hashmap/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/hashmap/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/hashmap/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>HashSet</title>
-				<link>http://localhost:1313/my-tech-blog/tags/hashset/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/hashset/</guid>
+				<title>HyperLogLog</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/hyperloglog/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/hyperloglog/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>IdleStateHandler</title>
-				<link>http://localhost:1313/my-tech-blog/tags/idlestatehandler/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/idlestatehandler/</guid>
+				<title>ISR</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/isr/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/isr/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Inbound</title>
-				<link>http://localhost:1313/my-tech-blog/tags/inbound/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/inbound/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>IoC</title>
-				<link>http://localhost:1313/my-tech-blog/tags/ioc/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/ioc/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>IO多路复用</title>
-				<link>http://localhost:1313/my-tech-blog/tags/io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>JAVA</title>
-				<link>http://localhost:1313/my-tech-blog/tags/java/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/java/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Java内存模型</title>
-				<link>http://localhost:1313/my-tech-blog/tags/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>JDK7</title>
-				<link>http://localhost:1313/my-tech-blog/tags/jdk7/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/jdk7/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>JDK动态代理</title>
-				<link>http://localhost:1313/my-tech-blog/tags/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>JIT</title>
-				<link>http://localhost:1313/my-tech-blog/tags/jit/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/jit/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>JMM</title>
-				<link>http://localhost:1313/my-tech-blog/tags/jmm/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/jmm/</guid>
+				<title>Java</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/java/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/java/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>JVM</title>
-				<link>http://localhost:1313/my-tech-blog/tags/jvm/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/jvm/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/jvm/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/jvm/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Kafka</title>
-				<link>http://localhost:1313/my-tech-blog/tags/kafka/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/kafka/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/kafka/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/kafka/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Leader Election</title>
-				<link>http://localhost:1313/my-tech-blog/tags/leader-election/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/leader-election/</guid>
+				<title>LCS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/lcs/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/lcs/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Leader选举</title>
-				<link>http://localhost:1313/my-tech-blog/tags/leader%E9%80%89%E4%B8%BE/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/leader%E9%80%89%E4%B8%BE/</guid>
+				<title>LIS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/lis/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/lis/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>LengthFieldBasedFrameDecoder</title>
-				<link>http://localhost:1313/my-tech-blog/tags/lengthfieldbasedframedecoder/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/lengthfieldbasedframedecoder/</guid>
+				<title>LSM Tree</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/lsm-tree/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/lsm-tree/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>LinkedHashMap</title>
-				<link>http://localhost:1313/my-tech-blog/tags/linkedhashmap/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/linkedhashmap/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>LinkedList</title>
-				<link>http://localhost:1313/my-tech-blog/tags/linkedlist/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/linkedlist/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>LRU</title>
-				<link>http://localhost:1313/my-tech-blog/tags/lru/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/lru/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>MyBatis</title>
-				<link>http://localhost:1313/my-tech-blog/tags/mybatis/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/mybatis/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Netty</title>
-				<link>http://localhost:1313/my-tech-blog/tags/netty/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/netty/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>NIO</title>
-				<link>http://localhost:1313/my-tech-blog/tags/nio/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/nio/</guid>
+				<title>Lua</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/lua/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/lua/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>OOM</title>
-				<link>http://localhost:1313/my-tech-blog/tags/oom/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/oom/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Outbound</title>
-				<link>http://localhost:1313/my-tech-blog/tags/outbound/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/outbound/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>PACELC</title>
-				<link>http://localhost:1313/my-tech-blog/tags/pacelc/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/pacelc/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Page Cache</title>
-				<link>http://localhost:1313/my-tech-blog/tags/page-cache/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/page-cache/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Pipeline</title>
-				<link>http://localhost:1313/my-tech-blog/tags/pipeline/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/pipeline/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/oom/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/oom/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>PriorityQueue</title>
-				<link>http://localhost:1313/my-tech-blog/tags/priorityqueue/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/priorityqueue/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/priorityqueue/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/priorityqueue/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Prometheus</title>
-				<link>http://localhost:1313/my-tech-blog/tags/prometheus/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/prometheus/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Promise</title>
-				<link>http://localhost:1313/my-tech-blog/tags/promise/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/promise/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Raft</title>
-				<link>http://localhost:1313/my-tech-blog/tags/raft/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/raft/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Rate Limiter</title>
-				<link>http://localhost:1313/my-tech-blog/tags/rate-limiter/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/rate-limiter/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>RDB</title>
-				<link>http://localhost:1313/my-tech-blog/tags/rdb/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/rdb/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Reactor</title>
-				<link>http://localhost:1313/my-tech-blog/tags/reactor/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/reactor/</guid>
+				<title>Producer</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/producer/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/producer/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Redis</title>
-				<link>http://localhost:1313/my-tech-blog/tags/redis/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/redis/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/redis/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/redis/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Redisson</title>
-				<link>http://localhost:1313/my-tech-blog/tags/redisson/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/redisson/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/redisson/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/redisson/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>RedLock</title>
-				<link>http://localhost:1313/my-tech-blog/tags/redlock/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/redlock/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/redlock/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/redlock/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>ReentrantLock</title>
-				<link>http://localhost:1313/my-tech-blog/tags/reentrantlock/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/reentrantlock/</guid>
+				<title>SkipList</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/skiplist/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/skiplist/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Saga</title>
-				<link>http://localhost:1313/my-tech-blog/tags/saga/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/saga/</guid>
+				<title>TimSort</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/timsort/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/timsort/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>SDS</title>
-				<link>http://localhost:1313/my-tech-blog/tags/sds/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/sds/</guid>
+				<title>Trie</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/trie/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/trie/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Seata</title>
-				<link>http://localhost:1313/my-tech-blog/tags/seata/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/seata/</guid>
+				<title>Watch Dog</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/watch-dog/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/watch-dog/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Semaphore</title>
-				<link>http://localhost:1313/my-tech-blog/tags/semaphore/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/semaphore/</guid>
+				<title>背包问题</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Skiplist</title>
-				<link>http://localhost:1313/my-tech-blog/tags/skiplist/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/skiplist/</guid>
+				<title>编辑距离</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>SPI</title>
-				<link>http://localhost:1313/my-tech-blog/tags/spi/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/spi/</guid>
+				<title>并查集</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Spring</title>
-				<link>http://localhost:1313/my-tech-blog/tags/spring/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/spring/</guid>
+				<title>布隆过滤器</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Spring Boot</title>
-				<link>http://localhost:1313/my-tech-blog/tags/spring-boot/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/spring-boot/</guid>
+				<title>单调栈</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%95%E8%B0%83%E6%A0%88/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%95%E8%B0%83%E6%A0%88/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Spring MVC</title>
-				<link>http://localhost:1313/my-tech-blog/tags/spring-mvc/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/spring-mvc/</guid>
+				<title>动态规划</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Spring.factories</title>
-				<link>http://localhost:1313/my-tech-blog/tags/spring.factories/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/spring.factories/</guid>
+				<title>堆</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%A0%86/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%A0%86/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Spring整合</title>
-				<link>http://localhost:1313/my-tech-blog/tags/spring%E6%95%B4%E5%90%88/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/spring%E6%95%B4%E5%90%88/</guid>
+				<title>二叉树</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>Synchronized</title>
-				<link>http://localhost:1313/my-tech-blog/tags/synchronized/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/synchronized/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>TCC</title>
-				<link>http://localhost:1313/my-tech-blog/tags/tcc/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/tcc/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>TCP</title>
-				<link>http://localhost:1313/my-tech-blog/tags/tcp/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/tcp/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>ThreadPoolExecutor</title>
-				<link>http://localhost:1313/my-tech-blog/tags/threadpoolexecutor/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/threadpoolexecutor/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>TreeMap</title>
-				<link>http://localhost:1313/my-tech-blog/tags/treemap/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/treemap/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>TreeSet</title>
-				<link>http://localhost:1313/my-tech-blog/tags/treeset/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/treeset/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Volatile</title>
-				<link>http://localhost:1313/my-tech-blog/tags/volatile/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/volatile/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>ZAB</title>
-				<link>http://localhost:1313/my-tech-blog/tags/zab/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/zab/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Ziplist</title>
-				<link>http://localhost:1313/my-tech-blog/tags/ziplist/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/ziplist/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>ZooKeeper</title>
-				<link>http://localhost:1313/my-tech-blog/tags/zookeeper/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/zookeeper/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>编译器</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%BC%96%E8%AF%91%E5%99%A8/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%BC%96%E8%AF%91%E5%99%A8/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>并发</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%B9%B6%E5%8F%91/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%B9%B6%E5%8F%91/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>插件</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%8F%92%E4%BB%B6/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%8F%92%E4%BB%B6/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>拆包</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%8B%86%E5%8C%85/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%8B%86%E5%8C%85/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>持久化</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%8C%81%E4%B9%85%E5%8C%96/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%8C%81%E4%B9%85%E5%8C%96/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>大key</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%A4%A7key/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%A4%A7key/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>调优</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E8%B0%83%E4%BC%98/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E8%B0%83%E4%BC%98/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>读写分离</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>堆排序</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>对象池</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%AF%B9%E8%B1%A1%E6%B1%A0/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%AF%B9%E8%B1%A1%E6%B1%A0/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>二叉堆</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E4%BA%8C%E5%8F%89%E5%A0%86/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E4%BA%8C%E5%8F%89%E5%A0%86/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>分布式</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>分布式架构</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>分布式事务</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid>
+				<title>二分查找</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>分布式锁</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>分布式一致性</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>分段锁</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E6%AE%B5%E9%94%81/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E6%AE%B5%E9%94%81/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>分页</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E9%A1%B5/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%88%86%E9%A1%B5/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>服务发现</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>高性能</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%AB%98%E6%80%A7%E8%83%BD/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%AB%98%E6%80%A7%E8%83%BD/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>共识算法</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>故障排查</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>哈希冲突</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81/</guid>
+				<title>归并排序</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>红黑树</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>滑动窗口</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>缓存</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%BC%93%E5%AD%98/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%BC%93%E5%AD%98/</guid>
+				<title>回溯</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%9B%9E%E6%BA%AF/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%9B%9E%E6%BA%AF/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>缓存穿透</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F/</guid>
+				<title>降级</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%99%8D%E7%BA%A7/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%99%8D%E7%BA%A7/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>集合</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%9B%86%E5%90%88/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%9B%86%E5%90%88/</guid>
+				<title>可重入锁</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>集群</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%9B%86%E7%BE%A4/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%9B%86%E7%BE%A4/</guid>
+				<title>快速排序</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>监控</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%9B%91%E6%8E%A7/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%9B%91%E6%8E%A7/</guid>
+				<title>排序</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%8E%92%E5%BA%8F/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%8E%92%E5%BA%8F/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>可用性</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/</guid>
+				<title>前缀和</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%89%8D%E7%BC%80%E5%92%8C/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%89%8D%E7%BC%80%E5%92%8C/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>扩展性</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%89%A9%E5%B1%95%E6%80%A7/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%89%A9%E5%B1%95%E6%80%A7/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>类加载</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>零拷贝</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%9B%B6%E6%8B%B7%E8%B4%9D/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%9B%B6%E6%8B%B7%E8%B4%9D/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>令牌桶</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E4%BB%A4%E7%89%8C%E6%A1%B6/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E4%BB%A4%E7%89%8C%E6%A1%B6/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>漏桶</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%BC%8F%E6%A1%B6/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%BC%8F%E6%A1%B6/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>模板方法</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>内存池</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%86%85%E5%AD%98%E6%B1%A0/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%86%85%E5%AD%98%E6%B1%A0/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>配置中心</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>启动优化</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>热key</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%83%ADkey/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%83%ADkey/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>容器启动</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>三级缓存</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>哨兵</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%93%A8%E5%85%B5/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%93%A8%E5%85%B5/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>生产实践</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%94%9F%E4%BA%A7%E5%AE%9E%E8%B7%B5/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%94%9F%E4%BA%A7%E5%AE%9E%E8%B7%B5/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>数据安全</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/</guid>
+				<title>区间DP</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8C%BA%E9%97%B4dp/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8C%BA%E9%97%B4dp/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>数据结构</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>双亲委派</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/</guid>
+				<title>数据可靠性</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E9%9D%A0%E6%80%A7/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E9%9D%A0%E6%80%A7/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>双向链表</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</guid>
+				<title>双指针</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%8C%E6%8C%87%E9%92%88/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%8C%E6%8C%87%E9%92%88/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>死循环</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%AD%BB%E5%BE%AA%E7%8E%AF/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%AD%BB%E5%BE%AA%E7%8E%AF/</guid>
+				<title>算法</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%AE%97%E6%B3%95/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%AE%97%E6%B3%95/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>锁</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%94%81/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%94%81/</guid>
+				<title>拓扑排序</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>锁升级</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%94%81%E5%8D%87%E7%BA%A7/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%94%81%E5%8D%87%E7%BA%A7/</guid>
+				<title>贪心</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%B4%AA%E5%BF%83/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%B4%AA%E5%BF%83/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>无锁</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%97%A0%E9%94%81/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%97%A0%E9%94%81/</guid>
+				<title>跳表</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%B7%B3%E8%A1%A8/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%B7%B3%E8%A1%A8/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>线程池</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
+				<title>图算法</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>线程模型</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
+				<title>网络</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BD%91%E7%BB%9C/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BD%91%E7%BB%9C/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>限流</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%99%90%E6%B5%81/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%99%90%E6%B5%81/</guid>
+				<title>线性数据结构</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%BF%E6%80%A7%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%BF%E6%80%A7%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>限流算法</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>消息队列</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</guid>
 				<description></description>
 			</item>
 			<item>
-				<title>心跳</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%BF%83%E8%B7%B3/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%BF%83%E8%B7%B3/</guid>
+				<title>雪花算法</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>一致性Hash</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%80%E8%87%B4%E6%80%A7hash/</link>
+				<pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%80%E8%87%B4%E6%80%A7hash/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Binlog</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/binlog/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/binlog/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Canal</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/canal/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/canal/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CAP</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cap/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cap/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CDC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cdc/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cdc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Checkpoint</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/checkpoint/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/checkpoint/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Device Shadow</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/device-shadow/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/device-shadow/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Exactly-Once</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/exactly-once/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/exactly-once/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Flink</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/flink/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/flink/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>IoT</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/iot/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/iot/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>IoT平台</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/iot%E5%B9%B3%E5%8F%B0/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/iot%E5%B9%B3%E5%8F%B0/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>MQTT</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/mqtt/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/mqtt/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>MySQL</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/mysql/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/mysql/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Netty</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/netty/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/netty/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>OTA</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/ota/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/ota/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>RocksDB</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/rocksdb/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/rocksdb/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Watermark</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/watermark/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/watermark/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>分布式</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>分库分表</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>高并发</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>固件升级</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>缓存一致性</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>灰度发布</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>架构演进</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>流处理</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%B5%81%E5%A4%84%E7%90%86/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%B5%81%E5%A4%84%E7%90%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>面试</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%9D%A2%E8%AF%95/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%9D%A2%E8%AF%95/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>设备管理</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>设备影子</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%BE%E5%A4%87%E5%BD%B1%E5%AD%90/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%BE%E5%A4%87%E5%BD%B1%E5%AD%90/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>数据同步</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>数据一致性</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>物联网</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%89%A9%E8%81%94%E7%BD%91/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%89%A9%E8%81%94%E7%BD%91/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>状态同步</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%8A%B6%E6%80%81%E5%90%8C%E6%AD%A5/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%8A%B6%E6%80%81%E5%90%8C%E6%AD%A5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>0-RTT</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/0-rtt/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/0-rtt/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Access</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/access/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/access/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Agent</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/agent/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/agent/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>AI</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/ai/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/ai/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>APISIX</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/apisix/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/apisix/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>API网关</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/api%E7%BD%91%E5%85%B3/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/api%E7%BD%91%E5%85%B3/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ARP</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/arp/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/arp/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>AutoGen</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/autogen/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/autogen/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>BBR</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bbr/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bbr/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>BIO</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bio/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bio/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>C10K</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/c10k/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/c10k/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Cache-Control</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cache-control/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cache-control/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CDN</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cdn/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cdn/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CLOSE_WAIT</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/close_wait/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/close_wait/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Connection ID</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/connection-id/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/connection-id/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Cookie</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cookie/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cookie/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CrewAI</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/crewai/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/crewai/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CUBIC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cubic/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cubic/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>DNS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/dns/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/dns/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ELF</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/elf/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/elf/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Embedding</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/embedding/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/embedding/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Envoy</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/envoy/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/envoy/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Epoll</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/epoll/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/epoll/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ETag</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/etag/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/etag/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Function Calling</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/function-calling/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/function-calling/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>GeoDNS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/geodns/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/geodns/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>GraphRAG</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/graphrag/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/graphrag/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>GRPC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/grpc/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/grpc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Gzip</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/gzip/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/gzip/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>HTTP</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/http/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/http/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>HTTP/2</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/http/2/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/http/2/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>HTTP/3</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/http/3/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/http/3/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>HTTPDNS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/httpdns/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/httpdns/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>HTTPS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/https/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/https/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>HyDE</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/hyde/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/hyde/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ICMP</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/icmp/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/icmp/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>IO多路复用</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>IP</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/ip/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/ip/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Istio</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/istio/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/istio/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>JSON Schema</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/json-schema/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/json-schema/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>JWT</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/jwt/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/jwt/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Keepalive</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/keepalive/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/keepalive/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Kong</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/kong/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/kong/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>LangGraph</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/langgraph/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/langgraph/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Limit_req</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/limit_req/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/limit_req/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>LLM</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/llm/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/llm/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Master-Worker</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/master-worker/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/master-worker/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>MemGPT</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/memgpt/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/memgpt/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ModSecurity</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/modsecurity/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/modsecurity/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Multi-Agent</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/multi-agent/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/multi-agent/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Nginx</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/nginx/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/nginx/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>NIO</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/nio/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/nio/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>OAuth</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/oauth/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/oauth/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>OpenAI</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/openai/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/openai/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Ping</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/ping/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/ping/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Plan-Execute</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/plan-execute/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/plan-execute/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Protobuf</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/protobuf/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/protobuf/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Proxy_cache</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/proxy_cache/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/proxy_cache/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Python</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/python/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/python/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>QUIC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/quic/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/quic/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>RAG</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/rag/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/rag/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ReAct</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/react/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/react/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Reflection</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/reflection/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/reflection/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Reno</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/reno/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/reno/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Reranker</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/reranker/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/reranker/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Rewrite</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/rewrite/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/rewrite/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>RPC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/rpc/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/rpc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Self-RAG</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/self-rag/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/self-rag/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Sendfile</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/sendfile/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/sendfile/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Service Mesh</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/service-mesh/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/service-mesh/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Session</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/session/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/session/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Sidecar</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/sidecar/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/sidecar/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Socket</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/socket/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/socket/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>TCP</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/tcp/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/tcp/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Tcpdump</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/tcpdump/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/tcpdump/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>TCP重传</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/tcp%E9%87%8D%E4%BC%A0/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/tcp%E9%87%8D%E4%BC%A0/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>TIME_WAIT</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/time_wait/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/time_wait/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>TLS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/tls/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/tls/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Tool Use</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/tool-use/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/tool-use/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Traceroute</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/traceroute/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/traceroute/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>UDP</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/udp/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/udp/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Upstream</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/upstream/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/upstream/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>WAF</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/waf/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/waf/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>WebSocket</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/websocket/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/websocket/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Wireshark</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/wireshark/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/wireshark/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Worker</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/worker/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/worker/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>安全</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%AE%89%E5%85%A8/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%AE%89%E5%85%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>编译原理</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>操作系统</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>队头阻塞</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%98%9F%E5%A4%B4%E9%98%BB%E5%A1%9E/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%98%9F%E5%A4%B4%E9%98%BB%E5%A1%9E/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>反向代理</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>服务发现</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>负载均衡</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>缓存</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%93%E5%AD%98/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%93%E5%AD%98/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>计算机体系结构</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>记忆系统</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>加密</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8A%A0%E5%AF%86/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8A%A0%E5%AF%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>架构</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%9E%B6%E6%9E%84/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%9E%B6%E6%9E%84/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>健康检查</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>鉴权</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%89%B4%E6%9D%83/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%89%B4%E6%9D%83/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>流式</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%B5%81%E5%BC%8F/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%B5%81%E5%BC%8F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>路由</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%B7%AF%E7%94%B1/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%B7%AF%E7%94%B1/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>模块</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%A8%A1%E5%9D%97/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%A8%A1%E5%9D%97/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>内存管理</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>全双工</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%85%A8%E5%8F%8C%E5%B7%A5/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%85%A8%E5%8F%8C%E5%B7%A5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>认证</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%A4%E8%AF%81/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%A4%E8%AF%81/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>三次握手</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>上下文窗口</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AA%97%E5%8F%A3/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AA%97%E5%8F%A3/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>设计模式</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>生命周期</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>事件驱动</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>微服务</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>限流</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%99%90%E6%B5%81/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%99%90%E6%B5%81/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>向量数据库</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>协议</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%8F%E8%AE%AE/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%8F%E8%AE%AE/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>协作模式</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%8F%E4%BD%9C%E6%A8%A1%E5%BC%8F/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%8F%E4%BD%9C%E6%A8%A1%E5%BC%8F/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>性能优化</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>序列化</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%BA%8F%E5%88%97%E5%8C%96/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>音视频</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>拥塞控制</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>域名解析</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>证书</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%AF%81%E4%B9%A6/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%AF%81%E4%B9%A6/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>状态机</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/</link>
+				<pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Bucket4j</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bucket4j/</link>
+				<pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bucket4j/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Quicklist</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/quicklist/</link>
+				<pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/quicklist/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>RateLimiter</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/ratelimiter/</link>
+				<pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/ratelimiter/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Sentinel</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/sentinel/</link>
+				<pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/sentinel/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Ziplist</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/ziplist/</link>
+				<pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/ziplist/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>令牌桶</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%BB%A4%E7%89%8C%E6%A1%B6/</link>
+				<pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%BB%A4%E7%89%8C%E6%A1%B6/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>内部编码</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%86%85%E9%83%A8%E7%BC%96%E7%A0%81/</link>
+				<pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%86%85%E9%83%A8%E7%BC%96%E7%A0%81/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>数据类型</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+				<pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>选型</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%80%89%E5%9E%8B/</link>
+				<pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%80%89%E5%9E%8B/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>2PC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/2pc/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/2pc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>AccessOrder</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/accessorder/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/accessorder/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ArrayList</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/arraylist/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/arraylist/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>BUG复盘</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bug%E5%A4%8D%E7%9B%98/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bug%E5%A4%8D%E7%9B%98/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Cache Aside</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cache-aside/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cache-aside/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CAS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cas/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cas/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ChannelFutureListener</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/channelfuturelistener/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/channelfuturelistener/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ConcurrentHashMap</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/concurrenthashmap/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/concurrenthashmap/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CopyOnWriteArrayList</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/copyonwritearraylist/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/copyonwritearraylist/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>COW</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cow/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cow/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Deque</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/deque/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/deque/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Etcd</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/etcd/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/etcd/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>EventLoop</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/eventloop/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/eventloop/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Fail-Fast</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/fail-fast/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/fail-fast/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>HashSet</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/hashset/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/hashset/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>IdleStateHandler</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/idlestatehandler/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/idlestatehandler/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>JDK7</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/jdk7/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/jdk7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Leader选举</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/leader%E9%80%89%E4%B8%BE/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/leader%E9%80%89%E4%B8%BE/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>LengthFieldBasedFrameDecoder</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/lengthfieldbasedframedecoder/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/lengthfieldbasedframedecoder/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>LinkedHashMap</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/linkedhashmap/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/linkedhashmap/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>LinkedList</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/linkedlist/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/linkedlist/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>LRU</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/lru/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/lru/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>NavigableMap</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/navigablemap/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/navigablemap/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>PACELC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/pacelc/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/pacelc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Raft</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/raft/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/raft/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Reactor</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/reactor/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/reactor/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Recycler</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/recycler/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/recycler/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Saga</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/saga/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/saga/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Seata</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/seata/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/seata/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Synchronized</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/synchronized/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/synchronized/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>TCC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/tcc/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/tcc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>TopK</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/topk/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/topk/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>TreeMap</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/treemap/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/treemap/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>TreeSet</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/treeset/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/treeset/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ZAB</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/zab/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/zab/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ZooKeeper</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/zookeeper/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/zookeeper/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>包装模式</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8C%85%E8%A3%85%E6%A8%A1%E5%BC%8F/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8C%85%E8%A3%85%E6%A8%A1%E5%BC%8F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>本地消息表</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>并发</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%B9%B6%E5%8F%91/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%B9%B6%E5%8F%91/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>拆包</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%8B%86%E5%8C%85/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%8B%86%E5%8C%85/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>读写分离</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>堆排序</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>对象池</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%AF%B9%E8%B1%A1%E6%B1%A0/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%AF%B9%E8%B1%A1%E6%B1%A0/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>二叉堆</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8C%E5%8F%89%E5%A0%86/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8C%E5%8F%89%E5%A0%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>分布式事务</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>分段锁</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E6%AE%B5%E9%94%81/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E6%AE%B5%E9%94%81/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>高性能</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%AB%98%E6%80%A7%E8%83%BD/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%AB%98%E6%80%A7%E8%83%BD/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>共识算法</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>哈希冲突</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>集合</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%9B%86%E5%90%88/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%9B%86%E5%90%88/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>可用性</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>扩容</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%89%A9%E5%AE%B9/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%89%A9%E5%AE%B9/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>连接管理</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>漏桶</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%BC%8F%E6%A1%B6/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%BC%8F%E6%A1%B6/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>日志复制</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>双向链表</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>死循环</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%AD%BB%E5%BE%AA%E7%8E%AF/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%AD%BB%E5%BE%AA%E7%8E%AF/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>无锁</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%97%A0%E9%94%81/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%97%A0%E9%94%81/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>线程模型</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>线性一致性</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%BF%E6%80%A7%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%BF%E6%80%A7%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>协议设计</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>心跳</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%BF%83%E8%B7%B3/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%BF%83%E8%B7%B3/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>旋转</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%97%8B%E8%BD%AC/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%97%8B%E8%BD%AC/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>循环依赖</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%97%8B%E8%BD%AC/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%97%8B%E8%BD%AC/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>一致性</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E4%B8%80%E8%87%B4%E6%80%A7/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>异步</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%BC%82%E6%AD%A5/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%BC%82%E6%AD%A5/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>引用计数</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>源码</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E6%BA%90%E7%A0%81/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E6%BA%90%E7%A0%81/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>运维</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E8%BF%90%E7%BB%B4/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E8%BF%90%E7%BB%B4/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>责任链</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E8%B4%A3%E4%BB%BB%E9%93%BE/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E8%B4%A3%E4%BB%BB%E9%93%BE/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%BA%90%E7%A0%81/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%BA%90%E7%A0%81/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>粘包</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E7%B2%98%E5%8C%85/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E7%B2%98%E5%8C%85/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>中间件</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
-				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</guid>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%B2%98%E5%8C%85/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%B2%98%E5%8C%85/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>重连</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%87%8D%E8%BF%9E/</link>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%87%8D%E8%BF%9E/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%87%8D%E8%BF%9E/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>最终一致性</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+				<pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>@EnableAutoConfiguration</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/@enableautoconfiguration/</link>
 				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%87%8D%E8%BF%9E/</guid>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/@enableautoconfiguration/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>@PostConstruct</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/@postconstruct/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/@postconstruct/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>AOF</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/aof/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/aof/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>AOP</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/aop/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/aop/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>AQS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/aqs/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/aqs/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>AutoConfigurationImportSelector</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/autoconfigurationimportselector/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/autoconfigurationimportselector/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>BeanFactoryPostProcessor</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/beanfactorypostprocessor/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/beanfactorypostprocessor/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>BeanPostProcessor</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/beanpostprocessor/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/beanpostprocessor/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Bean生命周期</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Buffer Pool</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/buffer-pool/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/buffer-pool/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Bug排查</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bug%E6%8E%92%E6%9F%A5/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bug%E6%8E%92%E6%9F%A5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ByteBuf</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bytebuf/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bytebuf/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ByteToMessageDecoder</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/bytetomessagedecoder/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/bytetomessagedecoder/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CGLIB</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cglib/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cglib/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Change Buffer</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/change-buffer/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/change-buffer/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ChannelFuture</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/channelfuture/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/channelfuture/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ChannelHandler</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/channelhandler/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/channelhandler/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ClassLoader</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/classloader/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/classloader/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CLH</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/clh/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/clh/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Cluster</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cluster/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cluster/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Condition</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/condition/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/condition/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Controller</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/controller/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/controller/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CountDownLatch</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/countdownlatch/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/countdownlatch/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CyclicBarrier</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/cyclicbarrier/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/cyclicbarrier/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>DCL</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/dcl/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/dcl/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>DDL</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/ddl/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/ddl/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>DispatcherServlet</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/dispatcherservlet/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/dispatcherservlet/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>EventListener</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/eventlistener/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/eventlistener/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>EXPLAIN</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/explain/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/explain/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Future</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/future/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/future/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Gap Lock</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/gap-lock/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/gap-lock/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Grafana</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/grafana/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/grafana/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>GTID</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/gtid/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/gtid/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>HandlerMapping</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/handlermapping/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/handlermapping/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Happens-Before</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/happens-before/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/happens-before/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Inbound</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/inbound/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/inbound/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>InnoDB</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/innodb/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/innodb/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>InnoDB Cluster</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/innodb-cluster/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/innodb-cluster/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>IoC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/ioc/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/ioc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Java内存模型</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>JDK动态代理</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>JIT</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/jit/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/jit/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>JMM</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/jmm/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/jmm/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Join</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/join/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/join/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>MessageToByteEncoder</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/messagetobyteencoder/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/messagetobyteencoder/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>MGR</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/mgr/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/mgr/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>MHA</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/mha/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/mha/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>MVCC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/mvcc/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/mvcc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>MyBatis</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/mybatis/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/mybatis/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Next-Key Lock</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/next-key-lock/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/next-key-lock/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Orchestrator</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/orchestrator/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/orchestrator/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Outbound</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/outbound/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/outbound/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Page Cache</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/page-cache/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/page-cache/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Performance Schema</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/performance-schema/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/performance-schema/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Pipeline</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/pipeline/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/pipeline/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Prometheus</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/prometheus/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/prometheus/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Promise</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/promise/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/promise/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Pt-Query-Digest</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/pt-query-digest/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/pt-query-digest/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>RDB</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/rdb/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/rdb/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Redo Log</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/redo-log/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/redo-log/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ReentrantLock</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/reentrantlock/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/reentrantlock/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>SDS</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/sds/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/sds/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Semaphore</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/semaphore/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/semaphore/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ShardingSphere</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/shardingsphere/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/shardingsphere/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>SPI</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/spi/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/spi/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Spring</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/spring/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/spring/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Spring Boot</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/spring-boot/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/spring-boot/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Spring MVC</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/spring-mvc/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/spring-mvc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Spring.factories</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/spring.factories/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/spring.factories/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Spring整合</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/spring%E6%95%B4%E5%90%88/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/spring%E6%95%B4%E5%90%88/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>SQL优化</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/sql%E4%BC%98%E5%8C%96/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/sql%E4%BC%98%E5%8C%96/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Sys Schema</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/sys-schema/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/sys-schema/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ThreadPoolExecutor</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/threadpoolexecutor/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/threadpoolexecutor/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Undo Log</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/undo-log/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/undo-log/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Volatile</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/volatile/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/volatile/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>WAL</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/wal/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/wal/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>半同步</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%8A%E5%90%8C%E6%AD%A5/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8D%8A%E5%90%8C%E6%AD%A5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>崩溃恢复</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%B4%A9%E6%BA%83%E6%81%A2%E5%A4%8D/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%B4%A9%E6%BA%83%E6%81%A2%E5%A4%8D/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>编解码器</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%96%E8%A7%A3%E7%A0%81%E5%99%A8/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%96%E8%A7%A3%E7%A0%81%E5%99%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>编译器</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%96%E8%AF%91%E5%99%A8/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%96%E8%AF%91%E5%99%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>并行复制</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%B9%B6%E8%A1%8C%E5%A4%8D%E5%88%B6/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%B9%B6%E8%A1%8C%E5%A4%8D%E5%88%B6/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>插件</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%8F%92%E4%BB%B6/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%8F%92%E4%BB%B6/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>持久化</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%8C%81%E4%B9%85%E5%8C%96/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%8C%81%E4%B9%85%E5%8C%96/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>存储引擎</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>大key</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%A4%A7key/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%A4%A7key/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>调优</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%B0%83%E4%BC%98/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%B0%83%E4%BC%98/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>分布式架构</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>分页</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E9%A1%B5/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%88%86%E9%A1%B5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>高可用</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>隔离级别</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>缓存穿透</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>集群</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%9B%86%E7%BE%A4/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%9B%86%E7%BE%A4/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>监控</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%9B%91%E6%8E%A7/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%9B%91%E6%8E%A7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>扩展性</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%89%A9%E5%B1%95%E6%80%A7/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%89%A9%E5%B1%95%E6%80%A7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>类加载</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>零拷贝</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%9B%B6%E6%8B%B7%E8%B4%9D/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%9B%B6%E6%8B%B7%E8%B4%9D/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>慢查询</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%85%A2%E6%9F%A5%E8%AF%A2/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%85%A2%E6%9F%A5%E8%AF%A2/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>模板方法</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>内存池</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%86%85%E5%AD%98%E6%B1%A0/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%86%85%E5%AD%98%E6%B1%A0/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>配置中心</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>启动优化</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>热key</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%83%ADkey/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%83%ADkey/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>容器启动</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>三级缓存</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>哨兵</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%93%A8%E5%85%B5/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%93%A8%E5%85%B5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>生产实践</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%94%9F%E4%BA%A7%E5%AE%9E%E8%B7%B5/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%94%9F%E4%BA%A7%E5%AE%9E%E8%B7%B5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>事务</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8B%E5%8A%A1/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%BA%8B%E5%8A%A1/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>数据安全</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>双亲委派</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>水平拆分</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%B0%B4%E5%B9%B3%E6%8B%86%E5%88%86/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%B0%B4%E5%B9%B3%E6%8B%86%E5%88%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>死锁</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%AD%BB%E9%94%81/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%AD%BB%E9%94%81/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>索引</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%B4%A2%E5%BC%95/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%B4%A2%E5%BC%95/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>锁</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%94%81/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%94%81/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>锁升级</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%94%81%E5%8D%87%E7%BA%A7/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%94%81%E5%8D%87%E7%BA%A7/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>线程池</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>循环依赖</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>异步</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%BC%82%E6%AD%A5/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%BC%82%E6%AD%A5/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>引用计数</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>优化器</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%BC%98%E5%8C%96%E5%99%A8/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%BC%98%E5%8C%96%E5%99%A8/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>运维</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%BF%90%E7%BB%B4/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%BF%90%E7%BB%B4/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>责任链</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%B4%A3%E4%BB%BB%E9%93%BE/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%B4%A3%E4%BB%BB%E9%93%BE/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>执行计划</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>中间件</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>主从复制</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/</link>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/</link>
 				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/</guid>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>自动配置</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/</link>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/</link>
 				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/</guid>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>子查询</title>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%AD%90%E6%9F%A5%E8%AF%A2/</link>
+				<pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%AD%90%E6%9F%A5%E8%AF%A2/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>G1</title>
-				<link>http://localhost:1313/my-tech-blog/tags/g1/</link>
+				<link>https://guozy502.github.io/my-tech-blog/tags/g1/</link>
 				<pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/g1/</guid>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/g1/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>垃圾回收</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</link>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</link>
 				<pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</guid>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>对象生命周期</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
 				<pubDate>Fri, 26 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>逃逸分析</title>
-				<link>http://localhost:1313/my-tech-blog/tags/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/</link>
+				<link>https://guozy502.github.io/my-tech-blog/tags/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/</link>
 				<pubDate>Fri, 26 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/my-tech-blog/tags/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/</guid>
+				<guid>https://guozy502.github.io/my-tech-blog/tags/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/</guid>
 				<description></description>
 			</item>
 	</channel>

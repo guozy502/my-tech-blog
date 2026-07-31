@@ -3,7 +3,7 @@ title: "JIT编译器的分层编译与内联优化"
 date: 2026-06-28
 description: 深入拆解 HotSpot JIT 编译器的分层编译机制（C1/C2）和最强大的内联优化，理解 Java "先慢后快"的根源和 JIT 编译的底层逻辑。
 tags: ["JAVA","JVM","JIT","编译器","性能优化"]
-categories: ["Java"]
+categories: ["JVM"]
 ---
 
 ```mermaid

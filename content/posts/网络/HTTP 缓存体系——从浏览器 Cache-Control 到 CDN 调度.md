@@ -1,7 +1,7 @@
 ---
 title: "HTTP 缓存体系——从浏览器 Cache-Control 到 CDN 调度"
 date: 2026-07-29
-description: 从浏览器强缓存（Cache-Control: max-age）+ 协商缓存（ETag/Last-Modified）的两层缓存策略、缓存决策树、CDN 的分层缓存架构（边缘→区域→源站），到缓存击穿/穿透/雪崩的根因与解决方案，拆解 HTTP 缓存在整个网络数据链路中的完整角色。
+description: "从浏览器强缓存（Cache-Control: max-age）+ 协商缓存（ETag/Last-Modified）的两层缓存策略、缓存决策树、CDN 的分层缓存架构（边缘→区域→源站），到缓存击穿/穿透/雪崩的根因与解决方案，拆解 HTTP 缓存在整个网络数据链路中的完整角色。"
 tags: ["网络","HTTP","缓存","Cache-Control","CDN","ETag"]
 categories: ["网络"]
 ---
