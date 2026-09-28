@@ -9,8 +9,8 @@
     <title>My Tech Blog</title><meta name="author" content="">
 <meta name="description" content="">
 	<meta itemprop="name" content="My Tech Blog">
-	<meta itemprop="datePublished" content="2026-07-31T00:00:00+00:00">
-	<meta itemprop="dateModified" content="2026-07-31T00:00:00+00:00"><meta property="og:url" content="https://guozy502.github.io/my-tech-blog/">
+	<meta itemprop="datePublished" content="2026-09-03T00:00:00+00:00">
+	<meta itemprop="dateModified" content="2026-09-03T00:00:00+00:00"><meta property="og:url" content="https://guozy502.github.io/my-tech-blog/">
 	<meta property="og:site_name" content="My Tech Blog">
 	<meta property="og:title" content="My Tech Blog">
 	<meta property="og:locale" content="zh_CN">
@@ -91,60 +91,493 @@
     <div id="search-dropdown-mobile"></div>
   </div><main class="fi-container"><div class="page home posts"><div class="home-profile"><h1 class="home-title"></h1><p class="home-subtitle"><span class="d-none">记录技术，分享成长</span><span class="typeit"><template>记录技术，分享成长</template></span></p><div class="links"><a href="/my-tech-blog/index.xml" title="RSS" target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss" aria-hidden="true"></i>
     </a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka-%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E5%A4%B1%E7%9A%84%E7%AB%AF%E5%88%B0%E7%AB%AF%E4%BF%9D%E9%9A%9C%E7%94%9F%E4%BA%A7%E8%80%85broker-%E4%B8%8E%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%89%E9%98%B6%E6%AE%B5%E5%88%86%E6%9E%90/">Kafka 数据不丢失的端到端保障——生产者、Broker与消费者三阶段分析</a>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/iot/modbus-vs-opc-ua-%E9%80%89%E5%9E%8B%E5%88%86%E6%9E%90%E4%BB%8E%E5%8D%8F%E8%AE%AE%E5%85%A8%E6%99%AF%E6%A2%B3%E7%90%86%E5%88%B0%E6%B7%B7%E5%90%88%E6%9E%B6%E6%9E%84%E8%90%BD%E5%9C%B0/">Modbus vs OPC UA 选型分析——从协议全景梳理到混合架构落地</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-07-31 00:00:00'>发布于 <time datetime="2026-07-31">2026-07-31</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-category" title="分类 - 中间件"><i class="fa-regular fa-folder" aria-hidden="true"></i> 中间件</a></span></div><div class="content"><h3 class="heading-element" id="kafka-数据不丢失的端到端保障生产者broker-与消费者三阶段分析" data-decreased><span>Kafka 数据不丢失的端到端保障——生产者、Broker 与消费者三阶段分析</span>
-  <a href="#kafka-%e6%95%b0%e6%8d%ae%e4%b8%8d%e4%b8%a2%e5%a4%b1%e7%9a%84%e7%ab%af%e5%88%b0%e7%ab%af%e4%bf%9d%e9%9a%9c%e7%94%9f%e4%ba%a7%e8%80%85broker-%e4%b8%8e%e6%b6%88%e8%b4%b9%e8%80%85%e4%b8%89%e9%98%b6%e6%ae%b5%e5%88%86%e6%9e%90" class="heading-mark">
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-09-03 00:00:00'>发布于 <time datetime="2026-09-03">2026-09-03</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/iot/" class="post-category" title="分类 - IOT"><i class="fa-regular fa-folder" aria-hidden="true"></i> IOT</a></span></div><div class="content"><h3 class="heading-element" id="历史背景两条工业协议演进路线" data-decreased><span>历史背景——两条工业协议演进路线</span>
+  <a href="#%e5%8e%86%e5%8f%b2%e8%83%8c%e6%99%af%e4%b8%a4%e6%9d%a1%e5%b7%a5%e4%b8%9a%e5%8d%8f%e8%ae%ae%e6%bc%94%e8%bf%9b%e8%b7%af%e7%ba%bf" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><blockquote>
-<p>Kafka 的&quot;数据不丢失&quot;不是一个配置项就能解决的——它需要生产端、Broker 端、消费端三方协同。任何一个环节配置错了，数据就丢了。本文从每个阶段的丢数据场景出发，倒推需要做什么配置、为什么有效、以及配置之间的制约关系。</p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka-%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E5%A4%B1%E7%9A%84%E7%AB%AF%E5%88%B0%E7%AB%AF%E4%BF%9D%E9%9A%9C%E7%94%9F%E4%BA%A7%E8%80%85broker-%E4%B8%8E%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%89%E9%98%B6%E6%AE%B5%E5%88%86%E6%9E%90/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/kafka/' class="post-tag">Kafka</a><a href='/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E9%9D%A0%E6%80%A7/' class="post-tag">数据可靠性</a><a href='/my-tech-blog/tags/producer/' class="post-tag">Producer</a><a href='/my-tech-blog/tags/consumer/' class="post-tag">Consumer</a><a href='/my-tech-blog/tags/isr/' class="post-tag">ISR</a><a href='/my-tech-blog/tags/acks/' class="post-tag">Acks</a><a href='/my-tech-blog/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/' class="post-tag">消息队列</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%BB%8Esetnx%E5%88%B0redlock%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8E%A8%E5%AF%BC/">Redis 分布式锁实现原理——从SETNX到RedLock的完整推导</a>
+</h3><p>物联网协议不是一个&quot;协议&quot;，而是<strong>四代技术叠加出来的协议栈</strong>。理解 Modbus 和 OPC UA 的选型，先要理解它们各自站在协议演进的哪一层。</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/iot/modbus-vs-opc-ua-%E9%80%89%E5%9E%8B%E5%88%86%E6%9E%90%E4%BB%8E%E5%8D%8F%E8%AE%AE%E5%85%A8%E6%99%AF%E6%A2%B3%E7%90%86%E5%88%B0%E6%B7%B7%E5%90%88%E6%9E%B6%E6%9E%84%E8%90%BD%E5%9C%B0/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/iot/' class="post-tag">IoT</a><a href='/my-tech-blog/tags/modbus/' class="post-tag">Modbus</a><a href='/my-tech-blog/tags/opc-ua/' class="post-tag">OPC UA</a><a href='/my-tech-blog/tags/%E5%B7%A5%E4%B8%9A%E5%8D%8F%E8%AE%AE/' class="post-tag">工业协议</a><a href='/my-tech-blog/tags/%E5%8D%8F%E8%AE%AE%E9%80%89%E5%9E%8B/' class="post-tag">协议选型</a><a href='/my-tech-blog/tags/mqtt/' class="post-tag">MQTT</a><a href='/my-tech-blog/tags/coap/' class="post-tag">CoAP</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/java/solid-%E4%BA%94%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99java-%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/">SOLID 五大设计原则——Java 代码中的完整实践指南</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-07-31 00:00:00'>发布于 <time datetime="2026-07-31">2026-07-31</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-category" title="分类 - 中间件"><i class="fa-regular fa-folder" aria-hidden="true"></i> 中间件</a></span></div><div class="content"><h3 class="heading-element" id="redis-分布式锁实现原理从-setnx-到-redlock-的完整推导" data-decreased><span>Redis 分布式锁实现原理——从 SETNX 到 RedLock 的完整推导</span>
-  <a href="#redis-%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81%e5%ae%9e%e7%8e%b0%e5%8e%9f%e7%90%86%e4%bb%8e-setnx-%e5%88%b0-redlock-%e7%9a%84%e5%ae%8c%e6%95%b4%e6%8e%a8%e5%af%bc" class="heading-mark">
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-08-14 00:00:00'>发布于 <time datetime="2026-08-14">2026-08-14</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a></span></div><div class="content"><div class="diagram-container">
+  <pre class="mermaid">flowchart TB
+    subgraph SOLID["SOLID 五原则"]
+        S["S 单一职责\n一个类只有一个引起它变化的原因"]
+        O["O 开闭原则\n对扩展开放，对修改关闭"]
+        L["L 里氏替换\n子类可以无感替换父类"]
+        I["I 接口隔离\n不依赖用不到的接口"]
+        D["D 依赖倒置\n依赖抽象，不依赖具体实现"]
+    end
+
+    subgraph Patterns["对应设计模式"]
+        P1["策略模式 / 模板方法"]
+        P2["装饰器 / 观察者"]
+        P3["继承正确性"]
+        P4["适配器 / 门面"]
+        P5["工厂 / 依赖注入"]
+    end
+
+    S --> P1
+    O --> P2
+    L --> P3
+    I --> P4
+    D --> P5
+
+    style S fill:#e3f2fd,stroke:#1565c0
+    style O fill:#fff3e0,stroke:#f57c00
+    style L fill:#e8f5e9,stroke:#2e7d32
+    style I fill:#f3e5f5,stroke:#7b1fa2
+    style D fill:#fff9c4,stroke:#f9a825</pre>
+  <pre class="mermaid-dark">flowchart TB
+    subgraph SOLID["SOLID 五原则"]
+        S["S 单一职责\n一个类只有一个引起它变化的原因"]
+        O["O 开闭原则\n对扩展开放，对修改关闭"]
+        L["L 里氏替换\n子类可以无感替换父类"]
+        I["I 接口隔离\n不依赖用不到的接口"]
+        D["D 依赖倒置\n依赖抽象，不依赖具体实现"]
+    end
+
+    subgraph Patterns["对应设计模式"]
+        P1["策略模式 / 模板方法"]
+        P2["装饰器 / 观察者"]
+        P3["继承正确性"]
+        P4["适配器 / 门面"]
+        P5["工厂 / 依赖注入"]
+    end
+
+    S --> P1
+    O --> P2
+    L --> P3
+    I --> P4
+    D --> P5
+
+    style S fill:#e3f2fd,stroke:#1565c0
+    style O fill:#fff3e0,stroke:#f57c00
+    style L fill:#e8f5e9,stroke:#2e7d32
+    style I fill:#f3e5f5,stroke:#7b1fa2
+    style D fill:#fff9c4,stroke:#f9a825</pre>
+  <pre class="mermaid-neutral">flowchart TB
+    subgraph SOLID["SOLID 五原则"]
+        S["S 单一职责\n一个类只有一个引起它变化的原因"]
+        O["O 开闭原则\n对扩展开放，对修改关闭"]
+        L["L 里氏替换\n子类可以无感替换父类"]
+        I["I 接口隔离\n不依赖用不到的接口"]
+        D["D 依赖倒置\n依赖抽象，不依赖具体实现"]
+    end
+
+    subgraph Patterns["对应设计模式"]
+        P1["策略模式 / 模板方法"]
+        P2["装饰器 / 观察者"]
+        P3["继承正确性"]
+        P4["适配器 / 门面"]
+        P5["工厂 / 依赖注入"]
+    end
+
+    S --> P1
+    O --> P2
+    L --> P3
+    I --> P4
+    D --> P5
+
+    style S fill:#e3f2fd,stroke:#1565c0
+    style O fill:#fff3e0,stroke:#f57c00
+    style L fill:#e8f5e9,stroke:#2e7d32
+    style I fill:#f3e5f5,stroke:#7b1fa2
+    style D fill:#fff9c4,stroke:#f9a825</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart TB
+    subgraph SOLID["SOLID 五原则"]
+        S["S 单一职责\n一个类只有一个引起它变化的原因"]
+        O["O 开闭原则\n对扩展开放，对修改关闭"]
+        L["L 里氏替换\n子类可以无感替换父类"]
+        I["I 接口隔离\n不依赖用不到的接口"]
+        D["D 依赖倒置\n依赖抽象，不依赖具体实现"]
+    end
+
+    subgraph Patterns["对应设计模式"]
+        P1["策略模式 / 模板方法"]
+        P2["装饰器 / 观察者"]
+        P3["继承正确性"]
+        P4["适配器 / 门面"]
+        P5["工厂 / 依赖注入"]
+    end
+
+    S --> P1
+    O --> P2
+    L --> P3
+    I --> P4
+    D --> P5
+
+    style S fill:#e3f2fd,stroke:#1565c0
+    style O fill:#fff3e0,stroke:#f57c00
+    style L fill:#e8f5e9,stroke:#2e7d32
+    style I fill:#f3e5f5,stroke:#7b1fa2
+    style D fill:#fff9c4,stroke:#f9a825</pre></template>
+</div><hr>
+<h3 class="heading-element" id="零solid-解决什么问题" data-decreased><span>零、SOLID 解决什么问题？</span>
+  <a href="#%e9%9b%b6solid-%e8%a7%a3%e5%86%b3%e4%bb%80%e4%b9%88%e9%97%ae%e9%a2%98" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><blockquote>
-<p>面试问你 Redis 分布式锁，答&quot;SETNX + 过期时间 + Lua 删锁&quot;只能算及格。真正考察的是你能不能讲清楚：为什么不能先 SETNX 再 EXPIRE？看门狗怎么续期？Redis 主从切换时锁为什么丢了？RedLock 到底有没有用？本文从零推导 Redis 分布式锁的五次演进，逐层讲清每一步解决了什么问题、又引入了什么新问题。</p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%BB%8Esetnx%E5%88%B0redlock%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8E%A8%E5%AF%BC/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/redis/' class="post-tag">Redis</a><a href='/my-tech-blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/' class="post-tag">分布式锁</a><a href='/my-tech-blog/tags/redisson/' class="post-tag">Redisson</a><a href='/my-tech-blog/tags/redlock/' class="post-tag">RedLock</a><a href='/my-tech-blog/tags/watch-dog/' class="post-tag">Watch Dog</a><a href='/my-tech-blog/tags/lua/' class="post-tag">Lua</a><a href='/my-tech-blog/tags/%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81/' class="post-tag">可重入锁</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BB%8E%E8%83%8C%E5%8C%85%E5%88%B0%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%E7%9A%84%E4%BA%94%E6%AD%A5%E6%B3%95%E6%A8%A1%E6%9D%BF%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%9C%BA%E6%99%AF/">动态规划——从背包到编辑距离的五步法模板与工程场景</a>
+</h3><p>SOLID 是 Robert C. Martin（Bob 大叔）在 2000 年左右提出的五个面向对象设计原则。这五个原则回答的是同一个问题：<strong>什么样的代码结构能让&quot;需求变更&quot;的成本最小？</strong></p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/java/solid-%E4%BA%94%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99java-%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">Java</a><a href='/my-tech-blog/tags/solid/' class="post-tag">SOLID</a><a href='/my-tech-blog/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/' class="post-tag">设计原则</a><a href='/my-tech-blog/tags/%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/' class="post-tag">代码质量</a><a href='/my-tech-blog/tags/%E9%87%8D%E6%9E%84/' class="post-tag">重构</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/java%E9%9B%86%E5%90%88/hashmap-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A82%E7%9A%84%E5%B9%82%E6%AC%A1%E6%96%B9%E4%BB%8E%E5%8F%96%E6%A8%A1%E7%AE%97%E6%B3%95hashtable%E7%B4%A0%E6%95%B0%E8%AE%BE%E8%AE%A1%E5%88%B0%E7%B4%A2%E5%BC%95%E5%9D%87%E5%8C%80%E6%80%A7%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8E%A8%E5%AF%BC/">HashMap 为什么用2的幂次方——从取模算法、Hashtable素数设计到索引均匀性的完整推导</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-07-31 00:00:00'>发布于 <time datetime="2026-07-31">2026-07-31</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E7%AE%97%E6%B3%95/" class="post-category" title="分类 - 算法"><i class="fa-regular fa-folder" aria-hidden="true"></i> 算法</a></span></div><div class="content"><h3 class="heading-element" id="动态规划从背包到编辑距离的五步法模板与工程场景" data-decreased><span>动态规划——从背包到编辑距离的五步法模板与工程场景</span>
-  <a href="#%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e4%bb%8e%e8%83%8c%e5%8c%85%e5%88%b0%e7%bc%96%e8%be%91%e8%b7%9d%e7%a6%bb%e7%9a%84%e4%ba%94%e6%ad%a5%e6%b3%95%e6%a8%a1%e6%9d%bf%e4%b8%8e%e5%b7%a5%e7%a8%8b%e5%9c%ba%e6%99%af" class="heading-mark">
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-08-12 00:00:00'>发布于 <time datetime="2026-08-12">2026-08-12</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/java%E9%9B%86%E5%90%88/" class="post-category" title="分类 - Java集合"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java集合</a></span></div><div class="content"><h3 class="heading-element" id="一核心问题为什么必须是-2-的幂" data-decreased><span>一、核心问题——为什么必须是 2 的幂？</span>
+  <a href="#%e4%b8%80%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e4%b8%ba%e4%bb%80%e4%b9%88%e5%bf%85%e9%a1%bb%e6%98%af-2-%e7%9a%84%e5%b9%82" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><blockquote>
-<p>动态规划是算法面试的分水岭——它不是&quot;记住几道题的解法&quot;，而是&quot;看到一个问题能识别出 DP 结构&quot;。本文从统一的五步法模板出发，拆解背包、LIS、LCS、编辑距离四个核心模型，讲清楚状态转移方程的推导过程，以及 DP 在 diff 算法和推荐系统中的应用。</p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BB%8E%E8%83%8C%E5%8C%85%E5%88%B0%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%E7%9A%84%E4%BA%94%E6%AD%A5%E6%B3%95%E6%A8%A1%E6%9D%BF%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%9C%BA%E6%99%AF/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E7%AE%97%E6%B3%95/' class="post-tag">算法</a><a href='/my-tech-blog/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/' class="post-tag">动态规划</a><a href='/my-tech-blog/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/' class="post-tag">背包问题</a><a href='/my-tech-blog/tags/lis/' class="post-tag">LIS</a><a href='/my-tech-blog/tags/lcs/' class="post-tag">LCS</a><a href='/my-tech-blog/tags/%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/' class="post-tag">编辑距离</a><a href='/my-tech-blog/tags/%E5%8C%BA%E9%97%B4dp/' class="post-tag">区间DP</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E7%AE%97%E6%B3%95/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%B7%A5%E7%A8%8B%E7%AE%97%E6%B3%95bitmap%E5%B8%83%E9%9A%86hll%E4%B8%80%E8%87%B4%E6%80%A7hash%E4%B8%8E%E9%99%90%E6%B5%81/">海量数据处理与工程算法——BitMap、布隆过滤器、HyperLogLog、一致性Hash与限流</a>
+</h3><p>一句话答案：<strong>因为 HashMap 用 <code>(n-1) &amp; hash</code> 代替 <code>hash % n</code> 计算桶下标，而 <code>&amp;</code> 等价于 <code>%</code> 的数学前提是 n 为 2 的幂。</strong></p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/java%E9%9B%86%E5%90%88/hashmap-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A82%E7%9A%84%E5%B9%82%E6%AC%A1%E6%96%B9%E4%BB%8E%E5%8F%96%E6%A8%A1%E7%AE%97%E6%B3%95hashtable%E7%B4%A0%E6%95%B0%E8%AE%BE%E8%AE%A1%E5%88%B0%E7%B4%A2%E5%BC%95%E5%9D%87%E5%8C%80%E6%80%A7%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8E%A8%E5%AF%BC/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/java/' class="post-tag">Java</a><a href='/my-tech-blog/tags/hashmap/' class="post-tag">HashMap</a><a href='/my-tech-blog/tags/%E9%9B%86%E5%90%88/' class="post-tag">集合</a><a href='/my-tech-blog/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/' class="post-tag">位运算</a><a href='/my-tech-blog/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/' class="post-tag">源码分析</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/mysql/mysql%E5%8D%95%E8%A1%A8%E6%9C%80%E5%A4%9A%E8%83%BD%E5%AD%98%E5%A4%9A%E5%B0%91%E8%A1%8C%E7%90%86%E8%AE%BA%E6%9E%81%E9%99%90b&#43;tree%E5%B1%82%E7%BA%A7%E4%B8%8E%E7%94%9F%E4%BA%A7%E5%AE%9E%E8%B7%B5/">MySQL单表最多能存多少行——理论极限、B&#43;Tree层级与生产实践</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-07-31 00:00:00'>发布于 <time datetime="2026-07-31">2026-07-31</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E7%AE%97%E6%B3%95/" class="post-category" title="分类 - 算法"><i class="fa-regular fa-folder" aria-hidden="true"></i> 算法</a></span></div><div class="content"><h3 class="heading-element" id="海量数据处理与工程算法bitmap布隆过滤器一致性-hash-与限流" data-decreased><span>海量数据处理与工程算法——BitMap、布隆过滤器、一致性 Hash 与限流</span>
-  <a href="#%e6%b5%b7%e9%87%8f%e6%95%b0%e6%8d%ae%e5%a4%84%e7%90%86%e4%b8%8e%e5%b7%a5%e7%a8%8b%e7%ae%97%e6%b3%95bitmap%e5%b8%83%e9%9a%86%e8%bf%87%e6%bb%a4%e5%99%a8%e4%b8%80%e8%87%b4%e6%80%a7-hash-%e4%b8%8e%e9%99%90%e6%b5%81" class="heading-mark">
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-08-12 00:00:00'>发布于 <time datetime="2026-08-12">2026-08-12</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/mysql/" class="post-category" title="分类 - MYSQL"><i class="fa-regular fa-folder" aria-hidden="true"></i> MYSQL</a></span></div><div class="content"><div class="diagram-container">
+  <pre class="mermaid">flowchart TB
+    Q["MySQL 单表最多存多少行？"]
+    Q --> L1["第 1 层：理论硬上限\nInnoDB 表空间 64TB\nMax 2³² 个 16KB 页\n= 约 40 亿 ~ 600 亿行"]
+    Q --> L2["第 2 层：B+Tree 层数\n每多一层，扇出 1000 倍\n3 层 = 1600 万~1 亿行\n4 层 = 160 亿~100 亿行"]
+    Q --> L3["第 3 层：生产可运维性\nDDL/备份/恢复/BP 容量\n这些才是真正的瓶颈"]
+
+    L1 --> L1A["没人会撞到这堵墙"]
+    L2 --> L2A["3-4 层 B+Tree 在性能上是 OK 的"]
+    L3 --> L3A["生产瓶颈在运维，不在存储"]
+
+    style Q fill:#1565c0,color:#fff
+    style L1 fill:#ffebee,stroke:#c62828
+    style L2 fill:#fff3e0,stroke:#f57c00
+    style L3 fill:#e8f5e9,stroke:#2e7d32</pre>
+  <pre class="mermaid-dark">flowchart TB
+    Q["MySQL 单表最多存多少行？"]
+    Q --> L1["第 1 层：理论硬上限\nInnoDB 表空间 64TB\nMax 2³² 个 16KB 页\n= 约 40 亿 ~ 600 亿行"]
+    Q --> L2["第 2 层：B+Tree 层数\n每多一层，扇出 1000 倍\n3 层 = 1600 万~1 亿行\n4 层 = 160 亿~100 亿行"]
+    Q --> L3["第 3 层：生产可运维性\nDDL/备份/恢复/BP 容量\n这些才是真正的瓶颈"]
+
+    L1 --> L1A["没人会撞到这堵墙"]
+    L2 --> L2A["3-4 层 B+Tree 在性能上是 OK 的"]
+    L3 --> L3A["生产瓶颈在运维，不在存储"]
+
+    style Q fill:#1565c0,color:#fff
+    style L1 fill:#ffebee,stroke:#c62828
+    style L2 fill:#fff3e0,stroke:#f57c00
+    style L3 fill:#e8f5e9,stroke:#2e7d32</pre>
+  <pre class="mermaid-neutral">flowchart TB
+    Q["MySQL 单表最多存多少行？"]
+    Q --> L1["第 1 层：理论硬上限\nInnoDB 表空间 64TB\nMax 2³² 个 16KB 页\n= 约 40 亿 ~ 600 亿行"]
+    Q --> L2["第 2 层：B+Tree 层数\n每多一层，扇出 1000 倍\n3 层 = 1600 万~1 亿行\n4 层 = 160 亿~100 亿行"]
+    Q --> L3["第 3 层：生产可运维性\nDDL/备份/恢复/BP 容量\n这些才是真正的瓶颈"]
+
+    L1 --> L1A["没人会撞到这堵墙"]
+    L2 --> L2A["3-4 层 B+Tree 在性能上是 OK 的"]
+    L3 --> L3A["生产瓶颈在运维，不在存储"]
+
+    style Q fill:#1565c0,color:#fff
+    style L1 fill:#ffebee,stroke:#c62828
+    style L2 fill:#fff3e0,stroke:#f57c00
+    style L3 fill:#e8f5e9,stroke:#2e7d32</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart TB
+    Q["MySQL 单表最多存多少行？"]
+    Q --> L1["第 1 层：理论硬上限\nInnoDB 表空间 64TB\nMax 2³² 个 16KB 页\n= 约 40 亿 ~ 600 亿行"]
+    Q --> L2["第 2 层：B+Tree 层数\n每多一层，扇出 1000 倍\n3 层 = 1600 万~1 亿行\n4 层 = 160 亿~100 亿行"]
+    Q --> L3["第 3 层：生产可运维性\nDDL/备份/恢复/BP 容量\n这些才是真正的瓶颈"]
+
+    L1 --> L1A["没人会撞到这堵墙"]
+    L2 --> L2A["3-4 层 B+Tree 在性能上是 OK 的"]
+    L3 --> L3A["生产瓶颈在运维，不在存储"]
+
+    style Q fill:#1565c0,color:#fff
+    style L1 fill:#ffebee,stroke:#c62828
+    style L2 fill:#fff3e0,stroke:#f57c00
+    style L3 fill:#e8f5e9,stroke:#2e7d32</pre></template>
+</div><hr>
+<h3 class="heading-element" id="一三层答案你到底问的是哪个最多" data-decreased><span>一、三层答案——你到底问的是哪个&quot;最多&quot;？</span>
+  <a href="#%e4%b8%80%e4%b8%89%e5%b1%82%e7%ad%94%e6%a1%88%e4%bd%a0%e5%88%b0%e5%ba%95%e9%97%ae%e7%9a%84%e6%98%af%e5%93%aa%e4%b8%aa%e6%9c%80%e5%a4%9a" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><blockquote>
-<p>这些算法有一个共同特征：它们不是&quot;解 LeetCode 题&quot;用的，而是在真实系统中处理海量数据时节省内存、提升性能和保证可靠性的基础设施。理解它们的原理，是架构师和资深工程师的基本功。</p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/%E7%AE%97%E6%B3%95/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%B7%A5%E7%A8%8B%E7%AE%97%E6%B3%95bitmap%E5%B8%83%E9%9A%86hll%E4%B8%80%E8%87%B4%E6%80%A7hash%E4%B8%8E%E9%99%90%E6%B5%81/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E7%AE%97%E6%B3%95/' class="post-tag">算法</a><a href='/my-tech-blog/tags/bitmap/' class="post-tag">BitMap</a><a href='/my-tech-blog/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/' class="post-tag">布隆过滤器</a><a href='/my-tech-blog/tags/hyperloglog/' class="post-tag">HyperLogLog</a><a href='/my-tech-blog/tags/%E4%B8%80%E8%87%B4%E6%80%A7hash/' class="post-tag">一致性Hash</a><a href='/my-tech-blog/tags/%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/' class="post-tag">雪花算法</a><a href='/my-tech-blog/tags/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/' class="post-tag">限流算法</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E7%AE%97%E6%B3%95/%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84hashmap%E5%A0%86%E4%B8%8E%E8%B7%B3%E8%A1%A8%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">核心数据结构——HashMap、堆与跳表的原理与实现</a>
+</h3><p>&ldquo;MySQL 单表最多存多少行？&ldquo;这个问题有三个完全不同的答案，取决于你在问哪个层面：</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/mysql/mysql%E5%8D%95%E8%A1%A8%E6%9C%80%E5%A4%9A%E8%83%BD%E5%AD%98%E5%A4%9A%E5%B0%91%E8%A1%8C%E7%90%86%E8%AE%BA%E6%9E%81%E9%99%90b&#43;tree%E5%B1%82%E7%BA%A7%E4%B8%8E%E7%94%9F%E4%BA%A7%E5%AE%9E%E8%B7%B5/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/mysql/' class="post-tag">MySQL</a><a href='/my-tech-blog/tags/innodb/' class="post-tag">InnoDB</a><a href='/my-tech-blog/tags/b&#43;tree/' class="post-tag">B&#43;Tree</a><a href='/my-tech-blog/tags/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/' class="post-tag">分库分表</a><a href='/my-tech-blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class="post-tag">性能优化</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/mysql/mysql%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B%E9%80%89%E5%9E%8B%E4%B8%8E%E9%95%BF%E5%BA%A6%E8%AE%BE%E7%BD%AE%E4%BB%8E%E6%95%B4%E6%95%B0%E5%88%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9E%9A%E4%B8%BE%E4%B8%8Ejson%E7%9A%84%E6%9C%80%E4%BC%98%E5%AE%9E%E8%B7%B5/">MySQL字段类型选型与长度设置——从整数到字符串、枚举与JSON的最优实践</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-07-31 00:00:00'>发布于 <time datetime="2026-07-31">2026-07-31</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E7%AE%97%E6%B3%95/" class="post-category" title="分类 - 算法"><i class="fa-regular fa-folder" aria-hidden="true"></i> 算法</a></span></div><div class="content"><h3 class="heading-element" id="核心数据结构hashmap堆与跳表的原理与实现" data-decreased><span>核心数据结构——HashMap、堆与跳表的原理与实现</span>
-  <a href="#%e6%a0%b8%e5%bf%83%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84hashmap%e5%a0%86%e4%b8%8e%e8%b7%b3%e8%a1%a8%e7%9a%84%e5%8e%9f%e7%90%86%e4%b8%8e%e5%ae%9e%e7%8e%b0" class="heading-mark">
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-08-12 00:00:00'>发布于 <time datetime="2026-08-12">2026-08-12</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/mysql/" class="post-category" title="分类 - MYSQL"><i class="fa-regular fa-folder" aria-hidden="true"></i> MYSQL</a></span></div><div class="content"><h3 class="heading-element" id="一整型每个数字都要想清楚最大是多少" data-decreased><span>一、整型——每个数字都要想清楚&quot;最大是多少&quot;</span>
+  <a href="#%e4%b8%80%e6%95%b4%e5%9e%8b%e6%af%8f%e4%b8%aa%e6%95%b0%e5%ad%97%e9%83%bd%e8%a6%81%e6%83%b3%e6%b8%85%e6%a5%9a%e6%9c%80%e5%a4%a7%e6%98%af%e5%a4%9a%e5%b0%91" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><blockquote>
-<p>这三个数据结构贯穿了几乎所有的系统设计：HashMap 是 O(1) 查找的基石，堆是 Top K 和优先调度的标配，跳表在 Redis 和并发场景中替代红黑树。本文从底层原理讲到最优实现，再到工程中真正用到它们的场景。</p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/%E7%AE%97%E6%B3%95/%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84hashmap%E5%A0%86%E4%B8%8E%E8%B7%B3%E8%A1%A8%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E7%AE%97%E6%B3%95/' class="post-tag">算法</a><a href='/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/' class="post-tag">数据结构</a><a href='/my-tech-blog/tags/hashmap/' class="post-tag">HashMap</a><a href='/my-tech-blog/tags/%E5%A0%86/' class="post-tag">堆</a><a href='/my-tech-blog/tags/%E8%B7%B3%E8%A1%A8/' class="post-tag">跳表</a><a href='/my-tech-blog/tags/skiplist/' class="post-tag">SkipList</a><a href='/my-tech-blog/tags/priorityqueue/' class="post-tag">PriorityQueue</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%BA%AF%E8%B4%AA%E5%BF%83%E4%B8%8E%E5%9B%BE%E7%AE%97%E6%B3%95%E7%BB%84%E5%90%88%E7%A9%B7%E4%B8%BE%E6%9C%80%E4%BC%98%E5%86%B3%E7%AD%96%E5%88%B0%E7%BD%91%E7%BB%9C%E5%BB%BA%E6%A8%A1/">回溯、贪心与图算法——组合穷举、最优决策到网络建模</a>
-  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-07-31 00:00:00'>发布于 <time datetime="2026-07-31">2026-07-31</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/%E7%AE%97%E6%B3%95/" class="post-category" title="分类 - 算法"><i class="fa-regular fa-folder" aria-hidden="true"></i> 算法</a></span></div><div class="content"><h3 class="heading-element" id="回溯贪心与图算法组合穷举最优决策到网络建模" data-decreased><span>回溯、贪心与图算法——组合穷举、最优决策到网络建模</span>
-  <a href="#%e5%9b%9e%e6%ba%af%e8%b4%aa%e5%bf%83%e4%b8%8e%e5%9b%be%e7%ae%97%e6%b3%95%e7%bb%84%e5%90%88%e7%a9%b7%e4%b8%be%e6%9c%80%e4%bc%98%e5%86%b3%e7%ad%96%e5%88%b0%e7%bd%91%e7%bb%9c%e5%bb%ba%e6%a8%a1" class="heading-mark">
+</h3><h3 class="heading-element" id="11-四种整型的真相"><span>1.1 四种整型的真相</span>
+  <a href="#11-%e5%9b%9b%e7%a7%8d%e6%95%b4%e5%9e%8b%e7%9a%84%e7%9c%9f%e7%9b%b8" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><blockquote>
-<p>回溯是穷举的艺术，贪心是局部最优的赌博，图算法是对真实世界的网络建模。这三种思维模式覆盖了面试中 &ldquo;非 DP 非数据结构&rdquo; 的所有核心算法题。本文不讲死记硬背，讲每种算法的<strong>决策框架</strong>——回溯的选/不选决策树、贪心的证明路径、图算法的遍历骨架。</p></div><div class="post-footer">
-    <a href="/my-tech-blog/posts/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%BA%AF%E8%B4%AA%E5%BF%83%E4%B8%8E%E5%9B%BE%E7%AE%97%E6%B3%95%E7%BB%84%E5%90%88%E7%A9%B7%E4%B8%BE%E6%9C%80%E4%BC%98%E5%86%B3%E7%AD%96%E5%88%B0%E7%BD%91%E7%BB%9C%E5%BB%BA%E6%A8%A1/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/%E7%AE%97%E6%B3%95/' class="post-tag">算法</a><a href='/my-tech-blog/tags/%E5%9B%9E%E6%BA%AF/' class="post-tag">回溯</a><a href='/my-tech-blog/tags/%E8%B4%AA%E5%BF%83/' class="post-tag">贪心</a><a href='/my-tech-blog/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/' class="post-tag">图算法</a><a href='/my-tech-blog/tags/dfs/' class="post-tag">DFS</a><a href='/my-tech-blog/tags/bfs/' class="post-tag">BFS</a><a href='/my-tech-blog/tags/dijkstra/' class="post-tag">Dijkstra</a><a href='/my-tech-blog/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/' class="post-tag">并查集</a><a href='/my-tech-blog/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/' class="post-tag">拓扑排序</a></div></div>
+</h3><div class="table-wrapper">
+  <table>
+    <thead>
+        <tr>
+            <th>类型</th>
+            <th style="text-align: center">字节数</th>
+            <th>有符号范围</th>
+            <th>无符号范围</th>
+            <th>&ldquo;够用&quot;的场景</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>TINYINT</code></td>
+            <td style="text-align: center">1</td>
+            <td>-128 ~ 127</td>
+            <td>0 ~ 255</td>
+            <td>状态码、布尔值、年龄</td>
+        </tr>
+        <tr>
+            <td><code>SMALLINT</code></td>
+            <td style="text-align: center">2</td>
+            <td>-32768 ~ 32767</td>
+            <td>0 ~ 65535</td>
+            <td>年份、端口号、小型计数器</td>
+        </tr>
+        <tr>
+            <td><code>MEDIUMINT</code></td>
+            <td style="text-align: center">3</td>
+            <td>-838 万 ~ 838 万</td>
+            <td>0 ~ 1677 万</td>
+            <td>中型计数器（很少用）</td>
+        </tr>
+        <tr>
+            <td><code>INT</code></td>
+            <td style="text-align: center">4</td>
+            <td>-21 亿 ~ 21 亿</td>
+            <td>0 ~ 42 亿</td>
+            <td>主键、用户 ID、大部分计数器</td>
+        </tr>
+        <tr>
+            <td><code>BIGINT</code></td>
+            <td style="text-align: center">8</td>
+            <td>-9 京 ~ 9 京</td>
+            <td>0 ~ 1844 京</td>
+            <td>自增主键（防止溢出）、金额（存分）、时间戳（毫秒）</td>
+        </tr>
+    </tbody>
+  </table>
+</div><p><strong>选择原则只有一条</strong>：预估字段的最大可能值，选择刚好能兜底的<strong>最小</strong>类型。</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/mysql/mysql%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B%E9%80%89%E5%9E%8B%E4%B8%8E%E9%95%BF%E5%BA%A6%E8%AE%BE%E7%BD%AE%E4%BB%8E%E6%95%B4%E6%95%B0%E5%88%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9E%9A%E4%B8%BE%E4%B8%8Ejson%E7%9A%84%E6%9C%80%E4%BC%98%E5%AE%9E%E8%B7%B5/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/mysql/' class="post-tag">MySQL</a><a href='/my-tech-blog/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/' class="post-tag">数据类型</a><a href='/my-tech-blog/tags/varchar/' class="post-tag">VARCHAR</a><a href='/my-tech-blog/tags/schema%E8%AE%BE%E8%AE%A1/' class="post-tag">Schema设计</a><a href='/my-tech-blog/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/' class="post-tag">最佳实践</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/my-tech-blog/posts/pg/postgresql-%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E5%85%A8%E6%99%AF%E4%BB%8E%E8%BF%9B%E7%A8%8B%E6%9E%B6%E6%9E%84mvcc-%E5%AE%9E%E7%8E%B0%E5%88%B0-vacuum-%E6%9C%BA%E5%88%B6%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%A2%B3%E7%90%86/">PostgreSQL 核心知识点全景——从进程架构、MVCC 实现到 Vacuum 机制的深度梳理</a>
+  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2026-08-12 00:00:00'>发布于 <time datetime="2026-08-12">2026-08-12</time></span><span class="post-included-in">&nbsp;收录于 <a href="/my-tech-blog/categories/pg/" class="post-category" title="分类 - PG"><i class="fa-regular fa-folder" aria-hidden="true"></i> PG</a></span></div><div class="content"><div class="diagram-container">
+  <pre class="mermaid">flowchart TB
+    subgraph Arch["一、进程架构"]
+        A1["Postmaster 主进程"]
+        A2["Backend 进程\n（每连接 fork 一个）"]
+        A3["Background Worker\n（后台进程）"]
+        A1 --> A2
+        A1 --> A3
+    end
+
+    subgraph Storage["二、存储与 MVCC"]
+        B1["Heap Tuple\n（堆元组，8KB 页）"]
+        B2["xmin / xmax\n（事务 ID 标记版本）"]
+        B3["NO Undo Log!\n旧版本直接留在数据页"]
+        B1 --> B2 --> B3
+    end
+
+    subgraph Index["三、索引体系"]
+        C1["B-Tree（默认）"]
+        C2["GiST（几何/全文搜索）"]
+        C3["GIN（倒排索引）"]
+        C4["BRIN（块范围索引）"]
+    end
+
+    subgraph WAL["四、WAL 与检查点"]
+        D1["WAL（预写日志）"]
+        D2["Checkpointer"]
+        D3["BGWriter"]
+    end
+
+    subgraph Vacuum["五、Vacuum 机制"]
+        E1["死元组清理"]
+        E2["XID 回卷风险"]
+        E3["Autovacuum"]
+    end
+
+    subgraph Ext["六、扩展生态"]
+        F1["丰富数据类型\n（JSONB/数组/范围/hstore）"]
+        F2["FDW 外部数据包装器"]
+        F3["PostGIS 地理空间"]
+        F4["Citus 分布式"]
+    end
+
+    Arch --> Storage --> Index
+    Storage --> WAL
+    Storage --> Vacuum
+    Index --> Ext
+
+    style Arch fill:#e3f2fd,stroke:#1565c0
+    style Storage fill:#fff3e0,stroke:#f57c00
+    style Index fill:#e8f5e9,stroke:#2e7d32
+    style WAL fill:#f3e5f5,stroke:#7b1fa2
+    style Vacuum fill:#ffebee,stroke:#c62828
+    style Ext fill:#fff9c4,stroke:#f9a825</pre>
+  <pre class="mermaid-dark">flowchart TB
+    subgraph Arch["一、进程架构"]
+        A1["Postmaster 主进程"]
+        A2["Backend 进程\n（每连接 fork 一个）"]
+        A3["Background Worker\n（后台进程）"]
+        A1 --> A2
+        A1 --> A3
+    end
+
+    subgraph Storage["二、存储与 MVCC"]
+        B1["Heap Tuple\n（堆元组，8KB 页）"]
+        B2["xmin / xmax\n（事务 ID 标记版本）"]
+        B3["NO Undo Log!\n旧版本直接留在数据页"]
+        B1 --> B2 --> B3
+    end
+
+    subgraph Index["三、索引体系"]
+        C1["B-Tree（默认）"]
+        C2["GiST（几何/全文搜索）"]
+        C3["GIN（倒排索引）"]
+        C4["BRIN（块范围索引）"]
+    end
+
+    subgraph WAL["四、WAL 与检查点"]
+        D1["WAL（预写日志）"]
+        D2["Checkpointer"]
+        D3["BGWriter"]
+    end
+
+    subgraph Vacuum["五、Vacuum 机制"]
+        E1["死元组清理"]
+        E2["XID 回卷风险"]
+        E3["Autovacuum"]
+    end
+
+    subgraph Ext["六、扩展生态"]
+        F1["丰富数据类型\n（JSONB/数组/范围/hstore）"]
+        F2["FDW 外部数据包装器"]
+        F3["PostGIS 地理空间"]
+        F4["Citus 分布式"]
+    end
+
+    Arch --> Storage --> Index
+    Storage --> WAL
+    Storage --> Vacuum
+    Index --> Ext
+
+    style Arch fill:#e3f2fd,stroke:#1565c0
+    style Storage fill:#fff3e0,stroke:#f57c00
+    style Index fill:#e8f5e9,stroke:#2e7d32
+    style WAL fill:#f3e5f5,stroke:#7b1fa2
+    style Vacuum fill:#ffebee,stroke:#c62828
+    style Ext fill:#fff9c4,stroke:#f9a825</pre>
+  <pre class="mermaid-neutral">flowchart TB
+    subgraph Arch["一、进程架构"]
+        A1["Postmaster 主进程"]
+        A2["Backend 进程\n（每连接 fork 一个）"]
+        A3["Background Worker\n（后台进程）"]
+        A1 --> A2
+        A1 --> A3
+    end
+
+    subgraph Storage["二、存储与 MVCC"]
+        B1["Heap Tuple\n（堆元组，8KB 页）"]
+        B2["xmin / xmax\n（事务 ID 标记版本）"]
+        B3["NO Undo Log!\n旧版本直接留在数据页"]
+        B1 --> B2 --> B3
+    end
+
+    subgraph Index["三、索引体系"]
+        C1["B-Tree（默认）"]
+        C2["GiST（几何/全文搜索）"]
+        C3["GIN（倒排索引）"]
+        C4["BRIN（块范围索引）"]
+    end
+
+    subgraph WAL["四、WAL 与检查点"]
+        D1["WAL（预写日志）"]
+        D2["Checkpointer"]
+        D3["BGWriter"]
+    end
+
+    subgraph Vacuum["五、Vacuum 机制"]
+        E1["死元组清理"]
+        E2["XID 回卷风险"]
+        E3["Autovacuum"]
+    end
+
+    subgraph Ext["六、扩展生态"]
+        F1["丰富数据类型\n（JSONB/数组/范围/hstore）"]
+        F2["FDW 外部数据包装器"]
+        F3["PostGIS 地理空间"]
+        F4["Citus 分布式"]
+    end
+
+    Arch --> Storage --> Index
+    Storage --> WAL
+    Storage --> Vacuum
+    Index --> Ext
+
+    style Arch fill:#e3f2fd,stroke:#1565c0
+    style Storage fill:#fff3e0,stroke:#f57c00
+    style Index fill:#e8f5e9,stroke:#2e7d32
+    style WAL fill:#f3e5f5,stroke:#7b1fa2
+    style Vacuum fill:#ffebee,stroke:#c62828
+    style Ext fill:#fff9c4,stroke:#f9a825</pre><div class="diagram-copy-btn" aria-label="Copy Mermaid code" role="button"><i class="fa-regular fa-clone fa-width-auto" aria-hidden="true"></i></div>
+<template><pre>flowchart TB
+    subgraph Arch["一、进程架构"]
+        A1["Postmaster 主进程"]
+        A2["Backend 进程\n（每连接 fork 一个）"]
+        A3["Background Worker\n（后台进程）"]
+        A1 --> A2
+        A1 --> A3
+    end
+
+    subgraph Storage["二、存储与 MVCC"]
+        B1["Heap Tuple\n（堆元组，8KB 页）"]
+        B2["xmin / xmax\n（事务 ID 标记版本）"]
+        B3["NO Undo Log!\n旧版本直接留在数据页"]
+        B1 --> B2 --> B3
+    end
+
+    subgraph Index["三、索引体系"]
+        C1["B-Tree（默认）"]
+        C2["GiST（几何/全文搜索）"]
+        C3["GIN（倒排索引）"]
+        C4["BRIN（块范围索引）"]
+    end
+
+    subgraph WAL["四、WAL 与检查点"]
+        D1["WAL（预写日志）"]
+        D2["Checkpointer"]
+        D3["BGWriter"]
+    end
+
+    subgraph Vacuum["五、Vacuum 机制"]
+        E1["死元组清理"]
+        E2["XID 回卷风险"]
+        E3["Autovacuum"]
+    end
+
+    subgraph Ext["六、扩展生态"]
+        F1["丰富数据类型\n（JSONB/数组/范围/hstore）"]
+        F2["FDW 外部数据包装器"]
+        F3["PostGIS 地理空间"]
+        F4["Citus 分布式"]
+    end
+
+    Arch --> Storage --> Index
+    Storage --> WAL
+    Storage --> Vacuum
+    Index --> Ext
+
+    style Arch fill:#e3f2fd,stroke:#1565c0
+    style Storage fill:#fff3e0,stroke:#f57c00
+    style Index fill:#e8f5e9,stroke:#2e7d32
+    style WAL fill:#f3e5f5,stroke:#7b1fa2
+    style Vacuum fill:#ffebee,stroke:#c62828
+    style Ext fill:#fff9c4,stroke:#f9a825</pre></template>
+</div><hr>
+<h3 class="heading-element" id="先看全局pg-和-mysql-的根本分歧" data-decreased><span>先看全局——PG 和 MySQL 的根本分歧</span>
+  <a href="#%e5%85%88%e7%9c%8b%e5%85%a8%e5%b1%80pg-%e5%92%8c-mysql-%e7%9a%84%e6%a0%b9%e6%9c%ac%e5%88%86%e6%ad%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>在深入每个模块之前，理解 PG 和 MySQL 的三项根本设计分歧：</p></div><div class="post-footer">
+    <a href="/my-tech-blog/posts/pg/postgresql-%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E5%85%A8%E6%99%AF%E4%BB%8E%E8%BF%9B%E7%A8%8B%E6%9E%B6%E6%9E%84mvcc-%E5%AE%9E%E7%8E%B0%E5%88%B0-vacuum-%E6%9C%BA%E5%88%B6%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%A2%B3%E7%90%86/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i><a href='/my-tech-blog/tags/postgresql/' class="post-tag">PostgreSQL</a><a href='/my-tech-blog/tags/pg/' class="post-tag">PG</a><a href='/my-tech-blog/tags/mvcc/' class="post-tag">MVCC</a><a href='/my-tech-blog/tags/wal/' class="post-tag">WAL</a><a href='/my-tech-blog/tags/vacuum/' class="post-tag">Vacuum</a><a href='/my-tech-blog/tags/%E7%B4%A2%E5%BC%95/' class="post-tag">索引</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
           <span class="page-link">
             <a href="/my-tech-blog/">1</a>
@@ -161,7 +594,7 @@
           <span class="page-link" aria-hidden="true">&hellip;</span>
         </li><li class="page-item">
           <span class="page-link">
-            <a href="/my-tech-blog/page/19/">19</a>
+            <a href="/my-tech-blog/page/29/">29</a>
           </span>
         </li></ul></div></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.163.3"><img class="hugo-icon" src="/my-tech-blog/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.5"><img class="fixit-icon" src="/my-tech-blog/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
@@ -171,5 +604,5 @@
   </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="/my-tech-blog/lib/cookieconsent/cookieconsent.min.css"><script src="/my-tech-blog/lib/autocomplete/autocomplete.min.js" defer></script><script src="/my-tech-blog/lib/typeit/index.umd.js" defer></script><script src="/my-tech-blog/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="/my-tech-blog/lib/cell-tooltip/cell-tooltip.umd.js" defer></script><script>window.config={"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"print":{"expandAdmonition":true,"expandCode":true,"expandDetails":true,"expandFileTree":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30},"tooltip":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.4.5"};</script><script src="/my-tech-blog/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/my-tech-blog/lib/cookieconsent/cookieconsent.min.css"><script src="/my-tech-blog/lib/autocomplete/autocomplete.min.js" defer></script><script src="/my-tech-blog/lib/typeit/index.umd.js" defer></script><script src="/my-tech-blog/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="/my-tech-blog/lib/cell-tooltip/cell-tooltip.umd.js" defer></script><script>window.config={"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"print":{"expandAdmonition":true,"expandCode":true,"expandDetails":true,"expandFileTree":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30},"tooltip":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.4.5"};</script><script src="/my-tech-blog/js/lib/mermaid.min.js" type="module"></script><script src="/my-tech-blog/js/theme.min.js" defer></script></body>
 </html>
